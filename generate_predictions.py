@@ -6,14 +6,12 @@ import csv
 import sqlite3
 from datetime import datetime
 
-# ============== KONFIGURASI ==============
 MODEL_NAME = "gemma3:4b" 
 DATA_DIR = "data"
 DATABASE_DIR = "data"
 GOLD_FILE = "database/gold_195.sql"
 OUTPUT_DIR = "output"
 
-# ============== FEW-SHOT EXAMPLES ==============
 FEW_SHOT_EXAMPLES = """
 # EXAMPLE 1 - Basic SELECT with COUNT
 Schema: Table singer: singer_id (INTEGER), name (TEXT), country (TEXT), age (INTEGER)
@@ -124,7 +122,6 @@ Question: Find the maximum and minimum weight for each pet type.
 SQL: SELECT MAX(weight), pettype FROM pets GROUP BY pettype
 """
 
-# ============== FUNGSI HELPER ==============
 
 def get_safe_filename(model_name):
     """Mengubah nama model menjadi nama file yang valid"""
@@ -257,7 +254,6 @@ def detect_query_pattern(question):
     
     hints = []
     
-    # Set operations
     if any(word in question_lower for word in ['both', 'and also', 'as well as']):
         hints.append("HINT: This might need INTERSECT (items in BOTH conditions)")
     
@@ -267,7 +263,6 @@ def detect_query_pattern(question):
     if any(word in question_lower for word in ['not', 'without', 'except']):
         hints.append("HINT: This might need NOT IN or EXCEPT")
     
-    # Aggregations
     if any(word in question_lower for word in ['how many', 'count', 'number of']):
         hints.append("HINT: Use COUNT(*) or COUNT(column)")
     
@@ -280,15 +275,12 @@ def detect_query_pattern(question):
     if any(word in question_lower for word in ['minimum', 'lowest', 'smallest', 'least']):
         hints.append("HINT: Use MIN(column) or ORDER BY column ASC LIMIT 1")
     
-    # Grouping
     if any(word in question_lower for word in ['each', 'every', 'per', 'for each']):
         hints.append("HINT: This likely needs GROUP BY")
     
-    # Pattern matching
     if any(word in question_lower for word in ['contain', 'include', 'start with', 'end with']):
         hints.append("HINT: Use LIKE with % wildcards")
     
-    # Range
     if 'between' in question_lower or ('more than' in question_lower and 'less than' in question_lower):
         hints.append("HINT: Use BETWEEN or comparison operators")
     
@@ -298,7 +290,6 @@ def detect_query_pattern(question):
 def generate_sql_with_ollama(question, schema, model_name):
     """Generate SQL menggunakan Ollama dengan Few-Shot Learning - IMPROVED VERSION"""
     
-    # Deteksi pattern untuk hints
     hints = detect_query_pattern(question)
     hints_text = "\n".join(hints) if hints else "No specific hints detected."
     
@@ -330,27 +321,23 @@ Question: {question}
 SQL Query (single line, lowercase keywords, no explanations):"""
     
     try:
-        # DEBUG: Print prompt statistics
         print(f"  [DEBUG] Prompt length: {len(prompt)} characters")
         print(f"  [DEBUG] Prompt tokens (approx): {len(prompt) // 4}")
         
-        # Call Ollama with improved parameters
         response = ollama.chat(
             model=model_name,
             messages=[{'role': 'user', 'content': prompt}],
             options={
-                'temperature': 0.3,           # Naikkan dari 0.1 untuk lebih flexible
-                'top_p': 0.95,                # Naikkan dari 0.9 untuk lebih diverse
-                'num_predict': 2000,           # Naikkan dari 200 untuk query complex
-                'stop': ['\n\n', 'Question:', 'Schema:', '# EXAMPLE', 'IMPORTANT']  # Stop sequences
+                'temperature': 0.3,           
+                'top_p': 0.95,               
+                'num_predict': 2000,        
+                'stop': ['\n\n', 'Question:', 'Schema:', '# EXAMPLE', 'IMPORTANT'] 
             }
         )
         
-        # DEBUG: Print raw response
         raw_sql = response['message']['content']
         print(f"  [DEBUG] Raw response length: {len(raw_sql)} characters")
         
-        # Show truncated raw response
         if len(raw_sql) > 150:
             print(f"  [DEBUG] Raw response: '{raw_sql[:150]}...'")
         else:
@@ -358,53 +345,39 @@ SQL Query (single line, lowercase keywords, no explanations):"""
         
         sql = raw_sql.strip()
         
-        # EARLY CHECK: Empty or too short response
         if not sql or len(sql) < 5:
             print(f"  [WARNING] Empty or too short response (length: {len(sql)})")
             print(f"  [WARNING] Using fallback query")
             return "SELECT 1"
         
-        # ============== CLEANING PIPELINE ==============
         
-        # Step 1: Remove markdown code blocks
         sql = sql.replace('```sql', '').replace('```', '').strip()
         
-        # Step 2: Filter out non-SQL lines
         lines = sql.split('\n')
         sql_lines = []
         for line in lines:
             line = line.strip()
             
-            # Skip empty lines
             if not line:
                 continue
             
-            # Skip comment lines
             if line.startswith('#') or line.startswith('//') or line.startswith('--'):
                 continue
             
-            # Skip explanatory text
             if line.lower().startswith(('note:', 'explanation:', 'this query', 'the sql')):
                 continue
             
-            # Keep lines with SQL keywords
             if any(keyword in line.lower() for keyword in ['select', 'insert', 'update', 'delete', 'with', 'from', 'where']):
                 sql_lines.append(line)
         
-        # Use filtered SQL if available
         if sql_lines:
             sql = ' '.join(sql_lines)
         
-        # Step 3: Normalize all whitespace to single space
         sql = ' '.join(sql.split())
         
-        # Step 4: Remove inline SQL comments
-        # Remove single-line comments (--)
         if '--' in sql:
-            # Split and take only part before comment
             sql = sql.split('--')[0].strip()
         
-        # Remove multi-line comments (/* */)
         while '/*' in sql and '*/' in sql:
             start = sql.find('/*')
             end = sql.find('*/', start)
@@ -414,50 +387,39 @@ SQL Query (single line, lowercase keywords, no explanations):"""
                 break
         sql = sql.strip()
         
-        # Step 5: Take only first query (if multiple separated by semicolon)
         if ';' in sql:
             sql = sql.split(';')[0].strip()
         
-        # Step 6: Remove leading/trailing whitespace
         sql = sql.strip()
         
-        # Step 7: Validate SQL has required keyword
         sql_lower = sql.lower()
         if not any(keyword in sql_lower for keyword in ['select', 'insert', 'update', 'delete', 'with']):
             print(f"  [WARNING] Invalid SQL - no SQL keyword found")
             print(f"  [WARNING] Cleaned result: '{sql[:100]}...'")
             return "SELECT 1"
         
-        # Step 8: Check parentheses balance
         open_paren = sql.count('(')
         close_paren = sql.count(')')
         if open_paren != close_paren:
             print(f"  [WARNING] Unbalanced parentheses: {open_paren} open, {close_paren} close")
-            # Don't fail, just warn - might still be valid
         
-        # Step 9: Fix operator spacing for consistency
-        # Add spaces around operators
         sql = sql.replace('=', ' = ')
         sql = sql.replace('>', ' > ')
         sql = sql.replace('<', ' < ')
-        sql = sql.replace('! =', '!=')  # Fix != that got split
-        sql = sql.replace('< =', '<=')  # Fix <=
-        sql = sql.replace('> =', '>=')  # Fix >=
-        sql = sql.replace('< >', '<>')  # Fix <>
+        sql = sql.replace('! =', '!=')  
+        sql = sql.replace('< =', '<=')  
+        sql = sql.replace('> =', '>=') 
+        sql = sql.replace('< >', '<>') 
         
-        # Normalize multiple spaces again
         sql = ' '.join(sql.split())
         
-        # Step 10: Final validation
         sql = sql.strip()
         
-        # Check minimum reasonable length
         if len(sql) < 10:
             print(f"  [WARNING] SQL too short after cleaning (length: {len(sql)})")
             print(f"  [WARNING] Result: '{sql}'")
             return "SELECT 1"
         
-        # DEBUG: Print final cleaned SQL
         if len(sql) > 150:
             print(f"  [DEBUG] Cleaned SQL: '{sql[:150]}...'")
         else:
