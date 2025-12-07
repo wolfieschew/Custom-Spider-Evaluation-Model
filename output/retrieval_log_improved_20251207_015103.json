@@ -1,0 +1,4743 @@
+[
+  {
+    "question_id": 1,
+    "question": "How many singers do we have ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6453497044091875,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.6012980990277584,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.5199087040246243,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from singer"
+  },
+  {
+    "question_id": 2,
+    "question": "What is the total number of singers ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6677860186495294,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.6283891416355538,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5389685818314724,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from singer"
+  },
+  {
+    "question_id": 3,
+    "question": "Show name , country , age for all singers ordered by age from the oldest to the youngest .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.716185852050201,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6585461953760638,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.643776116651746,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name, country, age from singer order by age desc"
+  },
+  {
+    "question_id": 4,
+    "question": "What are the names , countries , and ages for every singer in descending order of age ?",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.6750962355099359,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6487277965789584,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.628724766275484,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select name, country, age from singer order by age desc"
+  },
+  {
+    "question_id": 5,
+    "question": "What is the average , minimum , and maximum age of all singers from France ?",
+    "retrieved_examples": [
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5841605192494158,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5637816565210575,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5514664535598893,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use ORDER BY ASC LIMIT 1 for minimum"
+    ],
+    "generated_sql": "select avg(age), min(age), max(age) from singer where country = 'France' group by name"
+  },
+  {
+    "question_id": 6,
+    "question": "What is the average , minimum , and maximum age for all French singers ?",
+    "retrieved_examples": [
+      {
+        "category": "aggregation_where",
+        "similarity": 0.6093703593908264,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5642410570308979,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5633014102019189,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use ORDER BY ASC LIMIT 1 for minimum"
+    ],
+    "generated_sql": "select avg(age), min(age), max(age) from singer where country = 'France' group by name"
+  },
+  {
+    "question_id": 7,
+    "question": "Show the name and the release year of the song by the youngest singer .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.6233798266063865,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.6019004030448106,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5926208554394953,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select s.Song_Name, s.Song_release_year from singer s inner join singer_in_concert sic on s.Singer_ID = sic.Singer_ID inner join concert c on sic.concert_ID = c.concert_ID order by s.Age limit 1"
+  },
+  {
+    "question_id": 8,
+    "question": "What are the names and release years for all the songs of the youngest singer ?",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.5668566218178481,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5266080395248229,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5211385634331206,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select song_name, song_release_year from singer inner join singer_in_concert on singer.singer_id = singer_in_concert.singer_id where singer.age = (select min(age) from singer)"
+  },
+  {
+    "question_id": 9,
+    "question": "What are all distinct countries where singers above age 20 are from ?",
+    "retrieved_examples": [
+      {
+        "category": "intersect",
+        "similarity": 0.6388483894265949,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6162844667998526,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "distinct_where",
+        "similarity": 0.6071035381918989,
+        "sql": "SELECT DISTINCT country FROM singer WHERE age > 20"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct T2.Country from T2 join singer on T2.Singer_ID = T2.Singer_ID where T2.Age > 20"
+  },
+  {
+    "question_id": 10,
+    "question": "What are the different countries with singers above age 20 ?",
+    "retrieved_examples": [
+      {
+        "category": "intersect",
+        "similarity": 0.6470068188317364,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6083488960406994,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5937454106416399,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "SELECT DISTINCT Name FROM singer WHERE Age > 20"
+  },
+  {
+    "question_id": 11,
+    "question": "Show all countries and the number of singers in each country .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.7533387893057188,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6715451810762281,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.6675699766061287,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "SELECT T2.Country, COUNT(T2.Singer_ID) FROM singer AS T2 JOIN singer_in_concert AS T1 ON T1.Singer_ID = T2.Singer_ID GROUP BY T2.Country"
+  },
+  {
+    "question_id": 12,
+    "question": "How many singers are from each country ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.7205062292785747,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.6055926587590961,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6053878964955455,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select name from singer group by name"
+  },
+  {
+    "question_id": 13,
+    "question": "List all song names by singers above the average age .",
+    "retrieved_examples": [
+      {
+        "category": "subquery",
+        "similarity": 0.6826550745881347,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.6483705639750715,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.6436788100565971,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct T1.Song_Name from T1 join singer T2 on T1.Singer_ID = T2.Singer_ID where T2.Age > (select Average from stadium)"
+  },
+  {
+    "question_id": 14,
+    "question": "What are all the song names by singers who are older than average ?",
+    "retrieved_examples": [
+      {
+        "category": "subquery",
+        "similarity": 0.6565040831107142,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5855295430002828,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5720160946204095,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct T1.Song_Name from singer as T1 join singer_in_concert as T2 on T1.Singer_ID = T2.Singer_ID where T1.Age > (select avg(Age) from singer)"
+  },
+  {
+    "question_id": 15,
+    "question": "Show location and name for all stadiums with a capacity between 5000 and 10000 .",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.7030587188874647,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.653483320253692,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "except",
+        "similarity": 0.6491111555620053,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching",
+      "HINT: Use BETWEEN for range queries"
+    ],
+    "generated_sql": "select location, name from stadium where capacity between 5000 and 10000"
+  },
+  {
+    "question_id": 16,
+    "question": "What are the locations and names of all stations with capacity between 5000 and 10000 ?",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.5452662601895986,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.48222008728648685,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "nested_subquery",
+        "similarity": 0.46537922404563925,
+        "sql": "SELECT COUNT(*) FROM concert WHERE stadium_id = (SELECT stadium_id FROM stadium ORDER BY capacity DESC LIMIT 1)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching",
+      "HINT: Use BETWEEN for range queries"
+    ],
+    "generated_sql": "select name, location from stadium where capacity between 5000 and 10000"
+  },
+  {
+    "question_id": 17,
+    "question": "What is the maximum capacity and the average of all stadiums ?",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.6208582565754324,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5524390887749357,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5180808307469321,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select max(Highest) from stadium, stadium where Highest is not null order by Highest desc limit 1"
+  },
+  {
+    "question_id": 18,
+    "question": "What is the average and maximum capacities for all stadiums ?",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.6283172866135459,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5791738545518235,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5333707505969049,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select avg(Average), max(Capacity) from stadium"
+  },
+  {
+    "question_id": 19,
+    "question": "What is the name and capacity for the stadium with highest average attendance ?",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.6264714501435164,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5433266201607037,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5415704932634653,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select t1.Name, t1.Average from stadium t1 inner join concert t2 on t1.Stadium_ID = t2.Stadium_ID order by t1.Average DESC limit 1"
+  },
+  {
+    "question_id": 20,
+    "question": "What is the name and capacity for the stadium with the highest average attendance ?",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.621090389301482,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5399544254990256,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5386571249449946,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name, T1.Average from stadium T1 inner join concert T2 on T1.Stadium_ID = T2.Stadium_ID where T1.Average = (select max(Average) from stadium)"
+  },
+  {
+    "question_id": 21,
+    "question": "How many concerts are there in year 2014 or 2015 ?",
+    "retrieved_examples": [
+      {
+        "category": "or_condition",
+        "similarity": 0.6021554203293875,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5156018809461784,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.514070639440438,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from concert where year like '%2014%' or year like '%2015%'"
+  },
+  {
+    "question_id": 22,
+    "question": "How many concerts occurred in 2014 or 2015 ?",
+    "retrieved_examples": [
+      {
+        "category": "or_condition",
+        "similarity": 0.6012324926868785,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5154072318009754,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.514254341334663,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from concert where year like '%2014%' or year like '%2015%'"
+  },
+  {
+    "question_id": 23,
+    "question": "Show the stadium name and the number of concerts in each stadium .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.717995327703391,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.6875335081551547,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "between",
+        "similarity": 0.673639206792525,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Name, count(*) from stadium T1 inner join concert T2 on T1.Stadium_ID = T2.Stadium_ID group by T1.Name"
+  },
+  {
+    "question_id": 24,
+    "question": "For each stadium , how many concerts play there ?",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.6123973302520109,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5779174545285473,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5745877122314933,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Name, count(T1.concert_ID) from stadium T1 join concert T2 on T1.Stadium_ID = T2.Stadium_ID group by T1.Name"
+  },
+  {
+    "question_id": 25,
+    "question": "Show the stadium name and capacity with most number of concerts in year 2014 or after .",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.647118235914958,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.6426999011750749,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "except",
+        "similarity": 0.6303285859122105,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name, T1.Capacity from stadium T1 join concert T2 on T1.Stadium_ID = T2.Stadium_ID where T2.Year > = '2014' group by T1.Stadium_ID, T1.Name, T1.Capacity having count(T2.concert_ID) > = 1"
+  },
+  {
+    "question_id": 26,
+    "question": "What is the name and capacity of the stadium with the most concerts after 2013 ?",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5385808220112243,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5379722856426785,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5344396299405899,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name, T1.Capacity from stadium T1 join concert T2 on T1.Stadium_ID = T2.Stadium_ID where T2.Year > '2013' group by T1.Stadium_ID order by count(*) desc limit 1"
+  },
+  {
+    "question_id": 27,
+    "question": "Which year has most number of concerts ?",
+    "retrieved_examples": [
+      {
+        "category": "or_condition",
+        "similarity": 0.5813546735453811,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5496466589414637,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5413402425351862,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select year from concert group by year order by count(*) desc limit 1"
+  },
+  {
+    "question_id": 28,
+    "question": "What is the year that had the most concerts ?",
+    "retrieved_examples": [
+      {
+        "category": "or_condition",
+        "similarity": 0.5656605582763893,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5465151513172591,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "nested_subquery",
+        "similarity": 0.5296669273502989,
+        "sql": "SELECT COUNT(*) FROM concert WHERE stadium_id = (SELECT stadium_id FROM stadium ORDER BY capacity DESC LIMIT 1)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select year from concert group by year order by count(*) desc limit 1"
+  },
+  {
+    "question_id": 29,
+    "question": "Show the stadium names without any concert .",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.6665767336895793,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.6576192405143846,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "between",
+        "similarity": 0.6160206379077625,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name from stadium AS T1 where T1.Name not in (select T3.concert_Name from concert AS T3 inner join singer_in_concert AS T1_1 on T1_1.concert_ID = T3.concert_ID inner join singer AS T2 on T1_1.Singer_ID = T2.Singer_ID)"
+  },
+  {
+    "question_id": 30,
+    "question": "What are the names of the stadiums without any concerts ?",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.6102320819076699,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.5931667449145395,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5444514247541135,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name from stadium as T1 inner join concert as T2 on T1.Stadium_ID = T2.Stadium_ID where T2.concert_ID is null"
+  },
+  {
+    "question_id": 31,
+    "question": "Show countries where a singer above age 40 and a singer below 30 are from .",
+    "retrieved_examples": [
+      {
+        "category": "intersect",
+        "similarity": 0.7239201883187635,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6926157554977054,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6758534920461696,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "SELECT DISTINCT Name FROM singer WHERE Age > 40 OR Age < 30"
+  },
+  {
+    "question_id": 32,
+    "question": "Show names for all stadiums except for stadiums having a concert in year 2014 .",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.7197061904539467,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.6645409398224227,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.6409851857754907,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from stadium where stadium.Stadium_ID not in (select T1.Stadium_ID from concert T1 join singer_in_concert T2 on T1.Stadium_ID = T2.concert_ID where T1.Year = '2014')"
+  },
+  {
+    "question_id": 33,
+    "question": "What are the names of all stadiums that did not have a concert in 2014 ?",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.6081437018493284,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.5689452263225359,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5071057072457253,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select T1.Name from stadium as T1 inner join concert as T2 on T1.Stadium_ID = T2.Stadium_ID where T2.Year ! = '2014'"
+  },
+  {
+    "question_id": 34,
+    "question": "Show the name and theme for all concerts and the number of singers in each concert .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.6613161201383144,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6427391957444949,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.6369003043315544,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.concert_Name, T1.Theme, count(T3.Singer_ID) from concert T1 join singer_in_concert T3 on T1.concert_ID = T3.concert_ID group by T1.concert_Name, T1.Theme"
+  },
+  {
+    "question_id": 35,
+    "question": "What are the names , themes , and number of singers for every concert ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5886131726123851,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5746588712264022,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.5553930306425728,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.concert_name, T1.theme, count(T2.Singer_ID) from concert T1 join singer_in_concert T3 on T1.concert_ID = T3.concert_ID join singer T2 on T3.Singer_ID = T2.Singer_ID group by T1.concert_name, T1.theme"
+  },
+  {
+    "question_id": 36,
+    "question": "List singer names and number of concerts for each singer .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6364406586561894,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.6229288921311085,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.6166790300524209,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select s.Name, count(si.concert_ID) from singer s join singer_in_concert si on s.Singer_ID = si.Singer_ID group by s.Name"
+  },
+  {
+    "question_id": 37,
+    "question": "What are the names of the singers and number of concerts for each person ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5930338739337507,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.5579181443466313,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5421455138065887,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Name, count(*) from singer T1 join singer_in_concert T2 on T1.Singer_ID = T2.Singer_ID group by T1.Name"
+  },
+  {
+    "question_id": 38,
+    "question": "List all singer names in concerts in year 2014 .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_joins",
+        "similarity": 0.5728993783613283,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5722856377532329,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5538454256442652,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Name from singer as T1 inner join singer_in_concert as T2 on T1.Singer_ID = T2.Singer_ID inner join concert as T3 on T2.concert_ID = T3.concert_ID where T3.Year = '2014'"
+  },
+  {
+    "question_id": 39,
+    "question": "What are the names of the singers who performed in a concert in 2014 ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.4928295901715548,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.49202386643641116,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "or_condition",
+        "similarity": 0.4703754356077339,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Name from singer as T1 join singer_in_concert as T2 on T1.Singer_ID = T2.Singer_ID join concert as T3 on T2.concert_ID = T3.concert_ID where T3.Year = '2014'"
+  },
+  {
+    "question_id": 40,
+    "question": "what is the name and nation of the singer who have a song having 'Hey ' in its name ?",
+    "retrieved_examples": [
+      {
+        "category": "like",
+        "similarity": 0.5845563962714909,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5732527174402992,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5604309181421577,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Name, T1.Country from singer T1 join singer_in_concert T2 on T1.Singer_ID = T2.Singer_ID where T1.Song_Name like '%Hey%'"
+  },
+  {
+    "question_id": 41,
+    "question": "What is the name and country of origin of every singer who has a song with the word 'Hey ' in its title ?",
+    "retrieved_examples": [
+      {
+        "category": "like",
+        "similarity": 0.5950161866809052,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5787415029907601,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.550426634802468,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name, T1.Country from singer as T1 join singer_in_concert as T2 on T1.Singer_ID = T2.Singer_ID join concert as T3 on T2.concert_ID = T3.concert_ID where T3.Song_Name like '%Hey%'"
+  },
+  {
+    "question_id": 42,
+    "question": "Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015 .",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.6440516941062084,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "between",
+        "similarity": 0.6205860148830998,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.6112096139280702,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions"
+    ],
+    "generated_sql": "select name, location from stadium where concert_id in (select concert_id from concert where year in (select song_release_year from singer inner join singer_in_concert on singer.singer_id = singer_in_concert.singer_id inner join concert on singer_in_concert.concert_id = concert.concert_id where song_release_year in (select Year from concert)))"
+  },
+  {
+    "question_id": 43,
+    "question": "What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015 ?",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.554692220337448,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5253662103966196,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5219551780964863,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions"
+    ],
+    "generated_sql": "select distinct T1.Name, T1.Location from stadium T1 join concert T2 on T1.Stadium_ID = T2.Stadium_ID where T2.Year IN ('2014', '2015')"
+  },
+  {
+    "question_id": 44,
+    "question": "Find the number of concerts happened in the stadium with the highest capacity .",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.6534879799977683,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.6457325684701185,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.6444186909024054,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select count(T1.concert_ID) from concert AS T1 JOIN stadium AS T2 ON T1.Stadium_ID = T2.Stadium_ID WHERE T2.Capacity = (SELECT MAX(Capacity) FROM stadium)"
+  },
+  {
+    "question_id": 45,
+    "question": "What are the number of concerts that occurred in the stadium with the largest capacity ?",
+    "retrieved_examples": [
+      {
+        "category": "nested_subquery",
+        "similarity": 0.562559904850844,
+        "sql": "SELECT COUNT(*) FROM concert WHERE stadium_id = (SELECT stadium_id FROM stadium ORDER BY capacity DESC LIMIT 1)"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.562151083416516,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5608269065668875,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select count(T1.concert_ID) from concert AS T1 JOIN stadium AS T2 ON T1.Stadium_ID = T2.Stadium_ID WHERE T2.Capacity = (SELECT MAX(Capacity) FROM stadium)"
+  },
+  {
+    "question_id": 46,
+    "question": "Find the number of pets whose weight is heavier than 10 .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.663706500516662,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5961053636994906,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.5250775901840047,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from pets where weight > 10"
+  },
+  {
+    "question_id": 47,
+    "question": "How many pets have a greater weight than 10 ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5677088618665568,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5176210211719606,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.44746147596687236,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from pets where weight > 10"
+  },
+  {
+    "question_id": 48,
+    "question": "Find the weight of the youngest dog .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.604796022962873,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5125615307241733,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.48332580656820623,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select weight from pets order by pet_age asc limit 1"
+  },
+  {
+    "question_id": 49,
+    "question": "How much does the youngest dog weigh ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5186293900991641,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.4191390101042904,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.40884212201649517,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select weight from pets where pet_type = 'dog' order by pet_age asc limit 1"
+  },
+  {
+    "question_id": 50,
+    "question": "Find the maximum weight for each type of pet . List the maximum weight and pet type .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.7547591300343646,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.600284063610974,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.5937112432467122,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select pet_type, max(weight) from pets group by pet_type"
+  },
+  {
+    "question_id": 51,
+    "question": "List the maximum weight and type for each type of pet .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6987320996670666,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5752775420617252,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.549843002098458,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select pet_type, max(weight) as max_weight from pets group by pet_type"
+  },
+  {
+    "question_id": 52,
+    "question": "Find number of pets owned by students who are older than 20 .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6355154834776118,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5576346056800634,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "or_condition",
+        "similarity": 0.5192018187390832,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from Has_Pet hp join Student s on hp.StuID = s.StuID where s.Age > 20"
+  },
+  {
+    "question_id": 53,
+    "question": "How many pets are owned by students that have an age greater than 20 ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.514447728395921,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.43702189436868627,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.422395837774838,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from Has_Pet AS T1 JOIN Student AS T2 ON T1.StuID = T2.StuID where T2.Age > 20"
+  },
+  {
+    "question_id": 54,
+    "question": "Find the number of dog pets that are raised by female students ( with sex F ) .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6205011870170117,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5461971600579876,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.49235547853303746,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select count(*) from Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID = T2.PetID WHERE T2.PetType = 'dog' AND T1.StuID IN (SELECT StuID FROM Student WHERE Sex = 'F')"
+  },
+  {
+    "question_id": 55,
+    "question": "How many dog pets are raised by female students ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.4855313076830791,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.40152059956212205,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.37252140226480646,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from Has_Pet H inner join Pets P on H.PetID = P.PetID where P.PetType = 'dog' and H.StuID in (select StuID from Student where Sex = 'F')"
+  },
+  {
+    "question_id": 56,
+    "question": "Find the number of distinct type of pets .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6834923085941791,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6466281968759577,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5691007955236227,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(distinct pet_type) from pets"
+  },
+  {
+    "question_id": 57,
+    "question": "How many different types of pet are there ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5422846420555486,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5258495905163104,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.4638375705616954,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(distinct pet_type) from pets"
+  },
+  {
+    "question_id": 58,
+    "question": "Find the first name of students who have cat or dog pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.655429726759769,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5456303919025638,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5369716747217996,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Fname from Student AS T1 join Has_Pet AS T2 ON T1.StuID = T2.StuID where T2.PetID in (select PetID from Pets where PetType = 'cat') or T2.PetID in (select PetID from Pets where PetType = 'dog')"
+  },
+  {
+    "question_id": 59,
+    "question": "What are the first names of every student who has a cat or dog as a pet ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5440436384802656,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.443332466740666,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.40456809149651657,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Fname from Student AS T1 JOIN Has_Pet AS T2 ON T1.StuID = T2.StuID where T2.PetID in (select PetID from Pets where PetType = 'cat') or (select PetID from Pets where PetType = 'dog')"
+  },
+  {
+    "question_id": 60,
+    "question": "Find the first name of students who have both cat and dog pets .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6514893847733888,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5472895237154192,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "like",
+        "similarity": 0.4947632690329811,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions"
+    ],
+    "generated_sql": "select T1.Fname from Student AS T1 JOIN Has_Pet AS T2 ON T1.StuID = T2.StuID WHERE T2.PetID IN (SELECT PetID FROM Pets WHERE PetType = 'cat') AND T2.PetID IN (SELECT PetID FROM Pets WHERE PetType = 'dog')"
+  },
+  {
+    "question_id": 61,
+    "question": "What are the students ' first names who have both cats and dogs as pets ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5227699193133727,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.4413114903181004,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "union",
+        "similarity": 0.38906023339580065,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions"
+    ],
+    "generated_sql": "select T1.Fname from Student AS T1 JOIN Has_Pet AS T2 ON T1.StuID = T2.StuID JOIN Pets AS T3 ON T2.PetID = T3.PetID where T3.PetType = 'cat' and T3.PetType = 'dog'"
+  },
+  {
+    "question_id": 62,
+    "question": "Find the major and age of students who do not have a cat pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5703167085745467,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.473149833888777,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.46334115714284646,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select T1.Major, T1.Age from Student AS T1 inner join Has_Pet AS T2 on T1.StuID = T2.StuID where T2.PetID not in (select PetID from Pets where PetType = 'cat')"
+  },
+  {
+    "question_id": 63,
+    "question": "What major is every student who does not own a cat as a pet , and also how old are they ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.47735759966917235,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.38461203920260867,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.3814999223791178,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Major from Student AS T1 inner join Has_Pet AS T2 ON T1.StuID = T2.StuID where T2.PetID not in (select PetID from Pets where PetType = 'cat') order by T1.Major"
+  },
+  {
+    "question_id": 64,
+    "question": "Find the id of students who do not have a cat pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6155150958448129,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.5205655712567684,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5058777566244964,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select T1.StuID from Has_Pet T1 left join Pets T2 on T1.PetID = T2.PetID where T2.PetType < > 'cat'"
+  },
+  {
+    "question_id": 65,
+    "question": "What are the ids of the students who do not own cats as pets ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5216286619076452,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.4464725674840723,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "except",
+        "similarity": 0.4160337989808493,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select T1.StuID from Student T1 join Has_Pet T2 on T1.StuID = T2.StuID where T2.PetID not in (select PetID from Pets where PetType = 'cat')"
+  },
+  {
+    "question_id": 66,
+    "question": "Find the first name and age of students who have a dog but do not have a cat as a pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.631884534037459,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5069244915714259,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.47269415159852857,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select T1.Fname, T1.Age from Student as T1 join Has_Pet as T2 on T1.StuID = T2.StuID where T2.PetID in (select PetID from Pets where PetType = 'dog') and T2.PetID not in (select PetID from Pets where PetType = 'cat')"
+  },
+  {
+    "question_id": 67,
+    "question": "What is the first name of every student who has a dog but does not have a cat ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5615099731106215,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.4352013222445355,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.40544515832742206,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Fname from Student AS T1 JOIN Has_Pet AS T2 ON T1.StuID = T2.StuID WHERE T2.PetID IN (SELECT PetID FROM Pets WHERE PetType = 'dog') AND T2.PetID NOT IN (SELECT PetID FROM Pets WHERE PetType = 'cat')"
+  },
+  {
+    "question_id": 68,
+    "question": "Find the type and weight of the youngest pet .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6519701540719149,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5962714456822563,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5350699225815646,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select pet_type, weight from pets order by pet_age asc limit 1"
+  },
+  {
+    "question_id": 69,
+    "question": "What type of pet is the youngest animal , and how much does it weigh ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5402328281876533,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.4735959322835523,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.4250404517395017,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.PetType, T1.weight from Pets as T1 inner join Has_Pet as T2 on T1.PetID = T2.PetID order by T1.pet_age asc limit 1"
+  },
+  {
+    "question_id": 70,
+    "question": "Find the id and weight of all pets whose age is older than 1 .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.683232301118455,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.6608909922736207,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5892666244689686,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.PetID, T1.weight from Pets as T1 join Has_Pet as T2 on T1.PetID = T2.PetID where T1.pet_age > 1"
+  },
+  {
+    "question_id": 71,
+    "question": "What is the id and weight of every pet who is older than 1 ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6134702153896959,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5838523089791865,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5123059165159913,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.PetID, T1.weight from Pets as T1 join Has_Pet as T2 on T1.PetID = T2.PetID where T1.pet_age > 1"
+  },
+  {
+    "question_id": 72,
+    "question": "Find the average and maximum age for each type of pet .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6754858816388793,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.6053742441427578,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "having",
+        "similarity": 0.6016708580358225,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select pet_type, avg(pet_age), max(pet_age) from pets group by pet_type"
+  },
+  {
+    "question_id": 73,
+    "question": "What is the average and maximum age for each pet type ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5912169288645321,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5310177478936343,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.53026554701385,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select pet_type, avg(pet_age), max(pet_age) from pets group by pet_type"
+  },
+  {
+    "question_id": 74,
+    "question": "Find the average weight for each pet type .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6977426963153622,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5869875001824528,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5485385297786844,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select pet_type, avg(weight) from pets group by pet_type"
+  },
+  {
+    "question_id": 75,
+    "question": "What is the average weight for each type of pet ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6267111573463503,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.5197423061174896,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4765932588871504,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select pet_type, avg(weight) from pets group by pet_type"
+  },
+  {
+    "question_id": 76,
+    "question": "Find the first name and age of students who have a pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6488524960988221,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5369749071995128,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5201271440690692,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Fname, T1.Age from Student as T1 join Has_Pet as T2 on T1.StuID = T2.StuID where T2.PetID in (select PetID from Pets)"
+  },
+  {
+    "question_id": 77,
+    "question": "What are the different first names and ages of the students who do have pets ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.535273495034318,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.42642941082893876,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "union",
+        "similarity": 0.4175442551908153,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct T1.Fname, T1.Age from Student as T1 join Has_Pet as T2 on T1.StuID = T2.StuID where T2.PetID in (select PetID from Pets)"
+  },
+  {
+    "question_id": 78,
+    "question": "Find the id of the pet owned by student whose last name is \u2018Smith\u2019 .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5958287479310828,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.504961406352186,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "like",
+        "similarity": 0.49029216803890874,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select t1.PetID from Has_Pet t1 join Student t2 on t1.StuID = t2.StuID where t2.LName = 'Smith'"
+  },
+  {
+    "question_id": 79,
+    "question": "What is the id of the pet owned by the student whose last name is 'Smith ' ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5127726972690284,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.4416466644476312,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "union",
+        "similarity": 0.40737143516065444,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select t1.PetID from Has_Pet t1 join Student t2 on t1.StuID = t2.StuID where t2.LName = 'Smith'"
+  },
+  {
+    "question_id": 80,
+    "question": "Find the number of pets for each student who has any pet and student id .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6720006066255744,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5957798190078806,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "or_condition",
+        "similarity": 0.5535964773428913,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select count(T1.StuID) from Has_Pet AS T1 inner join Pets AS T2 ON T1.PetID = T2.PetID where T1.StuID is not null group by T1.StuID"
+  },
+  {
+    "question_id": 81,
+    "question": "For students who have pets , how many pets does each student have ? list their ids instead of names .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6574172803388638,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5681146428834883,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5361430731880338,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.PetID, count(*) from Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID = T2.PetID GROUP BY T1.PetID"
+  },
+  {
+    "question_id": 82,
+    "question": "Find the first name and gender of student who have more than one pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.7178114289879481,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5951174905337636,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5510869486068752,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Fname, T1.Sex from Student as T1 join Has_Pet as T2 on T1.StuID = T2.StuID join Pets as T3 on T2.PetID = T3.PetID where T2.PetID IN (select PetID from Has_Pet group by StuID having count(*) > 1)"
+  },
+  {
+    "question_id": 83,
+    "question": "What is the first name and gender of the all the students who have more than one pet ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.6085857942920325,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.497943215573084,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.4534323813033374,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Fname, T1.Sex from Student as T1 join Has_Pet as T2 on T1.StuID = T2.StuID group by T1.StuID having count(T2.PetID) > 1"
+  },
+  {
+    "question_id": 84,
+    "question": "Find the last name of the student who has a cat that is age 3 .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5867914595095458,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "like",
+        "similarity": 0.4847976529860984,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.48455896259906384,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.LName from Student as T1 join Pets as T2 on T1.StuID = T2.StuID where T2.PetType = 'cat' and T2.pet_age = 3"
+  },
+  {
+    "question_id": 85,
+    "question": "What is the last name of the student who has a cat that is 3 years old ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.48938346126648535,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "union",
+        "similarity": 0.417325150408611,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.41453379667060086,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.LName from Student AS T1 JOIN Has_Pet AS T2 ON T1.StuID = T2.StuID JOIN Pets AS T3 ON T2.PetID = T3.PetID where T3.PetType = 'cat' and T3.pet_age = 3"
+  },
+  {
+    "question_id": 86,
+    "question": "Find the average age of students who do not have any pet .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5351945622885611,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.48446615889900996,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4826657269879115,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select avg(T1.Age) from Student AS T1 left join Has_Pet AS T2 ON T1.StuID = T2.StuID where T2.PetID is null"
+  },
+  {
+    "question_id": 87,
+    "question": "What is the average age for all students who do not own any pets ?",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.4607211353685094,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.3957146006786361,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.39035937248427516,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select avg(age) from student where stu_id not in (select stu_id from has_pet)"
+  },
+  {
+    "question_id": 88,
+    "question": "How many employees are there ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.48550946986358084,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.4650419043025385,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.4373080562311122,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from employee"
+  },
+  {
+    "question_id": 89,
+    "question": "Count the number of employees",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5760132477736825,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.571873684947758,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5490259226047007,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from employee"
+  },
+  {
+    "question_id": 90,
+    "question": "Sort employee names by their age in ascending order .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.6529998218289738,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.5802180843472146,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5782551674276054,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from employee order by age asc"
+  },
+  {
+    "question_id": 91,
+    "question": "List the names of employees and sort in ascending order of age .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.6202170375954238,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5559452565163362,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.552866020177096,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from employee order by age asc"
+  },
+  {
+    "question_id": 92,
+    "question": "What is the number of employees from each city ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.48545777275074736,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.47774190757800705,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "union",
+        "similarity": 0.4602092473813701,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select count(*) from employee where city in (select city from employee)"
+  },
+  {
+    "question_id": 93,
+    "question": "Count the number of employees for each city .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.5171725537880667,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.512209703774467,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.4920252094466573,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select name, city from employee group by city"
+  },
+  {
+    "question_id": 94,
+    "question": "Which cities do more than one employee under age 30 come from ?",
+    "retrieved_examples": [
+      {
+        "category": "intersect",
+        "similarity": 0.5019138329629784,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "union",
+        "similarity": 0.47259729335379347,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4539844944191532,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct city from employee where age < 30"
+  },
+  {
+    "question_id": 95,
+    "question": "Find the cities that have more than one employee under age 30 .",
+    "retrieved_examples": [
+      {
+        "category": "intersect",
+        "similarity": 0.5769943592893028,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5338789134943949,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5157270696147794,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct city from employee where age < 30 group by city having count(*) > 1"
+  },
+  {
+    "question_id": 96,
+    "question": "Find the number of shops in each location .",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.5552865114870039,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5469549335281556,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5454419202578246,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select count(shop_id) from shop"
+  },
+  {
+    "question_id": 97,
+    "question": "How many shops are there in each location ?",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.47838515871541176,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.4560429057537258,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.4531394063910997,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select distinct location from shop"
+  },
+  {
+    "question_id": 98,
+    "question": "Find the manager name and district of the shop whose number of products is the largest .",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.5233915380037503,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5046860253730334,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5029794690889172,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select t1.Manager_name, t1.Location from t1 join t2 on t1.Shop_ID = t2.Shop_ID group by t1.Shop_ID order by t2.Number_products desc limit 1"
+  },
+  {
+    "question_id": 99,
+    "question": "What are the manager name and district of the shop that sells the largest number of products ?",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.4409757244044407,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.4229990701603423,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "between",
+        "similarity": 0.41556381808898946,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select t1.Manager_name, t1.Location from t1 join t2 on t1.Shop_ID = t2.Shop_ID group by t1.Shop_ID order by t2.Number_products desc limit 1"
+  },
+  {
+    "question_id": 100,
+    "question": "find the minimum and maximum number of products of all stores .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.6110507761597455,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.561491694328356,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.561370913809428,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use ORDER BY ASC LIMIT 1 for minimum"
+    ],
+    "generated_sql": "select min(Number_products) from shop"
+  },
+  {
+    "question_id": 101,
+    "question": "What are the minimum and maximum number of products across all the shops ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5584248977560122,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5208675088201136,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5173944062753381,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use ORDER BY ASC LIMIT 1 for minimum"
+    ],
+    "generated_sql": "select min(Number_products) from shop, max(Number_products) from shop"
+  },
+  {
+    "question_id": 102,
+    "question": "Return the name , location and district of all shops in descending order of number of products .",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.5395561715202633,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5337247715587609,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "distinct_where",
+        "similarity": 0.5204489831296479,
+        "sql": "SELECT DISTINCT country FROM singer WHERE age > 20"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name, location, district from shop order by number_products desc"
+  },
+  {
+    "question_id": 103,
+    "question": "Sort all the shops by number products in descending order , and return the name , location and district of each shop .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.5773812661517416,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5494452589180487,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5362978958180781,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select name, location, district from shop order by number_products desc"
+  },
+  {
+    "question_id": 104,
+    "question": "Find the names of stores whose number products is more than the average number of products .",
+    "retrieved_examples": [
+      {
+        "category": "subquery",
+        "similarity": 0.5484674038460323,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.5471072924504358,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5264796116688533,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from shop where number_products > (select avg(number_products) from shop)"
+  },
+  {
+    "question_id": 105,
+    "question": "Which shops ' number products is above the average ? Give me the shop names .",
+    "retrieved_examples": [
+      {
+        "category": "subquery",
+        "similarity": 0.517612931946171,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.5133643446029267,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.493381844758107,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Name from T1 join T2 on T1.Employee_ID = T2.Employee_ID group by T1.Shop_ID having T1.Number_products > (select avg(Number_products) from T1)"
+  },
+  {
+    "question_id": 106,
+    "question": "find the name of employee who was awarded the most times in the evaluation .",
+    "retrieved_examples": [
+      {
+        "category": "having",
+        "similarity": 0.5107326319847704,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.5080404666916934,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4945274118332151,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select T1.Name from employee AS T1 JOIN evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.Employee_ID HAVING COUNT(T2.Employee_ID) = (SELECT MAX(Award_count) FROM (SELECT COUNT(Employee_ID) AS Award_count FROM evaluation GROUP BY Employee_ID) AS Temp)"
+  },
+  {
+    "question_id": 107,
+    "question": "Which employee received the most awards in evaluations ? Give me the employee name .",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.4109971802096266,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "having",
+        "similarity": 0.3973749835329404,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.39069029872756517,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select T1.Name from employee AS T1 JOIN evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.Employee_ID, T1.Name ORDER BY count(*) DESC LIMIT 1"
+  },
+  {
+    "question_id": 108,
+    "question": "Find the name of the employee who got the highest one time bonus .",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.47971715428128753,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.46774112515043353,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "having",
+        "similarity": 0.46632924144190113,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select name from employee inner join evaluation on employee.employee_id = evaluation.employee_id order by evaluation.bonus desc limit 1"
+  },
+  {
+    "question_id": 109,
+    "question": "Which employee received the biggest bonus ? Give me the employee name .",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.4124207243648791,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.4047794101247546,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.40376869819016353,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from employee inner join evaluation on employee.employee_id = evaluation.employee_id order by evaluation.bonus desc limit 1"
+  },
+  {
+    "question_id": 110,
+    "question": "Find the names of employees who never won any award in the evaluation .",
+    "retrieved_examples": [
+      {
+        "category": "not_in",
+        "similarity": 0.4456971554164483,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "except",
+        "similarity": 0.43403155067582283,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "having",
+        "similarity": 0.42664302427748574,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select T1.Name from employee AS T1 left join evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID where T2.Employee_ID is null"
+  },
+  {
+    "question_id": 111,
+    "question": "What are the names of the employees who never received any evaluation ?",
+    "retrieved_examples": [
+      {
+        "category": "not_in",
+        "similarity": 0.33324370562527356,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.3201662529275236,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from employee where employee_id not in (select employee_id from evaluation)"
+  },
+  {
+    "question_id": 112,
+    "question": "What is the name of the shop that is hiring the largest number of employees ?",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.3938643309268038,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "or_condition",
+        "similarity": 0.373393981330603,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      },
+      {
+        "category": "having",
+        "similarity": 0.3706847927459172,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select T3.Name from T3 join T1 on T1.Shop_ID = T3.Shop_ID join T1 on T1.Employee_ID = T1.Employee_ID group by T3.Shop_ID order by count(T1.Employee_ID) desc limit 1"
+  },
+  {
+    "question_id": 113,
+    "question": "Which shop has the most employees ? Give me the shop name .",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.4477086135928767,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.4281832252531354,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "having",
+        "similarity": 0.42431841098384593,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name from T1 join T2 on T1.Employee_ID = T2.Employee_ID group by T1.Shop_ID order by count(T2.Employee_ID) desc limit 1"
+  },
+  {
+    "question_id": 114,
+    "question": "Find the name of the shops that do not hire any employee .",
+    "retrieved_examples": [
+      {
+        "category": "not_in",
+        "similarity": 0.4680457033183153,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "except",
+        "similarity": 0.46485423673670867,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "having",
+        "similarity": 0.4457390150228662,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from shop where shop.shop_id not in (select employee_id from hiring)"
+  },
+  {
+    "question_id": 115,
+    "question": "Which shops run with no employees ? Find the shop names",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.45523652451528823,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.44409440090603924,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "having",
+        "similarity": 0.43578534745353004,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select name from shop where shop_id not in (select shop_id from hiring)"
+  },
+  {
+    "question_id": 116,
+    "question": "Find the number of employees hired in each shop ; show the shop name as well .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5569853079216032,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5507362282263075,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5447644554004896,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select t1.Name, count(t1.Employee_ID) from hiring t1 join shop t2 on t1.Shop_ID = t2.Shop_ID group by t2.Shop_ID"
+  },
+  {
+    "question_id": 117,
+    "question": "For each shop , return the number of employees working there and the name of the shop .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5263050009003543,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5145556293454078,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.5089147243067119,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select t1.Name, count(t1.Employee_ID) from shop t1 join hiring t2 on t1.Shop_ID = t2.Shop_ID group by t1.Shop_ID"
+  },
+  {
+    "question_id": 118,
+    "question": "What is total bonus given in all evaluations ?",
+    "retrieved_examples": [
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4095710975828833,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.40413116977603947,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.38559663765003954,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select sum(\\`Bonus\\`) from evaluation"
+  },
+  {
+    "question_id": 119,
+    "question": "Find the total amount of bonus given in all the evaluations .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.4962127899640746,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4801194877037368,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.463766724547417,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select sum(bonus) from evaluation"
+  },
+  {
+    "question_id": 120,
+    "question": "Give me all the information about hiring .",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.43735903933929704,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.4371439945073981,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "having",
+        "similarity": 0.43484117039399245,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select * from hiring"
+  },
+  {
+    "question_id": 121,
+    "question": "What is all the information about hiring ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.4481932779565422,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "having",
+        "similarity": 0.43146524222763305,
+        "sql": "SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid GROUP BY T1.stuid HAVING COUNT(*) > 1"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4244897527642429,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select * from hiring"
+  },
+  {
+    "question_id": 122,
+    "question": "Which district has both stores with less than 3000 products and stores with more than 10000 products ?",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.48043419725084563,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.44742459712549576,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.44645947502224825,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "SELECT DISTINCT T3.District FROM shop AS T3 JOIN shop AS T1 ON T1.Shop_ID = T3.Shop_ID WHERE T1.Number_products < 3000 AND T1.Number_products > 10000"
+  },
+  {
+    "question_id": 123,
+    "question": "Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products .",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.5734789201023298,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5693125920270353,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5430479838323568,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions"
+    ],
+    "generated_sql": "SELECT DISTINCT T1.Location FROM shop AS T1 JOIN shop AS T2 ON T1.Shop_ID = T2.Shop_ID WHERE T1.Number_products < 3000 AND T1.Number_products > 10000"
+  },
+  {
+    "question_id": 124,
+    "question": "How many different store locations are there ?",
+    "retrieved_examples": [
+      {
+        "category": "between",
+        "similarity": 0.4767894459055159,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.45042018138334733,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "distinct_where",
+        "similarity": 0.4472820712567764,
+        "sql": "SELECT DISTINCT country FROM singer WHERE age > 20"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(distinct location) from shop"
+  },
+  {
+    "question_id": 125,
+    "question": "Count the number of distinct store locations .",
+    "retrieved_examples": [
+      {
+        "category": "distinct_where",
+        "similarity": 0.5623624028459502,
+        "sql": "SELECT DISTINCT country FROM singer WHERE age > 20"
+      },
+      {
+        "category": "between",
+        "similarity": 0.5493182283841205,
+        "sql": "SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5424659080952787,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(distinct shop.Location) from shop"
+  },
+  {
+    "question_id": 126,
+    "question": "How many conductors are there ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.46959357453319434,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.44500581859031313,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.43171394006958724,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from conductor"
+  },
+  {
+    "question_id": 127,
+    "question": "Count the number of conductors .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5232396999705001,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5163148112635769,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5037672380799808,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from conductor"
+  },
+  {
+    "question_id": 128,
+    "question": "List the names of conductors in ascending order of age .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.5746503150729613,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5288866530136782,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.5147995916295581,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from conductor order by age asc"
+  },
+  {
+    "question_id": 129,
+    "question": "What are the names of conductors , ordered by age ?",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.5615628406806685,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5161519830979246,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.4950898493791779,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from conductor order by age"
+  },
+  {
+    "question_id": 130,
+    "question": "What are the names of conductors whose nationalities are not `` USA '' ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.444454059792827,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.41667166085037455,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.39967328358405374,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from conductor where nationality not in ('USA')"
+  },
+  {
+    "question_id": 131,
+    "question": "Return the names of conductors that do not have the nationality `` USA '' .",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.5637297824066372,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5457773766412891,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.543022814379411,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from conductor where nationality not in ('USA')"
+  },
+  {
+    "question_id": 132,
+    "question": "What are the record companies of orchestras in descending order of years in which they were founded ?",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.4741542693661086,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4660935690571405,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.44945355131267956,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct t2.Record_Company from orchestra as t2 order by t2.Year_of_Founded DESC"
+  },
+  {
+    "question_id": 133,
+    "question": "Return the record companies of orchestras , sorted descending by the years in which they were founded .",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5495298242398251,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5439438238412806,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5276688152998762,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct T2.Record_Company from orchestra AS T2 JOIN performance AS T1 ON T2.Orchestra_ID = T1.Orchestra_ID ORDER BY T2.Year_of_Founded DESC"
+  },
+  {
+    "question_id": 134,
+    "question": "What is the average attendance of shows ?",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.5202581150408218,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4982109723781579,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.490259776693905,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select average(official_ratings_millions) from performance inner join show on performance.performance_id = show.performance_id"
+  },
+  {
+    "question_id": 135,
+    "question": "Return the average attendance across all shows .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.5990875505189293,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5849689578349768,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "max_limit",
+        "similarity": 0.5735681128709125,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select average(attendance) from show"
+  },
+  {
+    "question_id": 136,
+    "question": "What are the maximum and minimum share of performances whose type is not `` Live final '' .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5381338206648265,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.5344499634010524,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5328661038529163,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use ORDER BY ASC LIMIT 1 for minimum"
+    ],
+    "generated_sql": "select max(Share) from show where Type not like '%Live final%' union select min(Share) from show where Type not like '%Live final%'"
+  },
+  {
+    "question_id": 137,
+    "question": "Return the maximum and minimum shares for performances that do not have the type `` Live final '' .",
+    "retrieved_examples": [
+      {
+        "category": "max_limit",
+        "similarity": 0.5530847275130228,
+        "sql": "SELECT name, capacity FROM stadium ORDER BY average DESC LIMIT 1"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.5479231114792691,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5405242395839274,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use ORDER BY ASC LIMIT 1 for minimum"
+    ],
+    "generated_sql": "select max(Share) from show where Share < > ' Live final '"
+  },
+  {
+    "question_id": 138,
+    "question": "How many different nationalities do conductors have ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5171485077992011,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5084963475696443,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.4927190042936065,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(distinct nationality) from conductor"
+  },
+  {
+    "question_id": 139,
+    "question": "Count the number of different nationalities of conductors .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5968191235650355,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5533207881261661,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5392220019862477,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(distinct T1.Nationality) from conductor as T1"
+  },
+  {
+    "question_id": 140,
+    "question": "List names of conductors in descending order of years of work .",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.537198470777382,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5027448225702926,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5025256656981827,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from conductor order by year_of_work desc"
+  },
+  {
+    "question_id": 141,
+    "question": "What are the names of conductors , sorted descending by the number of years they have worked ?",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.5002626358169228,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "union",
+        "similarity": 0.4873384286542683,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4846280663712932,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T1.Conductor_ID ORDER BY T1.Year_of_Work DESC SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T1.Conductor_ID ORDER BY T1.Year_of_Work DESC"
+  },
+  {
+    "question_id": 142,
+    "question": "List the name of the conductor with the most years of work .",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.4901093927162061,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.48639150262477043,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.48582156004329763,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select name from conductor order by year_of_work desc limit 1"
+  },
+  {
+    "question_id": 143,
+    "question": "What is the name of the conductor who has worked the greatest number of years ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.41099987658575693,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.40460318469183415,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "except",
+        "similarity": 0.38839551468210404,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select name from conductor order by year_of_work desc limit 1"
+  },
+  {
+    "question_id": 144,
+    "question": "Show the names of conductors and the orchestras they have conducted .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.4954608397603264,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.4904969112662151,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.48560170659994273,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Name from conductor T1 join orchestra T2 on T1.Conductor_ID = T2.Conductor_ID"
+  },
+  {
+    "question_id": 145,
+    "question": "What are the names of conductors as well as the corresonding orchestras that they have conducted ?",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.44242428433179987,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.44101933809269056,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "except",
+        "similarity": 0.4236322873142211,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct t1.Name from conductor as t1 join orchestra as t2 on t1.Conductor_ID = t2.Conductor_ID"
+  },
+  {
+    "question_id": 146,
+    "question": "Show the names of conductors that have conducted more than one orchestras .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_joins",
+        "similarity": 0.4973099662079805,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.4761115415189781,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4632538136397168,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from conductor where conductor_id in (select conductor_id from orchestra group by conductor_id having count(*) > 1)"
+  },
+  {
+    "question_id": 147,
+    "question": "What are the names of conductors who have conducted at more than one orchestra ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_joins",
+        "similarity": 0.4244207114687242,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.41865128886954034,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "except",
+        "similarity": 0.40809559429596526,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from conductor where conductor_id in (select conductor_id from orchestra group by conductor_id having count(*) > 1)"
+  },
+  {
+    "question_id": 148,
+    "question": "Show the name of the conductor that has conducted the most number of orchestras .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.4959833228346214,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.49500068869063674,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.4863573321328024,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select name from conductor where conductor_id in (select conductor_id from orchestra group by conductor_id having count(*) > = 1)"
+  },
+  {
+    "question_id": 149,
+    "question": "What is the name of the conductor who has conducted the most orchestras ?",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.39067165062385445,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.3829516648084035,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "nested_subquery",
+        "similarity": 0.379454092960446,
+        "sql": "SELECT COUNT(*) FROM concert WHERE stadium_id = (SELECT stadium_id FROM stadium ORDER BY capacity DESC LIMIT 1)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select name from conductor where Conductor_ID in (select Conductor_ID from orchestra group by Conductor_ID count > (select count(Conductor_ID) from orchestra))"
+  },
+  {
+    "question_id": 150,
+    "question": "Please show the name of the conductor that has conducted orchestras founded after 2008 .",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.49010147450464536,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.48536627826681394,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.48060153338829037,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select T1.Name from conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID where T2.Year_of_Founded > 2008"
+  },
+  {
+    "question_id": 151,
+    "question": "What are the names of conductors who have conducted orchestras founded after the year 2008 ?",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.44141601908889433,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4287145908338166,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.4181426083401424,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID WHERE T2.Year_of_Founded > 2008"
+  },
+  {
+    "question_id": 152,
+    "question": "Please show the different record companies and the corresponding number of orchestras .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5589286556797277,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5469392835062251,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5323603077056204,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Record_Company, count(*) from orchestra AS T1 inner join show AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID group by T1.Record_Company"
+  },
+  {
+    "question_id": 153,
+    "question": "How many orchestras does each record company manage ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.45389073063942453,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.44330405394932076,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.4366961248364698,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Record_Company, count(T1.Orchestra_ID) from orchestra AS T1 inner join show AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID group by T1.Record_Company"
+  },
+  {
+    "question_id": 154,
+    "question": "Please show the record formats of orchestras in ascending order of count .",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5875636974207666,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5806516583627488,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5616998575902734,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select major_record_format from orchestra order by count(major_record_format) ascending"
+  },
+  {
+    "question_id": 155,
+    "question": "What are the major record formats of orchestras , sorted by their frequency ?",
+    "retrieved_examples": [
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5294821920868347,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5192623792478139,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5035738574669739,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "SELECT Major_Record_Format, COUNT(*) FROM orchestra GROUP BY Major_Record_Format ORDER BY COUNT(*) DESC"
+  },
+  {
+    "question_id": 156,
+    "question": "List the record company shared by the most number of orchestras .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.4745129802580558,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.4704294598720335,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4675443196859666,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "SELECT T3.Record_Company FROM orchestra AS T3 JOIN performance AS T1 ON T1.Orchestra_ID = T3.Orchestra_ID GROUP BY T3.Record_Company ORDER BY COUNT(T1.Orchestra_ID) DESC LIMIT 1"
+  },
+  {
+    "question_id": 157,
+    "question": "What is the record company used by the greatest number of orchestras ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.42795290957059606,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4230506151850433,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.422040313975283,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T3.Record_Company from orchestra AS T3 JOIN performance AS T1 ON T1.Orchestra_ID = T3.Orchestra_ID GROUP BY T3.Record_Company ORDER BY COUNT(*) DESC LIMIT 1"
+  },
+  {
+    "question_id": 158,
+    "question": "List the names of orchestras that have no performance .",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.5242074226942798,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.4994676310277922,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.4632931526638707,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Orchestra from T1 join orchestra T1 on T1.Orchestra_ID = T2.Orchestra_ID where T2.Orchestra_ID not in (select Orchestra_ID from performance)"
+  },
+  {
+    "question_id": 159,
+    "question": "What are the orchestras that do not have any performances ?",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.4507622024993829,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "not_in",
+        "similarity": 0.4312299179642034,
+        "sql": "SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.3925497585324823,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select distinct T1.Orchestra from orchestra AS T1 LEFT JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID WHERE T2.Orchestra_ID IS NULL"
+  },
+  {
+    "question_id": 160,
+    "question": "Show the record companies shared by orchestras founded before 2003 and after 2003 .",
+    "retrieved_examples": [
+      {
+        "category": "join_group",
+        "similarity": 0.5363628999577286,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5325078576037461,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "except",
+        "similarity": 0.5296455971152504,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "SELECT DISTINCT T1.Record_Company FROM orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID WHERE T1.Year_of_Founded < 2003 OR T1.Year_of_Founded > 2003"
+  },
+  {
+    "question_id": 161,
+    "question": "What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003 ?",
+    "retrieved_examples": [
+      {
+        "category": "except",
+        "similarity": 0.4643107594861488,
+        "sql": "SELECT name FROM stadium EXCEPT SELECT T2.name FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year = 2014"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.44879772313381977,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.4476081532385001,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use INTERSECT for items matching BOTH conditions"
+    ],
+    "generated_sql": "SELECT DISTINCT T3.Record_Company FROM orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID JOIN show AS T3 ON T2.Orchestra_ID = T3.Orchestra_ID WHERE T1.Year_of_Founded IN (SELECT Year_of_Founded FROM orchestra WHERE Year_of_Founded < 2003) INTERSECT SELECT DISTINCT T3.Record_Company FROM orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID JOIN show AS T3 ON T2.Orchestra_ID = T3.Orchestra_ID WHERE T1.Year_of_Founded IN (SELECT Year_of_Founded FROM orchestra WHERE Year_of_Founded > 2003)"
+  },
+  {
+    "question_id": 162,
+    "question": "Find the number of orchestras whose record format is `` CD '' or `` DVD '' .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.578843079026361,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5607791084974302,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5605847078888382,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from orchestra where Major_Record_Format like '%CD%' or Major_Record_Format like '%DVD%'"
+  },
+  {
+    "question_id": 163,
+    "question": "Count the number of orchestras that have CD or DVD as their record format .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5393333902229925,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5178927262399373,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5099548172184946,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(T1.Orchestra_ID) from orchestra AS T1 inner join show AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID where T1.Major_Record_Format IN ('CD', 'DVD')"
+  },
+  {
+    "question_id": 164,
+    "question": "Show the years in which orchestras that have given more than one performance are founded .",
+    "retrieved_examples": [
+      {
+        "category": "multiple_joins",
+        "similarity": 0.5161946811706131,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.5138737317889593,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "complex_join_group",
+        "similarity": 0.5004270111138663,
+        "sql": "SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select distinct T1.Year_of_Founded from orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID GROUP BY T1.Year_of_Founded HAVING count(*) > 1"
+  },
+  {
+    "question_id": 165,
+    "question": "What are years of founding for orchestras that have had more than a single performance ?",
+    "retrieved_examples": [
+      {
+        "category": "multiple_joins",
+        "similarity": 0.4721908222735533,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      },
+      {
+        "category": "join_group",
+        "similarity": 0.46716684201488695,
+        "sql": "SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T1.stadium_id"
+      },
+      {
+        "category": "or_condition",
+        "similarity": 0.46099966011934534,
+        "sql": "SELECT COUNT(*) FROM concert WHERE year = 2014 OR year = 2015"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "SELECT DISTINCT T2.Year_of_Founded FROM orchestra AS T2 JOIN performance AS T1 ON T2.Orchestra_ID = T1.Orchestra_ID GROUP BY T2.Orchestra_ID HAVING COUNT(T1.Performance_ID) > 1"
+  },
+  {
+    "question_id": 166,
+    "question": "How many singers are there ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6654611145014836,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.6194402115654285,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5364130891112818,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from singer"
+  },
+  {
+    "question_id": 167,
+    "question": "What is the count of singers ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6779697397018699,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.6520264545367221,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5500469016852535,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select count(*) from singer"
+  },
+  {
+    "question_id": 168,
+    "question": "List the name of singers in ascending order of net worth .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6092388308128971,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.6048879152380485,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5835685325813025,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from singer order by net_worth_millions ascending"
+  },
+  {
+    "question_id": 169,
+    "question": "What are the names of singers ordered by ascending net worth ?",
+    "retrieved_examples": [
+      {
+        "category": "select_order",
+        "similarity": 0.5775314613610911,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5517145108794197,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5271501592274963,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from singer order by net_worth_millions asc"
+  },
+  {
+    "question_id": 170,
+    "question": "What are the birth year and citizenship of singers ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.6268948623929896,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5709611031431252,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5463226880943555,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select birth_year, citizenship from singer"
+  },
+  {
+    "question_id": 171,
+    "question": "What are the birth years and citizenships of the singers ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.6003326848073658,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5679547526250146,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5286203793637215,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select birth_year, citizenship from singer"
+  },
+  {
+    "question_id": 172,
+    "question": "List the name of singers whose citizenship is not `` France '' .",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.5982945953495538,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5966076080184675,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5467156260041319,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from singer where citizenship not in ('France')"
+  },
+  {
+    "question_id": 173,
+    "question": "What are the names of the singers who are not French citizens ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.5220783586290599,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5211085299866438,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.4578998029158007,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from singer where citizenship not in ('french')"
+  },
+  {
+    "question_id": 174,
+    "question": "Show the name of singers whose birth year is either 1948 or 1949 ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5186853980377842,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.5008813849791585,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.49781620355952244,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use UNION for items matching EITHER condition"
+    ],
+    "generated_sql": "select name from singer where birth_year in (1948, 1949)"
+  },
+  {
+    "question_id": 175,
+    "question": "What are the names of the singers whose birth years are either 1948 or 1949 ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.47237597520415947,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.4646554736489496,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.4501729600266752,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use UNION for items matching EITHER condition"
+    ],
+    "generated_sql": "select name from singer where birth_year in (1948, 1949)"
+  },
+  {
+    "question_id": 176,
+    "question": "What is the name of the singer with the largest net worth ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5008379390072295,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.47990700828297944,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "like",
+        "similarity": 0.47434912093440734,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum",
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select name from singer where net_worth_millions = (select max(net_worth_millions) from singer)"
+  },
+  {
+    "question_id": 177,
+    "question": "What is the name of the singer who is worth the most ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.4863186981127556,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.47824019802194095,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.47788627275378,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select name from singer where net_worth_millions = (select max(net_worth_millions) from singer)"
+  },
+  {
+    "question_id": 178,
+    "question": "Show different citizenship of singers and the number of singers of each citizenship .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.7168775535038102,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6775791614158362,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.6550046885338087,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select citizenship, count(*) from singer group by citizenship"
+  },
+  {
+    "question_id": 179,
+    "question": "For each citizenship , how many singers are from that country ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6719284084002062,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6178990267422665,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5824179608102166,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select citizenship, count(*) from singer group by citizenship"
+  },
+  {
+    "question_id": 180,
+    "question": "Please show the most common citizenship of singers .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6901523323820358,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6690183872429661,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.6327181244432205,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select citizenship from singer group by citizenship order by count(*) desc limit 1"
+  },
+  {
+    "question_id": 181,
+    "question": "What is the most common singer citizenship ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.5843584969100517,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5786968081480018,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.542324196956053,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select citizenship from singer group by citizenship order by count(*) desc limit 1"
+  },
+  {
+    "question_id": 182,
+    "question": "Show different citizenships and the maximum net worth of singers of each citizenship .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6370311444133324,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "union",
+        "similarity": 0.6273817473359967,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5873017495225631,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select citizenship, max(net_worth_millions) from singer group by citizenship"
+  },
+  {
+    "question_id": 183,
+    "question": "For each citizenship , what is the maximum net worth ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.47122837900444753,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "multiple_aggregations",
+        "similarity": 0.46348942533576293,
+        "sql": "SELECT MAX(weight), pettype FROM pets GROUP BY pettype"
+      },
+      {
+        "category": "aggregation_where",
+        "similarity": 0.4498335769369958,
+        "sql": "SELECT AVG(age), MIN(age), MAX(age) FROM singer WHERE country = 'France'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group",
+      "HINT: Use ORDER BY DESC LIMIT 1 for maximum"
+    ],
+    "generated_sql": "select citizenship, max(net_worth_millions) from singer group by citizenship"
+  },
+  {
+    "question_id": 184,
+    "question": "Show titles of songs and names of singers .",
+    "retrieved_examples": [
+      {
+        "category": "like",
+        "similarity": 0.6901326603820902,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6592272042771744,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.6475427612528054,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Title, T2.Name from song AS T1 JOIN singer AS T2 ON T1.Singer_ID = T2.Singer_ID"
+  },
+  {
+    "question_id": 185,
+    "question": "What are the song titles and singer names ?",
+    "retrieved_examples": [
+      {
+        "category": "like",
+        "similarity": 0.6245445492488515,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5982809776977333,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "select_order",
+        "similarity": 0.5817326408092934,
+        "sql": "SELECT name, country, age FROM singer ORDER BY age DESC"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Title, T2.Name from song as T1 join singer as T2 on T1.Singer_ID = T2.Singer_ID"
+  },
+  {
+    "question_id": 186,
+    "question": "Show distinct names of singers that have songs with sales more than 300000 .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6557070352074804,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.6453499731672695,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.6241535825516579,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select distinct name from singer inner join song on singer.singer_id = song.singer_id where song.sales > 300000"
+  },
+  {
+    "question_id": 187,
+    "question": "what are the different names of the singers that have sales more than 300000 ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5919991841611125,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5602893040264176,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5547181613334605,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select distinct name from singer inner join song on singer.singer_id = song.singer_id where song.sales > 300000"
+  },
+  {
+    "question_id": 188,
+    "question": "Show the names of singers that have more than one song .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6438106455019708,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.6389518686537625,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.6170214425472581,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from singer where singer_id in (select singer_id from song group by singer_id having count(*) > 1)"
+  },
+  {
+    "question_id": 189,
+    "question": "What are the names of the singers that have more than one songs ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5622999956990911,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5456742263253169,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "multiple_joins",
+        "similarity": 0.539186584097622,
+        "sql": "SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id JOIN concert AS T3 ON T1.concert_id = T3.concert_id WHERE T3.year = 2014"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select name from singer where singer_id in (select singer_id from song group by singer_id having count(*) > 1)"
+  },
+  {
+    "question_id": 190,
+    "question": "Show the names of singers and the total sales of their songs .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6660041724585174,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "like",
+        "similarity": 0.6267579228535161,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.622890111907236,
+        "sql": "SELECT COUNT(*) FROM singer"
+      }
+    ],
+    "pattern_hints": [],
+    "generated_sql": "select T1.Name, sum(T2.Sales) from singer T1 join song T2 on T1.Singer_ID = T2.Singer_ID group by T1.Name"
+  },
+  {
+    "question_id": 191,
+    "question": "For each singer name , what is the total sales for their songs ?",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.6382310614320306,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5842285644274355,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "subquery",
+        "similarity": 0.5815418280171893,
+        "sql": "SELECT song_name FROM singer WHERE age > (SELECT AVG(age) FROM singer)"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select T1.Name, sum(T2.Sales) from singer T1 inner join song T2 on T1.Singer_ID = T2.Singer_ID group by T1.Name"
+  },
+  {
+    "question_id": 192,
+    "question": "List the name of singers that do not have any song .",
+    "retrieved_examples": [
+      {
+        "category": "group_by",
+        "similarity": 0.5623805856223116,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5594925020635605,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "like",
+        "similarity": 0.5504914998644013,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion"
+    ],
+    "generated_sql": "select name from singer where singer_id not in (select singer_id from song)"
+  },
+  {
+    "question_id": 193,
+    "question": "What is the sname of every sing that does not have any song ?",
+    "retrieved_examples": [
+      {
+        "category": "like",
+        "similarity": 0.5326585049234466,
+        "sql": "SELECT name FROM singer WHERE song_name LIKE '%Hey%'"
+      },
+      {
+        "category": "basic_count",
+        "similarity": 0.5315339434443725,
+        "sql": "SELECT COUNT(*) FROM singer"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.5262612510271382,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use NOT IN or EXCEPT for exclusion",
+      "HINT: Use GROUP BY for aggregating per group"
+    ],
+    "generated_sql": "select name from singer where singer_id not in (select singer_id from song)"
+  },
+  {
+    "question_id": 194,
+    "question": "Show the citizenship shared by singers with birth year before 1945 and after 1955 .",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.647439761613272,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.6227655208927624,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.600697792674587,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "SELECT T1.Citizenship FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID WHERE T1.Birth_Year < 1945 AND T1.Birth_Year > 1955"
+  },
+  {
+    "question_id": 195,
+    "question": "What are the citizenships that are shared by singers with a birth year before 1945 and after 1955 ?",
+    "retrieved_examples": [
+      {
+        "category": "union",
+        "similarity": 0.5435222347053481,
+        "sql": "SELECT birth_year FROM singer WHERE country = 'France' UNION SELECT birth_year FROM singer WHERE country = 'USA'"
+      },
+      {
+        "category": "intersect",
+        "similarity": 0.5079059050848826,
+        "sql": "SELECT country FROM singer WHERE age > 40 INTERSECT SELECT country FROM singer WHERE age < 30"
+      },
+      {
+        "category": "group_by",
+        "similarity": 0.50035730407841,
+        "sql": "SELECT country, COUNT(*) FROM singer GROUP BY country"
+      }
+    ],
+    "pattern_hints": [
+      "HINT: Use LIKE with % wildcards for pattern matching"
+    ],
+    "generated_sql": "select distinct citizenship from singer where birth_year < 1945 and birth_year > 1955"
+  }
+]

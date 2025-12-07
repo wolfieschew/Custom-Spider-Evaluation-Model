@@ -1,0 +1,3512 @@
+[
+  {
+    "question_id": 1,
+    "question": "How many singers do we have ?",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "multiple_joins",
+      "union",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6199281450787172,
+      0.5920569130597765,
+      0.5522627500764737,
+      0.5114495026512441,
+      0.510614940010009
+    ]
+  },
+  {
+    "question_id": 2,
+    "question": "What is the total number of singers ?",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "multiple_joins",
+      "union",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6537584666036378,
+      0.623025506481739,
+      0.5790024896552949,
+      0.5395791041004077,
+      0.5367625526516299
+    ]
+  },
+  {
+    "question_id": 3,
+    "question": "Show name , country , age for all singers ordered by age from the oldest to the youngest .",
+    "retrieved_categories": [
+      "select_order",
+      "intersect",
+      "group_by",
+      "subquery",
+      "union"
+    ],
+    "similarity_scores": [
+      0.7067570728643413,
+      0.6488084007486822,
+      0.6461747899573594,
+      0.6398880143875413,
+      0.6211329844752091
+    ]
+  },
+  {
+    "question_id": 4,
+    "question": "What are the names , countries , and ages for every singer in descending order of age ?",
+    "retrieved_categories": [
+      "select_order",
+      "group_by",
+      "intersect",
+      "union",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.6719964946235549,
+      0.6363928753977924,
+      0.6362685142873087,
+      0.6159379172522537,
+      0.6025420960558011
+    ]
+  },
+  {
+    "question_id": 5,
+    "question": "What is the average , minimum , and maximum age of all singers from France ?",
+    "retrieved_categories": [
+      "aggregation_where",
+      "union",
+      "intersect",
+      "select_order",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.5933561568085196,
+      0.5877051240269066,
+      0.5616563438071897,
+      0.5304354309142437,
+      0.5291632970654038
+    ]
+  },
+  {
+    "question_id": 6,
+    "question": "What is the average , minimum , and maximum age for all French singers ?",
+    "retrieved_categories": [
+      "aggregation_where",
+      "union",
+      "intersect",
+      "subquery",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6191942172535512,
+      0.5883646073552733,
+      0.574424964317675,
+      0.551276046078441,
+      0.5476529281069028
+    ]
+  },
+  {
+    "question_id": 7,
+    "question": "Show the name and the release year of the song by the youngest singer .",
+    "retrieved_categories": [
+      "select_order",
+      "subquery",
+      "union",
+      "group_by",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.6147368640802897,
+      0.605442571411417,
+      0.5933693296550296,
+      0.5759017382907113,
+      0.5746848909804595
+    ]
+  },
+  {
+    "question_id": 8,
+    "question": "What are the names and release years for all the songs of the youngest singer ?",
+    "retrieved_categories": [
+      "select_order",
+      "union",
+      "subquery",
+      "intersect",
+      "group_by"
+    ],
+    "similarity_scores": [
+      0.5571320670489586,
+      0.5314484721806406,
+      0.5194101871300885,
+      0.5171717865795123,
+      0.5126573090500478
+    ]
+  },
+  {
+    "question_id": 9,
+    "question": "What are all distinct countries where singers above age 20 are from ?",
+    "retrieved_categories": [
+      "intersect",
+      "union",
+      "distinct_where",
+      "group_by",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6458949260137351,
+      0.6169158833656972,
+      0.6141096426919839,
+      0.6023694890797389,
+      0.5855335375423386
+    ]
+  },
+  {
+    "question_id": 10,
+    "question": "What are the different countries with singers above age 20 ?",
+    "retrieved_categories": [
+      "intersect",
+      "union",
+      "distinct_where",
+      "group_by",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6561162117071969,
+      0.609655700965805,
+      0.5985542191478497,
+      0.5956587855584748,
+      0.5875204256526267
+    ]
+  },
+  {
+    "question_id": 11,
+    "question": "Show all countries and the number of singers in each country .",
+    "retrieved_categories": [
+      "group_by",
+      "union",
+      "intersect",
+      "basic_count",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.7415357705017562,
+      0.6802688646263281,
+      0.6629397362890486,
+      0.6525447725767124,
+      0.6460946816287572
+    ]
+  },
+  {
+    "question_id": 12,
+    "question": "How many singers are from each country ?",
+    "retrieved_categories": [
+      "group_by",
+      "union",
+      "intersect",
+      "basic_count",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.6963779047956763,
+      0.608632668954562,
+      0.5979762607387734,
+      0.5905222414241638,
+      0.5764134111702046
+    ]
+  },
+  {
+    "question_id": 13,
+    "question": "List all song names by singers above the average age .",
+    "retrieved_categories": [
+      "subquery",
+      "intersect",
+      "select_order",
+      "like",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.6791882891059254,
+      0.6386992760174803,
+      0.6337317161205674,
+      0.6312072214054848,
+      0.6076005151557048
+    ]
+  },
+  {
+    "question_id": 14,
+    "question": "What are all the song names by singers who are older than average ?",
+    "retrieved_categories": [
+      "subquery",
+      "intersect",
+      "select_order",
+      "aggregation_where",
+      "like"
+    ],
+    "similarity_scores": [
+      0.6411598221283299,
+      0.5838409550119571,
+      0.555204043783755,
+      0.5449393614329396,
+      0.5339043014229788
+    ]
+  },
+  {
+    "question_id": 15,
+    "question": "Show location and name for all stadiums with a capacity between 5000 and 10000 .",
+    "retrieved_categories": [
+      "between",
+      "join_group",
+      "except",
+      "max_limit",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.7232048252679937,
+      0.6777371843165082,
+      0.6515328425381296,
+      0.649013523307394,
+      0.6422495228161975
+    ]
+  },
+  {
+    "question_id": 16,
+    "question": "What are the locations and names of all stations with capacity between 5000 and 10000 ?",
+    "retrieved_categories": [
+      "between",
+      "max_limit",
+      "join_group",
+      "nested_subquery",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.5657474842630531,
+      0.48679589775846216,
+      0.48038116629057986,
+      0.47770359378903654,
+      0.477118820383613
+    ]
+  },
+  {
+    "question_id": 17,
+    "question": "What is the maximum capacity and the average of all stadiums ?",
+    "retrieved_categories": [
+      "max_limit",
+      "between",
+      "join_group",
+      "complex_join_group",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6303515211709791,
+      0.579839735842535,
+      0.5529197859972101,
+      0.5387581200288413,
+      0.5147264291845071
+    ]
+  },
+  {
+    "question_id": 18,
+    "question": "What is the average and maximum capacities for all stadiums ?",
+    "retrieved_categories": [
+      "max_limit",
+      "between",
+      "join_group",
+      "complex_join_group",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.635555491358204,
+      0.604892673905584,
+      0.5686213252555966,
+      0.5487577633053007,
+      0.5374626703692287
+    ]
+  },
+  {
+    "question_id": 19,
+    "question": "What is the name and capacity for the stadium with highest average attendance ?",
+    "retrieved_categories": [
+      "max_limit",
+      "join_group",
+      "between",
+      "complex_join_group",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6206928856685434,
+      0.5615320462937313,
+      0.5563475068508611,
+      0.5528576724195177,
+      0.5381399784330676
+    ]
+  },
+  {
+    "question_id": 20,
+    "question": "What is the name and capacity for the stadium with the highest average attendance ?",
+    "retrieved_categories": [
+      "max_limit",
+      "join_group",
+      "between",
+      "complex_join_group",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6153784702976921,
+      0.5576481732845843,
+      0.5516036219844636,
+      0.5505390259603992,
+      0.5364181562437417
+    ]
+  },
+  {
+    "question_id": 21,
+    "question": "How many concerts are there in year 2014 or 2015 ?",
+    "retrieved_categories": [
+      "or_condition",
+      "join_group",
+      "complex_join_group",
+      "multiple_joins",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6214300185024686,
+      0.5403961142720165,
+      0.5355149244092449,
+      0.5257075616013819,
+      0.5094964802685811
+    ]
+  },
+  {
+    "question_id": 22,
+    "question": "How many concerts occurred in 2014 or 2015 ?",
+    "retrieved_categories": [
+      "or_condition",
+      "join_group",
+      "complex_join_group",
+      "multiple_joins",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6153493107169361,
+      0.5356471872710815,
+      0.5347660062583525,
+      0.5253923504507667,
+      0.5184074418355554
+    ]
+  },
+  {
+    "question_id": 23,
+    "question": "Show the stadium name and the number of concerts in each stadium .",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "between",
+      "except",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.7608724579240512,
+      0.7129290200373664,
+      0.6937180681565951,
+      0.6717409678087529,
+      0.6445887314250233
+    ]
+  },
+  {
+    "question_id": 24,
+    "question": "For each stadium , how many concerts play there ?",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "between",
+      "except",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6509303666015634,
+      0.601656903023653,
+      0.5877234306859317,
+      0.5861939603498052,
+      0.5847068019603734
+    ]
+  },
+  {
+    "question_id": 25,
+    "question": "Show the stadium name and capacity with most number of concerts in year 2014 or after .",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "between",
+      "except",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6719641554608091,
+      0.6696015178031677,
+      0.6365789294330463,
+      0.6347969734573065,
+      0.6095859813569191
+    ]
+  },
+  {
+    "question_id": 26,
+    "question": "What is the name and capacity of the stadium with the most concerts after 2013 ?",
+    "retrieved_categories": [
+      "complex_join_group",
+      "join_group",
+      "except",
+      "between",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.5705967462682072,
+      0.5646374323608992,
+      0.5448513683425344,
+      0.5360044013550255,
+      0.5238477198165171
+    ]
+  },
+  {
+    "question_id": 27,
+    "question": "Which year has most number of concerts ?",
+    "retrieved_categories": [
+      "or_condition",
+      "complex_join_group",
+      "join_group",
+      "nested_subquery",
+      "except"
+    ],
+    "similarity_scores": [
+      0.6025919172764282,
+      0.5711970731400677,
+      0.5609917776532347,
+      0.5461775319278562,
+      0.5178995499408314
+    ]
+  },
+  {
+    "question_id": 28,
+    "question": "What is the year that had the most concerts ?",
+    "retrieved_categories": [
+      "or_condition",
+      "complex_join_group",
+      "join_group",
+      "nested_subquery",
+      "except"
+    ],
+    "similarity_scores": [
+      0.5877251913539607,
+      0.5696876294881608,
+      0.5461167381062748,
+      0.5443800774161168,
+      0.5192299913076462
+    ]
+  },
+  {
+    "question_id": 29,
+    "question": "Show the stadium names without any concert .",
+    "retrieved_categories": [
+      "not_in",
+      "except",
+      "between",
+      "join_group",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.6713254057182568,
+      0.6622251175742916,
+      0.6236241235527045,
+      0.6226280115820768,
+      0.5870712872135966
+    ]
+  },
+  {
+    "question_id": 30,
+    "question": "What are the names of the stadiums without any concerts ?",
+    "retrieved_categories": [
+      "except",
+      "not_in",
+      "join_group",
+      "between",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.6110654978943162,
+      0.6086703389505344,
+      0.5546481369772029,
+      0.5541310730634403,
+      0.5147085445863799
+    ]
+  },
+  {
+    "question_id": 31,
+    "question": "Show countries where a singer above age 40 and a singer below 30 are from .",
+    "retrieved_categories": [
+      "intersect",
+      "union",
+      "group_by",
+      "subquery",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.7273815435931987,
+      0.6879081532831006,
+      0.6794844513738675,
+      0.6671390126242888,
+      0.6586546631494611
+    ]
+  },
+  {
+    "question_id": 32,
+    "question": "Show names for all stadiums except for stadiums having a concert in year 2014 .",
+    "retrieved_categories": [
+      "except",
+      "not_in",
+      "join_group",
+      "complex_join_group",
+      "between"
+    ],
+    "similarity_scores": [
+      0.7195344346484374,
+      0.6714724457442967,
+      0.6694012611519146,
+      0.6533676664774004,
+      0.6483510915671524
+    ]
+  },
+  {
+    "question_id": 33,
+    "question": "What are the names of all stadiums that did not have a concert in 2014 ?",
+    "retrieved_categories": [
+      "except",
+      "not_in",
+      "join_group",
+      "complex_join_group",
+      "between"
+    ],
+    "similarity_scores": [
+      0.6121146865713362,
+      0.5749476573730048,
+      0.534055044234888,
+      0.5255494358022562,
+      0.5151537661968032
+    ]
+  },
+  {
+    "question_id": 34,
+    "question": "Show the name and theme for all concerts and the number of singers in each concert .",
+    "retrieved_categories": [
+      "join_group",
+      "multiple_joins",
+      "complex_join_group",
+      "group_by",
+      "like"
+    ],
+    "similarity_scores": [
+      0.6738403720958067,
+      0.6472822205882078,
+      0.6360636571053186,
+      0.6253879024728795,
+      0.6049247064342518
+    ]
+  },
+  {
+    "question_id": 35,
+    "question": "What are the names , themes , and number of singers for every concert ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "group_by",
+      "complex_join_group",
+      "like"
+    ],
+    "similarity_scores": [
+      0.5873507350788679,
+      0.5800281662978177,
+      0.5664287747972744,
+      0.5384806458586613,
+      0.5349222608936239
+    ]
+  },
+  {
+    "question_id": 36,
+    "question": "List singer names and number of concerts for each singer .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "group_by",
+      "complex_join_group",
+      "like"
+    ],
+    "similarity_scores": [
+      0.6782685645549353,
+      0.6457344763301075,
+      0.6290797718559659,
+      0.627140692682716,
+      0.6117105646050067
+    ]
+  },
+  {
+    "question_id": 37,
+    "question": "What are the names of the singers and number of concerts for each person ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "group_by",
+      "join_group",
+      "union",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.621692603910394,
+      0.5900446685744529,
+      0.5668267731070085,
+      0.5488157076235441,
+      0.5443633939118216
+    ]
+  },
+  {
+    "question_id": 38,
+    "question": "List all singer names in concerts in year 2014 .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "group_by",
+      "or_condition",
+      "like",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.6203320252386594,
+      0.5574289073860493,
+      0.5480255535147988,
+      0.5463896718147684,
+      0.5342578040583776
+    ]
+  },
+  {
+    "question_id": 39,
+    "question": "What are the names of the singers who performed in a concert in 2014 ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "or_condition",
+      "group_by",
+      "like",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.538913179817452,
+      0.4965512331982143,
+      0.4870609201058425,
+      0.4624214023489006,
+      0.4620920867694887
+    ]
+  },
+  {
+    "question_id": 40,
+    "question": "what is the name and nation of the singer who have a song having 'Hey ' in its name ?",
+    "retrieved_categories": [
+      "like",
+      "group_by",
+      "union",
+      "multiple_joins",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.5783044541013856,
+      0.5555511263019378,
+      0.5532085229979631,
+      0.5248467263873927,
+      0.5238902253229569
+    ]
+  },
+  {
+    "question_id": 41,
+    "question": "What is the name and country of origin of every singer who has a song with the word 'Hey ' in its title ?",
+    "retrieved_categories": [
+      "like",
+      "group_by",
+      "multiple_joins",
+      "union",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5872671208250086,
+      0.5537337727551054,
+      0.545335026716073,
+      0.541418146089719,
+      0.5216657904403946
+    ]
+  },
+  {
+    "question_id": 42,
+    "question": "Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015 .",
+    "retrieved_categories": [
+      "except",
+      "join_group",
+      "between",
+      "complex_join_group",
+      "or_condition"
+    ],
+    "similarity_scores": [
+      0.6501790982735245,
+      0.6356681542879208,
+      0.6267582918738656,
+      0.6263695930182402,
+      0.5943320270007042
+    ]
+  },
+  {
+    "question_id": 43,
+    "question": "What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015 ?",
+    "retrieved_categories": [
+      "except",
+      "join_group",
+      "complex_join_group",
+      "or_condition",
+      "between"
+    ],
+    "similarity_scores": [
+      0.5609666624171571,
+      0.5466064887204114,
+      0.5453734686731239,
+      0.5310158225333108,
+      0.5304875180290112
+    ]
+  },
+  {
+    "question_id": 44,
+    "question": "Find the number of concerts happened in the stadium with the highest capacity .",
+    "retrieved_categories": [
+      "complex_join_group",
+      "join_group",
+      "nested_subquery",
+      "max_limit",
+      "between"
+    ],
+    "similarity_scores": [
+      0.6807573551448344,
+      0.6791276692563623,
+      0.6695255003238793,
+      0.6397313695380783,
+      0.6328508440262706
+    ]
+  },
+  {
+    "question_id": 45,
+    "question": "What are the number of concerts that occurred in the stadium with the largest capacity ?",
+    "retrieved_categories": [
+      "nested_subquery",
+      "join_group",
+      "complex_join_group",
+      "between",
+      "except"
+    ],
+    "similarity_scores": [
+      0.5965510688375382,
+      0.5960246520078072,
+      0.592297308403243,
+      0.5535537910290153,
+      0.5472040789890158
+    ]
+  },
+  {
+    "question_id": 46,
+    "question": "Find the number of pets whose weight is heavier than 10 .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "max_limit",
+      "group_by",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.6646592767521192,
+      0.6170166321564821,
+      0.5212459634993646,
+      0.5096315897142267,
+      0.5061391356078514
+    ]
+  },
+  {
+    "question_id": 47,
+    "question": "How many pets have a greater weight than 10 ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "max_limit",
+      "group_by",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5650121909766558,
+      0.5334069550368994,
+      0.44371928059467713,
+      0.43096987594575803,
+      0.42563304412786984
+    ]
+  },
+  {
+    "question_id": 48,
+    "question": "Find the weight of the youngest dog .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "select_order",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.6054309579450236,
+      0.5196498765747902,
+      0.48850866704147944,
+      0.47477087106538635,
+      0.4517794774965641
+    ]
+  },
+  {
+    "question_id": 49,
+    "question": "How much does the youngest dog weigh ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "select_order",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.5194633342452231,
+      0.42223160407276383,
+      0.407461196957237,
+      0.40140952092911786,
+      0.3567166421272193
+    ]
+  },
+  {
+    "question_id": 50,
+    "question": "Find the maximum weight for each type of pet . List the maximum weight and pet type .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "max_limit",
+      "aggregation_where",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.7561298716618987,
+      0.6195046082867862,
+      0.5905419649613888,
+      0.5391092835746176,
+      0.5171893010357792
+    ]
+  },
+  {
+    "question_id": 51,
+    "question": "List the maximum weight and type for each type of pet .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "max_limit",
+      "aggregation_where",
+      "between"
+    ],
+    "similarity_scores": [
+      0.6949002094708338,
+      0.5924372375647683,
+      0.5425546890252841,
+      0.5044131151702572,
+      0.49040708127506655
+    ]
+  },
+  {
+    "question_id": 52,
+    "question": "Find number of pets owned by students who are older than 20 .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "aggregation_where",
+      "intersect",
+      "or_condition"
+    ],
+    "similarity_scores": [
+      0.6572625749385995,
+      0.5580854409812496,
+      0.5236857076192857,
+      0.520165471286763,
+      0.519340547920205
+    ]
+  },
+  {
+    "question_id": 53,
+    "question": "How many pets are owned by students that have an age greater than 20 ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "intersect",
+      "aggregation_where",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.5359715482684002,
+      0.4392192267180705,
+      0.4347276309866696,
+      0.4193561431663457,
+      0.41831299067052496
+    ]
+  },
+  {
+    "question_id": 54,
+    "question": "Find the number of dog pets that are raised by female students ( with sex F ) .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "group_by",
+      "basic_count",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.6407024174049373,
+      0.5433654881189086,
+      0.48207424104616325,
+      0.4763348069084592,
+      0.46626231533112433
+    ]
+  },
+  {
+    "question_id": 55,
+    "question": "How many dog pets are raised by female students ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "group_by",
+      "basic_count",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.494338311719472,
+      0.39224102806112116,
+      0.35390334632932585,
+      0.34202599754226143,
+      0.33223888443530747
+    ]
+  },
+  {
+    "question_id": 56,
+    "question": "Find the number of distinct type of pets .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "distinct_where",
+      "group_by",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.6982017228645824,
+      0.642049922661217,
+      0.5592952794250466,
+      0.5577705035577176,
+      0.5562201838070918
+    ]
+  },
+  {
+    "question_id": 57,
+    "question": "How many different types of pet are there ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "group_by",
+      "between",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.5638364507423551,
+      0.5211870097372984,
+      0.44870807461018847,
+      0.4434272659014355,
+      0.4333683460260954
+    ]
+  },
+  {
+    "question_id": 58,
+    "question": "Find the first name of students who have cat or dog pet .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "like",
+      "select_order",
+      "union"
+    ],
+    "similarity_scores": [
+      0.6716259099099507,
+      0.5364616872306012,
+      0.5348807041533067,
+      0.5013730045241841,
+      0.49361651039412896
+    ]
+  },
+  {
+    "question_id": 59,
+    "question": "What are the first names of every student who has a cat or dog as a pet ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "like",
+      "union",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.5640962527885689,
+      0.4371062912115145,
+      0.40517211527725255,
+      0.39997685990409626,
+      0.39590304980038615
+    ]
+  },
+  {
+    "question_id": 60,
+    "question": "Find the first name of students who have both cat and dog pets .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "like",
+      "multiple_joins",
+      "union"
+    ],
+    "similarity_scores": [
+      0.6689229921284964,
+      0.5414672318353693,
+      0.49380689225240004,
+      0.47800077479598607,
+      0.477418624010774
+    ]
+  },
+  {
+    "question_id": 61,
+    "question": "What are the students ' first names who have both cats and dogs as pets ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "multiple_joins",
+      "union",
+      "like"
+    ],
+    "similarity_scores": [
+      0.5443172902516411,
+      0.4421508694526271,
+      0.3925059357268578,
+      0.38981862197225,
+      0.38271153730123464
+    ]
+  },
+  {
+    "question_id": 62,
+    "question": "Find the major and age of students who do not have a cat pet .",
+    "retrieved_categories": [
+      "having",
+      "basic_count",
+      "except",
+      "multiple_aggregations",
+      "not_in"
+    ],
+    "similarity_scores": [
+      0.5852658932917043,
+      0.4602230471914721,
+      0.45946515164392837,
+      0.4574278168747208,
+      0.45650363053218734
+    ]
+  },
+  {
+    "question_id": 63,
+    "question": "What major is every student who does not own a cat as a pet , and also how old are they ?",
+    "retrieved_categories": [
+      "having",
+      "not_in",
+      "or_condition",
+      "except",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.49819958814357423,
+      0.3871387778614384,
+      0.38226162775888495,
+      0.379393803057445,
+      0.37904342591046103
+    ]
+  },
+  {
+    "question_id": 64,
+    "question": "Find the id of students who do not have a cat pet .",
+    "retrieved_categories": [
+      "having",
+      "not_in",
+      "except",
+      "basic_count",
+      "multiple_aggregations"
+    ],
+    "similarity_scores": [
+      0.6360327349959851,
+      0.5293468400524622,
+      0.5167867550051449,
+      0.4941855419752476,
+      0.49166320677313236
+    ]
+  },
+  {
+    "question_id": 65,
+    "question": "What are the ids of the students who do not own cats as pets ?",
+    "retrieved_categories": [
+      "having",
+      "not_in",
+      "except",
+      "multiple_aggregations",
+      "or_condition"
+    ],
+    "similarity_scores": [
+      0.5393450420787564,
+      0.45431797345229674,
+      0.4278836648857845,
+      0.4013198572741317,
+      0.3984045049042552
+    ]
+  },
+  {
+    "question_id": 66,
+    "question": "Find the first name and age of students who have a dog but do not have a cat as a pet .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "union",
+      "select_order",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.651089086369504,
+      0.501886586460401,
+      0.46776745475744336,
+      0.4669498433623869,
+      0.46275713353392206
+    ]
+  },
+  {
+    "question_id": 67,
+    "question": "What is the first name of every student who has a dog but does not have a cat ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "not_in",
+      "basic_count",
+      "union"
+    ],
+    "similarity_scores": [
+      0.5792425094110287,
+      0.425797981617495,
+      0.3934000963859935,
+      0.39216708732702327,
+      0.3919131557586102
+    ]
+  },
+  {
+    "question_id": 68,
+    "question": "Find the type and weight of the youngest pet .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "select_order",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.6506185593482261,
+      0.6090096027965066,
+      0.5375494259508108,
+      0.5265105570684689,
+      0.5026259268729688
+    ]
+  },
+  {
+    "question_id": 69,
+    "question": "What type of pet is the youngest animal , and how much does it weigh ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "select_order",
+      "aggregation_where",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.5424416908959135,
+      0.488571166104203,
+      0.4262853653443616,
+      0.42147514614763465,
+      0.399485684605311
+    ]
+  },
+  {
+    "question_id": 70,
+    "question": "Find the id and weight of all pets whose age is older than 1 .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "intersect",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6944993074482415,
+      0.6867808887366121,
+      0.6071960859067327,
+      0.5972557412435668,
+      0.5862414043425725
+    ]
+  },
+  {
+    "question_id": 71,
+    "question": "What is the id and weight of every pet who is older than 1 ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "select_order",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.6225864001359442,
+      0.6070662193472743,
+      0.5260748279489554,
+      0.5200882947254142,
+      0.5112672467289496
+    ]
+  },
+  {
+    "question_id": 72,
+    "question": "Find the average and maximum age for each type of pet .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "subquery",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.6804052383987444,
+      0.6202999693421012,
+      0.6111793866199904,
+      0.5819042999943917,
+      0.570633437450121
+    ]
+  },
+  {
+    "question_id": 73,
+    "question": "What is the average and maximum age for each pet type ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "intersect",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.5972050503518141,
+      0.5534681856407869,
+      0.5420148225035499,
+      0.5097292300766653,
+      0.5007228363374887
+    ]
+  },
+  {
+    "question_id": 74,
+    "question": "Find the average weight for each pet type .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "subquery",
+      "group_by"
+    ],
+    "similarity_scores": [
+      0.699334150742865,
+      0.6060304923900726,
+      0.5406940498425653,
+      0.5279097183559319,
+      0.5075921745640828
+    ]
+  },
+  {
+    "question_id": 75,
+    "question": "What is the average weight for each type of pet ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "having",
+      "aggregation_where",
+      "subquery",
+      "max_limit"
+    ],
+    "similarity_scores": [
+      0.6296788008164285,
+      0.5454131255205646,
+      0.47378684253992814,
+      0.45997952168676626,
+      0.4515345098020472
+    ]
+  },
+  {
+    "question_id": 76,
+    "question": "Find the first name and age of students who have a pet .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "union",
+      "select_order",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.6694185623358119,
+      0.5331110321752506,
+      0.5240790857598975,
+      0.5187446349684537,
+      0.5172197009392682
+    ]
+  },
+  {
+    "question_id": 77,
+    "question": "What are the different first names and ages of the students who do have pets ?",
+    "retrieved_categories": [
+      "having",
+      "union",
+      "multiple_aggregations",
+      "select_order",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.5564860399946338,
+      0.42645656995816006,
+      0.4246189038681309,
+      0.4105100323102536,
+      0.40372335261462733
+    ]
+  },
+  {
+    "question_id": 78,
+    "question": "Find the id of the pet owned by student whose last name is \u2018Smith\u2019 .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "like",
+      "distinct_where",
+      "union"
+    ],
+    "similarity_scores": [
+      0.6145428030520661,
+      0.5051339706280288,
+      0.49635838177680786,
+      0.4789789733272095,
+      0.4728009470998283
+    ]
+  },
+  {
+    "question_id": 79,
+    "question": "What is the id of the pet owned by the student whose last name is 'Smith ' ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "like",
+      "union",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.5284906212076282,
+      0.43993090202878093,
+      0.4085876078986327,
+      0.4073437803220579,
+      0.4066901268431028
+    ]
+  },
+  {
+    "question_id": 80,
+    "question": "Find the number of pets for each student who has any pet and student id .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "or_condition",
+      "group_by",
+      "union"
+    ],
+    "similarity_scores": [
+      0.7001461913542528,
+      0.5990464771241946,
+      0.5604570733074481,
+      0.5467589383390226,
+      0.545100144616399
+    ]
+  },
+  {
+    "question_id": 81,
+    "question": "For students who have pets , how many pets does each student have ? list their ids instead of names .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "group_by",
+      "basic_count",
+      "join_group"
+    ],
+    "similarity_scores": [
+      0.6817772173023833,
+      0.5697059319143343,
+      0.533860403484939,
+      0.5290743526425613,
+      0.5266357348102113
+    ]
+  },
+  {
+    "question_id": 82,
+    "question": "Find the first name and gender of student who have more than one pet .",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "union",
+      "like",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.7402638905742376,
+      0.5914293216424994,
+      0.5522637354885486,
+      0.5449096995496922,
+      0.5444492162377443
+    ]
+  },
+  {
+    "question_id": 83,
+    "question": "What is the first name and gender of the all the students who have more than one pet ?",
+    "retrieved_categories": [
+      "having",
+      "multiple_aggregations",
+      "union",
+      "group_by",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.6312096939603729,
+      0.4957667566983227,
+      0.4499133084288903,
+      0.4491061102717167,
+      0.4471580812051908
+    ]
+  },
+  {
+    "question_id": 84,
+    "question": "Find the last name of the student who has a cat that is age 3 .",
+    "retrieved_categories": [
+      "having",
+      "select_order",
+      "like",
+      "multiple_aggregations",
+      "union"
+    ],
+    "similarity_scores": [
+      0.6112624227009724,
+      0.48825974798327737,
+      0.48825849827783974,
+      0.4879741611438073,
+      0.48527800683540756
+    ]
+  },
+  {
+    "question_id": 85,
+    "question": "What is the last name of the student who has a cat that is 3 years old ?",
+    "retrieved_categories": [
+      "having",
+      "union",
+      "multiple_aggregations",
+      "select_order",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.5116623413601752,
+      0.4219176485283859,
+      0.41747754498284767,
+      0.4098339233037702,
+      0.40255024865924144
+    ]
+  },
+  {
+    "question_id": 86,
+    "question": "Find the average age of students who do not have any pet .",
+    "retrieved_categories": [
+      "having",
+      "aggregation_where",
+      "subquery",
+      "intersect",
+      "multiple_aggregations"
+    ],
+    "similarity_scores": [
+      0.549109521505626,
+      0.4795737770947545,
+      0.47742234728809935,
+      0.46961781868921626,
+      0.4545721058987302
+    ]
+  },
+  {
+    "question_id": 87,
+    "question": "What is the average age for all students who do not own any pets ?",
+    "retrieved_categories": [
+      "having",
+      "aggregation_where",
+      "intersect",
+      "subquery",
+      "union"
+    ],
+    "similarity_scores": [
+      0.47598204353479096,
+      0.3946178995114935,
+      0.3866521106398164,
+      0.38022240383783185,
+      0.3701421960291234
+    ]
+  },
+  {
+    "question_id": 88,
+    "question": "How many employees are there ?",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "join_group",
+      "or_condition",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.47662562551313215,
+      0.46489589922087654,
+      0.44883006030690364,
+      0.4322771393727443,
+      0.42109259754183753
+    ]
+  },
+  {
+    "question_id": 89,
+    "question": "Count the number of employees",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "join_group",
+      "or_condition",
+      "having"
+    ],
+    "similarity_scores": [
+      0.5692911828790191,
+      0.565454810198186,
+      0.5580410763830652,
+      0.5341524536347623,
+      0.5257601651849136
+    ]
+  },
+  {
+    "question_id": 90,
+    "question": "Sort employee names by their age in ascending order .",
+    "retrieved_categories": [
+      "select_order",
+      "subquery",
+      "intersect",
+      "aggregation_where",
+      "union"
+    ],
+    "similarity_scores": [
+      0.6523102917640667,
+      0.5953375572297678,
+      0.5858148638004592,
+      0.5769552799882208,
+      0.5592101604131506
+    ]
+  },
+  {
+    "question_id": 91,
+    "question": "List the names of employees and sort in ascending order of age .",
+    "retrieved_categories": [
+      "select_order",
+      "subquery",
+      "intersect",
+      "aggregation_where",
+      "union"
+    ],
+    "similarity_scores": [
+      0.6158854152880511,
+      0.5628903463317164,
+      0.5579564657420777,
+      0.5438129050848383,
+      0.5363144361699645
+    ]
+  },
+  {
+    "question_id": 92,
+    "question": "What is the number of employees from each city ?",
+    "retrieved_categories": [
+      "join_group",
+      "group_by",
+      "between",
+      "union",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.48616956551341334,
+      0.48153502755479793,
+      0.463873604567364,
+      0.4612890218025235,
+      0.44414403219717347
+    ]
+  },
+  {
+    "question_id": 93,
+    "question": "Count the number of employees for each city .",
+    "retrieved_categories": [
+      "join_group",
+      "group_by",
+      "between",
+      "basic_count",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.5257418650700445,
+      0.5074425953325084,
+      0.48927029963207225,
+      0.48783355596462824,
+      0.48378891504342947
+    ]
+  },
+  {
+    "question_id": 94,
+    "question": "Which cities do more than one employee under age 30 come from ?",
+    "retrieved_categories": [
+      "intersect",
+      "union",
+      "aggregation_where",
+      "distinct_where",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.5034900373771599,
+      0.4700686146589933,
+      0.4559697689210605,
+      0.4482842826891961,
+      0.4374624439394114
+    ]
+  },
+  {
+    "question_id": 95,
+    "question": "Find the cities that have more than one employee under age 30 .",
+    "retrieved_categories": [
+      "intersect",
+      "aggregation_where",
+      "distinct_where",
+      "union",
+      "having"
+    ],
+    "similarity_scores": [
+      0.576569377790739,
+      0.537613113489632,
+      0.5217949354962944,
+      0.5141431090943316,
+      0.5077739901298876
+    ]
+  },
+  {
+    "question_id": 96,
+    "question": "Find the number of shops in each location .",
+    "retrieved_categories": [
+      "between",
+      "intersect",
+      "group_by",
+      "join_group",
+      "max_limit"
+    ],
+    "similarity_scores": [
+      0.560877903811179,
+      0.5429659689684323,
+      0.5358555613027283,
+      0.532829689393498,
+      0.5176257152210454
+    ]
+  },
+  {
+    "question_id": 97,
+    "question": "How many shops are there in each location ?",
+    "retrieved_categories": [
+      "between",
+      "intersect",
+      "join_group",
+      "group_by",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.4918995817547589,
+      0.4569518917405493,
+      0.4526444129635583,
+      0.4501307398323961,
+      0.4336142102924416
+    ]
+  },
+  {
+    "question_id": 98,
+    "question": "Find the manager name and district of the shop whose number of products is the largest .",
+    "retrieved_categories": [
+      "max_limit",
+      "between",
+      "select_order",
+      "intersect",
+      "having"
+    ],
+    "similarity_scores": [
+      0.5253120661603108,
+      0.5074747825179254,
+      0.5067969422005957,
+      0.5035733272851242,
+      0.5017456635886242
+    ]
+  },
+  {
+    "question_id": 99,
+    "question": "What are the manager name and district of the shop that sells the largest number of products ?",
+    "retrieved_categories": [
+      "max_limit",
+      "between",
+      "select_order",
+      "complex_join_group",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.44984332728381105,
+      0.4324657301987856,
+      0.42804340576836586,
+      0.4207123732792395,
+      0.41972240416432344
+    ]
+  },
+  {
+    "question_id": 100,
+    "question": "find the minimum and maximum number of products of all stores .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "max_limit",
+      "aggregation_where",
+      "intersect",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6146594580487763,
+      0.5692547172614201,
+      0.5619467001885492,
+      0.5533378203896544,
+      0.5234799664185934
+    ]
+  },
+  {
+    "question_id": 101,
+    "question": "What are the minimum and maximum number of products across all the shops ?",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "intersect",
+      "aggregation_where",
+      "max_limit",
+      "between"
+    ],
+    "similarity_scores": [
+      0.5610700514890719,
+      0.5263063298827471,
+      0.5238574655271026,
+      0.5198633257367202,
+      0.5035409460246908
+    ]
+  },
+  {
+    "question_id": 102,
+    "question": "Return the name , location and district of all shops in descending order of number of products .",
+    "retrieved_categories": [
+      "between",
+      "select_order",
+      "like",
+      "max_limit",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.5462865263955249,
+      0.5352063272379259,
+      0.521134067572638,
+      0.5176552286574299,
+      0.5173385028137011
+    ]
+  },
+  {
+    "question_id": 103,
+    "question": "Sort all the shops by number products in descending order , and return the name , location and district of each shop .",
+    "retrieved_categories": [
+      "select_order",
+      "complex_join_group",
+      "between",
+      "max_limit",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.582032348062658,
+      0.5666355588016626,
+      0.5498319571584388,
+      0.5411467949737362,
+      0.5342875675217834
+    ]
+  },
+  {
+    "question_id": 104,
+    "question": "Find the names of stores whose number products is more than the average number of products .",
+    "retrieved_categories": [
+      "subquery",
+      "max_limit",
+      "between",
+      "intersect",
+      "having"
+    ],
+    "similarity_scores": [
+      0.5594367097890527,
+      0.5480167277577067,
+      0.5344011915433308,
+      0.5272472985191254,
+      0.5122100348543904
+    ]
+  },
+  {
+    "question_id": 105,
+    "question": "Which shops ' number products is above the average ? Give me the shop names .",
+    "retrieved_categories": [
+      "subquery",
+      "max_limit",
+      "between",
+      "aggregation_where",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.5274549762966808,
+      0.519074596818598,
+      0.5090846730295432,
+      0.49221106565924366,
+      0.49170899009266933
+    ]
+  },
+  {
+    "question_id": 106,
+    "question": "find the name of employee who was awarded the most times in the evaluation .",
+    "retrieved_categories": [
+      "having",
+      "max_limit",
+      "aggregation_where",
+      "multiple_aggregations",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.5106080583818836,
+      0.4933146506935603,
+      0.49035983576578274,
+      0.4882153340732736,
+      0.4733165975148989
+    ]
+  },
+  {
+    "question_id": 107,
+    "question": "Which employee received the most awards in evaluations ? Give me the employee name .",
+    "retrieved_categories": [
+      "max_limit",
+      "having",
+      "multiple_joins",
+      "complex_join_group",
+      "multiple_aggregations"
+    ],
+    "similarity_scores": [
+      0.4064782424143736,
+      0.400730260524458,
+      0.3984545241540816,
+      0.39327335023174587,
+      0.38793591503379427
+    ]
+  },
+  {
+    "question_id": 108,
+    "question": "Find the name of the employee who got the highest one time bonus .",
+    "retrieved_categories": [
+      "max_limit",
+      "aggregation_where",
+      "having",
+      "union",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.4768914307507923,
+      0.4731352708855501,
+      0.4689811072400934,
+      0.4673243951285764,
+      0.46688038206149796
+    ]
+  },
+  {
+    "question_id": 109,
+    "question": "Which employee received the biggest bonus ? Give me the employee name .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "max_limit",
+      "multiple_aggregations",
+      "union",
+      "group_by"
+    ],
+    "similarity_scores": [
+      0.42011837844247557,
+      0.4105441799959265,
+      0.40290469158286346,
+      0.3951934548609615,
+      0.3902392438348077
+    ]
+  },
+  {
+    "question_id": 110,
+    "question": "Find the names of employees who never won any award in the evaluation .",
+    "retrieved_categories": [
+      "not_in",
+      "except",
+      "having",
+      "union",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.450638617418931,
+      0.4384584956119373,
+      0.4255576859819111,
+      0.4046257543215433,
+      0.4042718455348887
+    ]
+  },
+  {
+    "question_id": 111,
+    "question": "What are the names of the employees who never received any evaluation ?",
+    "retrieved_categories": [
+      "not_in",
+      "union",
+      "except",
+      "select_order",
+      "group_by"
+    ],
+    "similarity_scores": [
+      0.34702678640313506,
+      0.3315538220450142,
+      0.3239877505046503,
+      0.32273983412357493,
+      0.319647366094638
+    ]
+  },
+  {
+    "question_id": 112,
+    "question": "What is the name of the shop that is hiring the largest number of employees ?",
+    "retrieved_categories": [
+      "max_limit",
+      "or_condition",
+      "nested_subquery",
+      "having",
+      "union"
+    ],
+    "similarity_scores": [
+      0.3843156299833338,
+      0.373734501154283,
+      0.37249299533926117,
+      0.3681641183756059,
+      0.3641128094944158
+    ]
+  },
+  {
+    "question_id": 113,
+    "question": "Which shop has the most employees ? Give me the shop name .",
+    "retrieved_categories": [
+      "max_limit",
+      "between",
+      "complex_join_group",
+      "having",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.4499856023476439,
+      0.43144165510674964,
+      0.4303951636767158,
+      0.42810019277694344,
+      0.4262222305993372
+    ]
+  },
+  {
+    "question_id": 114,
+    "question": "Find the name of the shops that do not hire any employee .",
+    "retrieved_categories": [
+      "not_in",
+      "except",
+      "having",
+      "union",
+      "distinct_where"
+    ],
+    "similarity_scores": [
+      0.474948297702296,
+      0.46671216123571296,
+      0.4475165352450838,
+      0.43008319817856605,
+      0.42313487180065945
+    ]
+  },
+  {
+    "question_id": 115,
+    "question": "Which shops run with no employees ? Find the shop names",
+    "retrieved_categories": [
+      "except",
+      "not_in",
+      "like",
+      "basic_count",
+      "having"
+    ],
+    "similarity_scores": [
+      0.4541942914984823,
+      0.44375045203724556,
+      0.4411178775634814,
+      0.4403381174090102,
+      0.43375524185442427
+    ]
+  },
+  {
+    "question_id": 116,
+    "question": "Find the number of employees hired in each shop ; show the shop name as well .",
+    "retrieved_categories": [
+      "join_group",
+      "group_by",
+      "multiple_joins",
+      "having",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5611615077713625,
+      0.5503482957030894,
+      0.5491558619013645,
+      0.5441653936795989,
+      0.5374547733210066
+    ]
+  },
+  {
+    "question_id": 117,
+    "question": "For each shop , return the number of employees working there and the name of the shop .",
+    "retrieved_categories": [
+      "union",
+      "join_group",
+      "group_by",
+      "multiple_joins",
+      "having"
+    ],
+    "similarity_scores": [
+      0.5222369289358382,
+      0.5216115693645025,
+      0.5212784002502832,
+      0.5142997212293692,
+      0.5067793401628945
+    ]
+  },
+  {
+    "question_id": 118,
+    "question": "What is total bonus given in all evaluations ?",
+    "retrieved_categories": [
+      "aggregation_where",
+      "multiple_aggregations",
+      "group_by",
+      "multiple_joins",
+      "union"
+    ],
+    "similarity_scores": [
+      0.41745913346239116,
+      0.4095605749450787,
+      0.39596057755121733,
+      0.3898322535580735,
+      0.3891860695023138
+    ]
+  },
+  {
+    "question_id": 119,
+    "question": "Find the total amount of bonus given in all the evaluations .",
+    "retrieved_categories": [
+      "multiple_aggregations",
+      "aggregation_where",
+      "group_by",
+      "having",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.4999901464517748,
+      0.4847167167195312,
+      0.4710372271895385,
+      0.46098395415216437,
+      0.4583290022279475
+    ]
+  },
+  {
+    "question_id": 120,
+    "question": "Give me all the information about hiring .",
+    "retrieved_categories": [
+      "having",
+      "union",
+      "multiple_joins",
+      "join_group",
+      "between"
+    ],
+    "similarity_scores": [
+      0.4519103347609473,
+      0.4462647214152732,
+      0.445880180210159,
+      0.4417459870426617,
+      0.4378350857676384
+    ]
+  },
+  {
+    "question_id": 121,
+    "question": "What is all the information about hiring ?",
+    "retrieved_categories": [
+      "union",
+      "having",
+      "between",
+      "aggregation_where",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.4557303153937406,
+      0.44831509948731624,
+      0.4301320571613353,
+      0.4273486894719651,
+      0.42135891362274464
+    ]
+  },
+  {
+    "question_id": 122,
+    "question": "Which district has both stores with less than 3000 products and stores with more than 10000 products ?",
+    "retrieved_categories": [
+      "between",
+      "intersect",
+      "max_limit",
+      "nested_subquery",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.48931518303499694,
+      0.45184354751384476,
+      0.4500091673191554,
+      0.44572130351918454,
+      0.4386702009313014
+    ]
+  },
+  {
+    "question_id": 123,
+    "question": "Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products .",
+    "retrieved_categories": [
+      "between",
+      "intersect",
+      "aggregation_where",
+      "subquery",
+      "multiple_aggregations"
+    ],
+    "similarity_scores": [
+      0.5739841961699267,
+      0.5651213075734025,
+      0.5388425894581902,
+      0.5341247850321971,
+      0.5339658401936014
+    ]
+  },
+  {
+    "question_id": 124,
+    "question": "How many different store locations are there ?",
+    "retrieved_categories": [
+      "between",
+      "distinct_where",
+      "intersect",
+      "group_by",
+      "join_group"
+    ],
+    "similarity_scores": [
+      0.4861727859981393,
+      0.45147054467881137,
+      0.44521157803853517,
+      0.43785165714915764,
+      0.437246169321965
+    ]
+  },
+  {
+    "question_id": 125,
+    "question": "Count the number of distinct store locations .",
+    "retrieved_categories": [
+      "distinct_where",
+      "between",
+      "join_group",
+      "group_by",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5623156873251262,
+      0.5602614773567111,
+      0.5488380226503244,
+      0.5388153150245678,
+      0.528082702763409
+    ]
+  },
+  {
+    "question_id": 126,
+    "question": "How many conductors are there ?",
+    "retrieved_categories": [
+      "group_by",
+      "join_group",
+      "intersect",
+      "multiple_joins",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.46336239897732195,
+      0.4545031023914582,
+      0.4466356226197726,
+      0.44569276757786463,
+      0.43737049156493885
+    ]
+  },
+  {
+    "question_id": 127,
+    "question": "Count the number of conductors .",
+    "retrieved_categories": [
+      "join_group",
+      "group_by",
+      "complex_join_group",
+      "basic_count",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.5376367225313916,
+      0.5218345304281842,
+      0.5086682056750291,
+      0.5049326989816809,
+      0.49694756326930994
+    ]
+  },
+  {
+    "question_id": 128,
+    "question": "List the names of conductors in ascending order of age .",
+    "retrieved_categories": [
+      "select_order",
+      "intersect",
+      "multiple_joins",
+      "subquery",
+      "union"
+    ],
+    "similarity_scores": [
+      0.5779408134062347,
+      0.5344901084923376,
+      0.5260805790587204,
+      0.5213417765058559,
+      0.5160686760924169
+    ]
+  },
+  {
+    "question_id": 129,
+    "question": "What are the names of conductors , ordered by age ?",
+    "retrieved_categories": [
+      "select_order",
+      "intersect",
+      "subquery",
+      "union",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.5676366028955926,
+      0.5280059095657161,
+      0.5017332114844042,
+      0.49160298638153355,
+      0.4796638105915581
+    ]
+  },
+  {
+    "question_id": 130,
+    "question": "What are the names of conductors whose nationalities are not `` USA '' ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "intersect",
+      "select_order",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.45286873280231527,
+      0.41016633621414433,
+      0.4016470829949732,
+      0.39641479161871124,
+      0.39460380690099217
+    ]
+  },
+  {
+    "question_id": 131,
+    "question": "Return the names of conductors that do not have the nationality `` USA '' .",
+    "retrieved_categories": [
+      "union",
+      "not_in",
+      "except",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.5755419327574428,
+      0.5574197201334193,
+      0.5463448685002775,
+      0.5299283627971832,
+      0.5288648282718743
+    ]
+  },
+  {
+    "question_id": 132,
+    "question": "What are the record companies of orchestras in descending order of years in which they were founded ?",
+    "retrieved_categories": [
+      "complex_join_group",
+      "select_order",
+      "join_group",
+      "multiple_joins",
+      "except"
+    ],
+    "similarity_scores": [
+      0.4933742758393241,
+      0.4823746188554992,
+      0.4717363809124155,
+      0.4617676023063623,
+      0.45497645160851913
+    ]
+  },
+  {
+    "question_id": 133,
+    "question": "Return the record companies of orchestras , sorted descending by the years in which they were founded .",
+    "retrieved_categories": [
+      "complex_join_group",
+      "multiple_joins",
+      "select_order",
+      "join_group",
+      "union"
+    ],
+    "similarity_scores": [
+      0.5711679655691374,
+      0.5582039804694595,
+      0.5512602869088818,
+      0.5494730897898483,
+      0.530486843999999
+    ]
+  },
+  {
+    "question_id": 134,
+    "question": "What is the average attendance of shows ?",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "between",
+      "max_limit",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.5353381129703515,
+      0.508135502645626,
+      0.4867043457281237,
+      0.4830017405603126,
+      0.48027558886658545
+    ]
+  },
+  {
+    "question_id": 135,
+    "question": "Return the average attendance across all shows .",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "max_limit",
+      "nested_subquery",
+      "except"
+    ],
+    "similarity_scores": [
+      0.6077125675809715,
+      0.5885707321868912,
+      0.5610621533563206,
+      0.5579272015853564,
+      0.5409143222728119
+    ]
+  },
+  {
+    "question_id": 136,
+    "question": "What are the maximum and minimum share of performances whose type is not `` Live final '' .",
+    "retrieved_categories": [
+      "except",
+      "complex_join_group",
+      "multiple_joins",
+      "nested_subquery",
+      "between"
+    ],
+    "similarity_scores": [
+      0.5388207110372163,
+      0.536744628962519,
+      0.5334590085477077,
+      0.532411304118768,
+      0.5298226237083102
+    ]
+  },
+  {
+    "question_id": 137,
+    "question": "Return the maximum and minimum shares for performances that do not have the type `` Live final '' .",
+    "retrieved_categories": [
+      "except",
+      "max_limit",
+      "nested_subquery",
+      "multiple_aggregations",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.5493250539532267,
+      0.547335722284388,
+      0.547034486139374,
+      0.5417324100835992,
+      0.5352039584227583
+    ]
+  },
+  {
+    "question_id": 138,
+    "question": "How many different nationalities do conductors have ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "intersect",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.5175193022301836,
+      0.5010494209891874,
+      0.4923211900092079,
+      0.4819447611226035,
+      0.45101125248669355
+    ]
+  },
+  {
+    "question_id": 139,
+    "question": "Count the number of different nationalities of conductors .",
+    "retrieved_categories": [
+      "group_by",
+      "union",
+      "join_group",
+      "intersect",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.5829665908545453,
+      0.5604660075941221,
+      0.5371826700956074,
+      0.5343874479278222,
+      0.5326646183746393
+    ]
+  },
+  {
+    "question_id": 140,
+    "question": "List names of conductors in descending order of years of work .",
+    "retrieved_categories": [
+      "select_order",
+      "multiple_joins",
+      "complex_join_group",
+      "union",
+      "join_group"
+    ],
+    "similarity_scores": [
+      0.5403979436625278,
+      0.5294668204902011,
+      0.5227982918166638,
+      0.5084447981745294,
+      0.49965116837948237
+    ]
+  },
+  {
+    "question_id": 141,
+    "question": "What are the names of conductors , sorted descending by the number of years they have worked ?",
+    "retrieved_categories": [
+      "complex_join_group",
+      "select_order",
+      "multiple_joins",
+      "union",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.50703644156153,
+      0.5062154020637392,
+      0.5025121882477054,
+      0.4947734855415808,
+      0.4836204004725382
+    ]
+  },
+  {
+    "question_id": 142,
+    "question": "List the name of the conductor with the most years of work .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "union",
+      "complex_join_group",
+      "select_order",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.509769761785903,
+      0.5012319544953576,
+      0.4955502385898027,
+      0.49491160724353206,
+      0.4918455554529318
+    ]
+  },
+  {
+    "question_id": 143,
+    "question": "What is the name of the conductor who has worked the greatest number of years ?",
+    "retrieved_categories": [
+      "union",
+      "intersect",
+      "multiple_joins",
+      "or_condition",
+      "except"
+    ],
+    "similarity_scores": [
+      0.4197148695406331,
+      0.41177872030719037,
+      0.4093104298025112,
+      0.40232589875943886,
+      0.40177804011745644
+    ]
+  },
+  {
+    "question_id": 144,
+    "question": "Show the names of conductors and the orchestras they have conducted .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "select_order",
+      "except"
+    ],
+    "similarity_scores": [
+      0.5362067509010282,
+      0.5291238065586866,
+      0.5124169974288714,
+      0.4825596740729444,
+      0.4790255938754778
+    ]
+  },
+  {
+    "question_id": 145,
+    "question": "What are the names of conductors as well as the corresonding orchestras that they have conducted ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "except",
+      "union"
+    ],
+    "similarity_scores": [
+      0.47466149032212734,
+      0.46701093592159953,
+      0.4463370337683998,
+      0.4327133718004982,
+      0.42712027388480006
+    ]
+  },
+  {
+    "question_id": 146,
+    "question": "Show the names of conductors that have conducted more than one orchestras .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "except",
+      "union"
+    ],
+    "similarity_scores": [
+      0.5385019670753834,
+      0.5058504903406482,
+      0.4844751300167878,
+      0.47024646886291027,
+      0.46685693930635314
+    ]
+  },
+  {
+    "question_id": 147,
+    "question": "What are the names of conductors who have conducted at more than one orchestra ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "except",
+      "between"
+    ],
+    "similarity_scores": [
+      0.46279724813048295,
+      0.4488110054384214,
+      0.4271090066007134,
+      0.4228552257420864,
+      0.40555547594671737
+    ]
+  },
+  {
+    "question_id": 148,
+    "question": "Show the name of the conductor that has conducted the most number of orchestras .",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "multiple_joins",
+      "group_by",
+      "between"
+    ],
+    "similarity_scores": [
+      0.5314725746499035,
+      0.5253089741428967,
+      0.5238430243324497,
+      0.48493141487372093,
+      0.48351632319113086
+    ]
+  },
+  {
+    "question_id": 149,
+    "question": "What is the name of the conductor who has conducted the most orchestras ?",
+    "retrieved_categories": [
+      "complex_join_group",
+      "join_group",
+      "nested_subquery",
+      "multiple_joins",
+      "max_limit"
+    ],
+    "similarity_scores": [
+      0.4223754616998447,
+      0.4142795631396179,
+      0.40639754368879244,
+      0.385797602230124,
+      0.37944333061597635
+    ]
+  },
+  {
+    "question_id": 150,
+    "question": "Please show the name of the conductor that has conducted orchestras founded after 2008 .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "except",
+      "or_condition"
+    ],
+    "similarity_scores": [
+      0.5277520808514684,
+      0.5160920437843082,
+      0.5144002545988482,
+      0.5028076015620737,
+      0.4905515336084104
+    ]
+  },
+  {
+    "question_id": 151,
+    "question": "What are the names of conductors who have conducted orchestras founded after the year 2008 ?",
+    "retrieved_categories": [
+      "except",
+      "complex_join_group",
+      "multiple_joins",
+      "or_condition",
+      "join_group"
+    ],
+    "similarity_scores": [
+      0.4498322887567098,
+      0.4469236508745634,
+      0.4435099138843867,
+      0.44027643266961203,
+      0.43895597979027406
+    ]
+  },
+  {
+    "question_id": 152,
+    "question": "Please show the different record companies and the corresponding number of orchestras .",
+    "retrieved_categories": [
+      "join_group",
+      "multiple_joins",
+      "group_by",
+      "complex_join_group",
+      "union"
+    ],
+    "similarity_scores": [
+      0.5808684626084633,
+      0.5663716951232395,
+      0.5602473313593315,
+      0.556400270889609,
+      0.5351712363082778
+    ]
+  },
+  {
+    "question_id": 153,
+    "question": "How many orchestras does each record company manage ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "group_by",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.482613956310603,
+      0.47873493749478496,
+      0.4604629772978681,
+      0.46041799025997016,
+      0.4433052803740804
+    ]
+  },
+  {
+    "question_id": 154,
+    "question": "Please show the record formats of orchestras in ascending order of count .",
+    "retrieved_categories": [
+      "complex_join_group",
+      "join_group",
+      "select_order",
+      "multiple_joins",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.6086567421948319,
+      0.5812714065055952,
+      0.5799004387015803,
+      0.5602106223387101,
+      0.5381639019308885
+    ]
+  },
+  {
+    "question_id": 155,
+    "question": "What are the major record formats of orchestras , sorted by their frequency ?",
+    "retrieved_categories": [
+      "complex_join_group",
+      "join_group",
+      "select_order",
+      "multiple_joins",
+      "between"
+    ],
+    "similarity_scores": [
+      0.5457654929419892,
+      0.5198085495774676,
+      0.5175680182095961,
+      0.5091801176483676,
+      0.5001461288430655
+    ]
+  },
+  {
+    "question_id": 156,
+    "question": "List the record company shared by the most number of orchestras .",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "multiple_joins",
+      "group_by",
+      "like"
+    ],
+    "similarity_scores": [
+      0.4907126015401213,
+      0.4870630970862739,
+      0.48359508403518553,
+      0.47406789161223784,
+      0.45585130504612537
+    ]
+  },
+  {
+    "question_id": 157,
+    "question": "What is the record company used by the greatest number of orchestras ?",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "group_by",
+      "multiple_joins",
+      "nested_subquery"
+    ],
+    "similarity_scores": [
+      0.439197589526636,
+      0.43695520418624323,
+      0.42898172648708316,
+      0.425118157917149,
+      0.4131745368627262
+    ]
+  },
+  {
+    "question_id": 158,
+    "question": "List the names of orchestras that have no performance .",
+    "retrieved_categories": [
+      "except",
+      "not_in",
+      "complex_join_group",
+      "join_group",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.531378321717509,
+      0.5162300236196188,
+      0.4906125922785055,
+      0.4904194973718092,
+      0.4773357428937974
+    ]
+  },
+  {
+    "question_id": 159,
+    "question": "What are the orchestras that do not have any performances ?",
+    "retrieved_categories": [
+      "except",
+      "not_in",
+      "join_group",
+      "complex_join_group",
+      "or_condition"
+    ],
+    "similarity_scores": [
+      0.4592089007253078,
+      0.44572658113023883,
+      0.4216177044344589,
+      0.4082846430759971,
+      0.3925519268876953
+    ]
+  },
+  {
+    "question_id": 160,
+    "question": "Show the record companies shared by orchestras founded before 2003 and after 2003 .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "except",
+      "group_by"
+    ],
+    "similarity_scores": [
+      0.559464972431607,
+      0.5588641242648282,
+      0.5496192534265352,
+      0.5401155767401011,
+      0.5205226360324514
+    ]
+  },
+  {
+    "question_id": 161,
+    "question": "What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003 ?",
+    "retrieved_categories": [
+      "except",
+      "multiple_joins",
+      "complex_join_group",
+      "join_group",
+      "or_condition"
+    ],
+    "similarity_scores": [
+      0.4778354780175082,
+      0.4694800266776504,
+      0.46878233357272686,
+      0.4667711875397331,
+      0.46272516113024675
+    ]
+  },
+  {
+    "question_id": 162,
+    "question": "Find the number of orchestras whose record format is `` CD '' or `` DVD '' .",
+    "retrieved_categories": [
+      "join_group",
+      "complex_join_group",
+      "group_by",
+      "multiple_joins",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5931516703335487,
+      0.5825660319077268,
+      0.5777983557191453,
+      0.5776506637765157,
+      0.5573546624558277
+    ]
+  },
+  {
+    "question_id": 163,
+    "question": "Count the number of orchestras that have CD or DVD as their record format .",
+    "retrieved_categories": [
+      "join_group",
+      "group_by",
+      "multiple_joins",
+      "complex_join_group",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.551353399900896,
+      0.5404313792975944,
+      0.5313990076540788,
+      0.5309391654361505,
+      0.5132791071034094
+    ]
+  },
+  {
+    "question_id": 164,
+    "question": "Show the years in which orchestras that have given more than one performance are founded .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "complex_join_group",
+      "or_condition",
+      "except"
+    ],
+    "similarity_scores": [
+      0.556420737126167,
+      0.5384990962861477,
+      0.5168070634156259,
+      0.5104567303582178,
+      0.5082793702612103
+    ]
+  },
+  {
+    "question_id": 165,
+    "question": "What are years of founding for orchestras that have had more than a single performance ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "join_group",
+      "or_condition",
+      "except",
+      "complex_join_group"
+    ],
+    "similarity_scores": [
+      0.5104108083081866,
+      0.49259283715154056,
+      0.484277430976021,
+      0.4708929557043511,
+      0.46868144901885966
+    ]
+  },
+  {
+    "question_id": 166,
+    "question": "How many singers are there ?",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "multiple_joins",
+      "select_order",
+      "like"
+    ],
+    "similarity_scores": [
+      0.6398654293842855,
+      0.6063167334118659,
+      0.568367682686161,
+      0.52462006764177,
+      0.5246120225913979
+    ]
+  },
+  {
+    "question_id": 167,
+    "question": "What is the count of singers ?",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "multiple_joins",
+      "select_order",
+      "like"
+    ],
+    "similarity_scores": [
+      0.662150084100004,
+      0.6419763144640234,
+      0.5768200019149621,
+      0.546858716121086,
+      0.5404732025671249
+    ]
+  },
+  {
+    "question_id": 168,
+    "question": "List the name of singers in ascending order of net worth .",
+    "retrieved_categories": [
+      "select_order",
+      "group_by",
+      "multiple_joins",
+      "like",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.6008402820271713,
+      0.5975682019397119,
+      0.5878084826168426,
+      0.5765814863116653,
+      0.5697751296744074
+    ]
+  },
+  {
+    "question_id": 169,
+    "question": "What are the names of singers ordered by ascending net worth ?",
+    "retrieved_categories": [
+      "select_order",
+      "group_by",
+      "multiple_joins",
+      "like",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5722174194091583,
+      0.5426100090228009,
+      0.525654352320536,
+      0.5193622636746308,
+      0.5186010411427048
+    ]
+  },
+  {
+    "question_id": 170,
+    "question": "What are the birth year and citizenship of singers ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "intersect",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6533789365686398,
+      0.5638205908410493,
+      0.5565045475235568,
+      0.5472918207035248,
+      0.5390257706892284
+    ]
+  },
+  {
+    "question_id": 171,
+    "question": "What are the birth years and citizenships of the singers ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "multiple_joins",
+      "intersect",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6269114477253502,
+      0.5608755446434759,
+      0.548133518381893,
+      0.5401435631574596,
+      0.5298283837545104
+    ]
+  },
+  {
+    "question_id": 172,
+    "question": "List the name of singers whose citizenship is not `` France '' .",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "like",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.613133470703773,
+      0.5842285200884837,
+      0.5396185625813,
+      0.5394648491634989,
+      0.5382219768565825
+    ]
+  },
+  {
+    "question_id": 173,
+    "question": "What are the names of the singers who are not French citizens ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "multiple_joins",
+      "basic_count",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.5391960893236709,
+      0.5127532520816322,
+      0.45435859651908417,
+      0.4541853320102785,
+      0.4486097764135218
+    ]
+  },
+  {
+    "question_id": 174,
+    "question": "Show the name of singers whose birth year is either 1948 or 1949 ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "multiple_joins",
+      "select_order",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5199419984581561,
+      0.5144134073318425,
+      0.5074512867834616,
+      0.5062170209006183,
+      0.5026212463100338
+    ]
+  },
+  {
+    "question_id": 175,
+    "question": "What are the names of the singers whose birth years are either 1948 or 1949 ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "select_order",
+      "multiple_joins",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.486601486050755,
+      0.4693741425653358,
+      0.4641304297273687,
+      0.4602904521595297,
+      0.4564627312720148
+    ]
+  },
+  {
+    "question_id": 176,
+    "question": "What is the name of the singer with the largest net worth ?",
+    "retrieved_categories": [
+      "group_by",
+      "basic_count",
+      "like",
+      "multiple_joins",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.48832193676720864,
+      0.48339241394221855,
+      0.46251685915078844,
+      0.45938703673275005,
+      0.4546042408570867
+    ]
+  },
+  {
+    "question_id": 177,
+    "question": "What is the name of the singer who is worth the most ?",
+    "retrieved_categories": [
+      "basic_count",
+      "multiple_joins",
+      "group_by",
+      "subquery",
+      "like"
+    ],
+    "similarity_scores": [
+      0.48298108071128887,
+      0.48150190800193615,
+      0.4754769619260133,
+      0.4734408628920818,
+      0.47284347167046004
+    ]
+  },
+  {
+    "question_id": 178,
+    "question": "Show different citizenship of singers and the number of singers of each citizenship .",
+    "retrieved_categories": [
+      "group_by",
+      "union",
+      "multiple_joins",
+      "basic_count",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.7017776730298193,
+      0.6991776052478569,
+      0.6602824892994205,
+      0.6435971052638848,
+      0.6345229175146565
+    ]
+  },
+  {
+    "question_id": 179,
+    "question": "For each citizenship , how many singers are from that country ?",
+    "retrieved_categories": [
+      "group_by",
+      "union",
+      "intersect",
+      "basic_count",
+      "multiple_joins"
+    ],
+    "similarity_scores": [
+      0.654339556366585,
+      0.6371868398632243,
+      0.5781957336473633,
+      0.5774046054889802,
+      0.5653180682327021
+    ]
+  },
+  {
+    "question_id": 180,
+    "question": "Please show the most common citizenship of singers .",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "multiple_joins",
+      "intersect",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.6795605525842963,
+      0.6667523822546415,
+      0.6380820472574554,
+      0.6237877041137229,
+      0.6184630630734005
+    ]
+  },
+  {
+    "question_id": 181,
+    "question": "What is the most common singer citizenship ?",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "basic_count",
+      "multiple_joins",
+      "intersect"
+    ],
+    "similarity_scores": [
+      0.5914343464221324,
+      0.5521223309073715,
+      0.5291147385790029,
+      0.5245830420038192,
+      0.5236346476350134
+    ]
+  },
+  {
+    "question_id": 182,
+    "question": "Show different citizenships and the maximum net worth of singers of each citizenship .",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "multiple_joins",
+      "intersect",
+      "aggregation_where"
+    ],
+    "similarity_scores": [
+      0.6415814200619707,
+      0.6247951709033812,
+      0.608863376045975,
+      0.5886160877009582,
+      0.5778446595432273
+    ]
+  },
+  {
+    "question_id": 183,
+    "question": "For each citizenship , what is the maximum net worth ?",
+    "retrieved_categories": [
+      "union",
+      "multiple_aggregations",
+      "aggregation_where",
+      "intersect",
+      "group_by"
+    ],
+    "similarity_scores": [
+      0.47658771442253317,
+      0.46456481543444805,
+      0.4537873015116269,
+      0.44315781287036926,
+      0.43758696079842285
+    ]
+  },
+  {
+    "question_id": 184,
+    "question": "Show titles of songs and names of singers .",
+    "retrieved_categories": [
+      "like",
+      "multiple_joins",
+      "subquery",
+      "group_by",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6856683412914594,
+      0.6657749707842449,
+      0.6447294225480578,
+      0.6388008249423529,
+      0.6379200352589923
+    ]
+  },
+  {
+    "question_id": 185,
+    "question": "What are the song titles and singer names ?",
+    "retrieved_categories": [
+      "like",
+      "multiple_joins",
+      "group_by",
+      "subquery",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6178966575932873,
+      0.5950989757324696,
+      0.5782825875618329,
+      0.5782762682817939,
+      0.5689648438150645
+    ]
+  },
+  {
+    "question_id": 186,
+    "question": "Show distinct names of singers that have songs with sales more than 300000 .",
+    "retrieved_categories": [
+      "group_by",
+      "like",
+      "subquery",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.6363175523737834,
+      0.6358532542087693,
+      0.6276307451658719,
+      0.6251109433096184,
+      0.6096605144881891
+    ]
+  },
+  {
+    "question_id": 187,
+    "question": "what are the different names of the singers that have sales more than 300000 ?",
+    "retrieved_categories": [
+      "group_by",
+      "multiple_joins",
+      "like",
+      "basic_count",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.5777291164503713,
+      0.5577460846193282,
+      0.5500574934456671,
+      0.5461003101696736,
+      0.5400289476083346
+    ]
+  },
+  {
+    "question_id": 188,
+    "question": "Show the names of singers that have more than one song .",
+    "retrieved_categories": [
+      "multiple_joins",
+      "like",
+      "group_by",
+      "subquery",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.6545892271863991,
+      0.6381371033633685,
+      0.6257788970023767,
+      0.6092788815331068,
+      0.595620813586959
+    ]
+  },
+  {
+    "question_id": 189,
+    "question": "What are the names of the singers that have more than one songs ?",
+    "retrieved_categories": [
+      "multiple_joins",
+      "group_by",
+      "like",
+      "basic_count",
+      "union"
+    ],
+    "similarity_scores": [
+      0.5713081283866108,
+      0.5408675606073094,
+      0.5397044848837982,
+      0.5117654319939039,
+      0.5102085293948455
+    ]
+  },
+  {
+    "question_id": 190,
+    "question": "Show the names of singers and the total sales of their songs .",
+    "retrieved_categories": [
+      "group_by",
+      "subquery",
+      "multiple_joins",
+      "like",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.6498583142269345,
+      0.6296357530591866,
+      0.6283058371602676,
+      0.6186120060146534,
+      0.6121231614831831
+    ]
+  },
+  {
+    "question_id": 191,
+    "question": "For each singer name , what is the total sales for their songs ?",
+    "retrieved_categories": [
+      "group_by",
+      "multiple_joins",
+      "subquery",
+      "basic_count",
+      "like"
+    ],
+    "similarity_scores": [
+      0.6236590204094079,
+      0.5948328554696917,
+      0.588228076254249,
+      0.5777948223616289,
+      0.5723206455330505
+    ]
+  },
+  {
+    "question_id": 192,
+    "question": "List the name of singers that do not have any song .",
+    "retrieved_categories": [
+      "group_by",
+      "like",
+      "basic_count",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.546005848387403,
+      0.543433932486162,
+      0.5433082193563082,
+      0.5394372947333148,
+      0.5268600226160481
+    ]
+  },
+  {
+    "question_id": 193,
+    "question": "What is the sname of every sing that does not have any song ?",
+    "retrieved_categories": [
+      "like",
+      "basic_count",
+      "group_by",
+      "multiple_joins",
+      "select_order"
+    ],
+    "similarity_scores": [
+      0.5261512032747158,
+      0.5094477650347187,
+      0.5063431364072611,
+      0.49356833586054755,
+      0.47477070508123836
+    ]
+  },
+  {
+    "question_id": 194,
+    "question": "Show the citizenship shared by singers with birth year before 1945 and after 1955 .",
+    "retrieved_categories": [
+      "union",
+      "group_by",
+      "intersect",
+      "multiple_joins",
+      "subquery"
+    ],
+    "similarity_scores": [
+      0.6618071830456201,
+      0.6053978886222043,
+      0.6001631189910784,
+      0.5950915038499532,
+      0.5662123127059261
+    ]
+  },
+  {
+    "question_id": 195,
+    "question": "What are the citizenships that are shared by singers with a birth year before 1945 and after 1955 ?",
+    "retrieved_categories": [
+      "union",
+      "intersect",
+      "multiple_joins",
+      "group_by",
+      "basic_count"
+    ],
+    "similarity_scores": [
+      0.5515280196542813,
+      0.5071885661069764,
+      0.4857176097074311,
+      0.48211371084189714,
+      0.45937488366779966
+    ]
+  }
+]

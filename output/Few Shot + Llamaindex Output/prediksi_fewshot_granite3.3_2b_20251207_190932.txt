@@ -1,0 +1,195 @@
+SELECT COUNT(*) FROM concert JOIN singer_in_concert ON concert.concert_ID = singer_in_concert.concert_ID JOIN singer ON singer_in_concert.Singer_ID = singer.Singer_ID	concert_singer
+SELECT COUNT(*) FROM concert JOIN singer_in_concert ON concert.concert_ID = singer_in_concert.concert_ID JOIN singer ON singer_in_concert.Singer_ID = singer.Singer_ID	concert_singer
+SELECT name, country, age FROM singer ORDER BY age DESC	concert_singer
+SELECT name, country, age FROM singer_in_concert INNER JOIN singer ON concert_ID = Singer_ID ORDER BY age DESC	concert_singer
+SELECT AVG(s.age), MIN(s.age), MAX(s.age) FROM singer AS s JOIN singer_in_concert AS sic ON s.Singer_ID = sic.Singer_ID WHERE s.country = 'France'	concert_singer
+SELECT AVG(s.age), MIN(s.age), MAX(s.age) FROM singer AS s JOIN concert_in_singer AS c ON s.Singer_ID = c.Singer_ID WHERE s.country = 'France'	concert_singer
+SELECT concert_Name, Song_release_year FROM concert_Name JOIN singer_in_concert ON concert_Name.concert_ID = singer_in_concert.concert_ID JOIN singer ON singer_in_concert.Singer_ID = singer.Singer_ID WHERE singer.Age = (SELECT MIN(Age) FROM singer)	concert_singer
+SELECT singer_in_concert.Song_Name, singer.Song_release_year FROM concert_joiner JOIN singer ON concert_joiner.Singer_ID = singer.Singer_ID JOIN singer_in_concert ON concert_joiner.concert_ID = singer_in_concert.concert_ID WHERE singer.Age = (SELECT MIN(Age) FROM singer)	concert_singer
+SELECT DISTINCT T1.country FROM singer AS T1 JOIN concert_in_singer AS T2 ON T1.Singer_ID = T2.Singer_ID WHERE T1.age > 20	concert_singer
+SELECT DISTINCT country FROM singer WHERE age > 20	concert_singer
+SELECT T1.country, COUNT(DISTINCT T3.singer_id) FROM concert AS T1 JOIN singer_in_concert AS T2 ON T1.concert_ID = T2.concert_ID JOIN singer AS T3 ON T2.Singer_ID = T3.Singer_ID GROUP BY T1.country	concert_singer
+SELECT T2.country, COUNT(T1.Singer_ID) FROM singer AS T1 JOIN singer_in_concert AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T2.country	concert_singer
+SELECT T1.Song_Name FROM concert AS T1 JOIN singer_in_concert AS T2 ON T1.concert_ID = T2.concert_ID JOIN singer AS T3 ON T2.Singer_ID = T3.Singer_ID WHERE T3.Age > (SELECT AVG(T4.Age) FROM concert AS T4)	concert_singer
+SELECT T1.Song_Name FROM concert AS T1 JOIN singer AS T2 ON T1.Singer_ID = T2.Singer_ID WHERE T2.Age > (SELECT AVG(T2.Age) FROM singer AS T2)	concert_singer
+SELECT T2.location, T2.name FROM stadium AS T1 JOIN concert AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.capacity BETWEEN 5000 AND 10000	concert_singer
+SELECT location, name FROM stadium WHERE capacity BETWEEN 5000 AND 10000	concert_singer
+SELECT MAX(stadium.capacity), AVG(stadium.capacity) FROM stadium JOIN concert_in_stadium ON stadium.Stadium_ID = concert_in_stadium.Stadium_ID GROUP BY concert_in_stadium.concert_ID	concert_singer
+SELECT AVG(stadium.capacity), MAX(stadium.capacity) FROM concert JOIN singer_in_concert ON concert.concert_ID = singer_in_concert.concert_ID JOIN stadium ON singer_in_concert.Stadium_ID = stadium.Stadium_ID GROUP BY stadium.Stadium_ID	concert_singer
+SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.average = (SELECT MAX(T1.average) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id)	concert_singer
+SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.average = (SELECT MAX(average) FROM concert)	concert_singer
+SELECT COUNT(*) FROM concert WHERE YEAR = '2014' OR YEAR = '2015'	concert_singer
+SELECT COUNT(*) FROM concert WHERE YEAR IN ('2014', '2015')	concert_singer
+SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id GROUP BY T2.name	concert_singer
+SELECT T2.name, COUNT(*) FROM concert AS T1 JOIN singer_in_concert AS T2 ON T1.concert_id = T2.concert_id GROUP BY T2.stadium_id	concert_singer
+SELECT T2.name, T2.capacity FROM stadium AS T1 JOIN concert_in_stadium AS T2 ON T1.Stadium_ID = T2.Stadium_ID WHERE YEAR(T2.concert_Date) > = '2014' GROUP BY T1.Name ORDER BY COUNT(*) DESC LIMIT 1	concert_singer
+SELECT T2.name, T2.capacity FROM concert AS T1 JOIN stadium AS T2 ON T1.stadium_id = T2.stadium_id WHERE T1.year > 2013 GROUP BY T2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1	concert_singer
+SELECT Year FROM concert GROUP BY Year ORDER BY COUNT(*) DESC LIMIT 1	concert_singer
+SELECT Year FROM concert GROUP BY Year ORDER BY COUNT(*) DESC LIMIT 1	concert_singer
+SELECT name FROM stadium WHERE stadium_id NOT IN (SELECT stadium_id FROM concert)	concert_singer
+SELECT T2.name FROM stadium AS T1 EXCEPT SELECT T3.concert_Name FROM concert AS T2 JOIN singer_in_concert AS T3 ON T2.concert_ID = T3.concert_ID	concert_singer
+SELECT DISTINCT country FROM singer WHERE age > 40 INTERSECT SELECT DISTINCT country FROM singer WHERE age < 30	concert_singer
+SELECT T3.name FROM stadium AS T1 JOIN singer_in_concert AS T2 ON T1.stadium_id = T2.stadium_id JOIN concert AS T3 ON T2.concert_id = T3.concert_id WHERE T3.year < > 2014	concert_singer
+SELECT T2.name FROM stadium AS T1 EXCEPT SELECT T3.name FROM concert_in_stadium AS T2 JOIN concert AS T3 ON T2.concert_id = T3.concert_id WHERE YEAR(T3.year) = 2014	concert_singer
+SELECT T1.concert_Name, T2.Theme FROM concert AS T1 JOIN singer_in_concert AS T2 ON T1.concert_ID = T2.concert_ID GROUP BY T1.concert_ID	concert_singer
+SELECT T1.concert_Name, T2.Theme, COUNT(T3.Singer_ID) FROM concert AS T1 JOIN singer_in_concert AS T2 ON T1.concert_ID = T2.concert_ID JOIN singer AS T3 ON T2.Singer_ID = T3.Singer_ID GROUP BY T1.concert_ID	concert_singer
+SELECT T1.name, COUNT(T2.concert_ID) FROM singer AS T1 JOIN singer_in_concert AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.name	concert_singer
+SELECT singer.name, COUNT(concert_in_singer.concert_ID) FROM singer_in_concert JOIN concert ON singer_in_concert.concert_ID = concert.concert_ID JOIN singer ON singer_in_concert.Singer_ID = singer.Singer_ID GROUP BY singer.name	concert_singer
+SELECT T3.name FROM singer_in_concert AS T1 JOIN concert AS T2 ON T1.concert_ID = T2.concert_ID JOIN singer AS T3 ON T1.Singer_ID = T3.Singer_ID WHERE YEAR(T2.year) = 2014	concert_singer
+SELECT T2.name FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id = T2.singer_id WHERE YEAR(T1.concert_date) = 2014	concert_singer
+SELECT T1.name, T1.country FROM singer AS T1 JOIN has_pet AS T2 ON T1.singer_id = T2.singer_id WHERE song_name LIKE '%Hey%'	concert_singer
+SELECT T1.name, T2.country FROM singer AS T1 JOIN has_pet AS T2 ON T1.singer_id = T2.stuid WHERE song_name LIKE '%Hey%'	concert_singer
+SELECT T1.name, T1.location FROM stadium AS T1 JOIN concert_in_stadium AS T2 ON T1.Stadium_ID = T2.Stadium_ID WHERE T2.Year IN (2014, 2015) GROUP BY T1.Stadium_ID HAVING COUNT(DISTINCT T2.concert_ID) > 0	concert_singer
+SELECT T1.name, T1.location FROM stadium AS T1 JOIN concert_in_stadium AS T2 ON T1.Stadium_ID = T2.Stadium_ID WHERE T2.Year IN (2014, 2015) GROUP BY T1.Stadium_ID HAVING COUNT(DISTINCT T2.concert_ID) > 0	concert_singer
+SELECT COUNT(*) FROM concert JOIN stadium ON concert.stadium_id = stadium.Stadium_ID WHERE stadium.Capacity = (SELECT MAX(Capacity) FROM stadium)	concert_singer
+SELECT COUNT(*) FROM concert JOIN stadium ON concert.stadium_id = stadium.stadium_id WHERE stadium.capacity = (SELECT MAX(capacity) FROM stadium)	concert_singer
+SELECT COUNT(*) FROM has_pet WHERE weight > 10	pets_1
+SELECT COUNT(*) FROM has_pet hp JOIN pets p ON hp.petid = p.petid WHERE p.weight > 10	pets_1
+SELECT MAX(T1.weight) FROM has_pet AS T1 JOIN pets AS T2 ON T1.PetID = T2.PetID WHERE T2.PetType = 'dog' AND T2.pet_age = (SELECT MIN(pet_age) FROM pets)	pets_1
+SELECT MIN(weight) FROM has_pet JOIN pets ON has_pet.PetID = pets.PetID WHERE pets.PetType = 'dog'	pets_1
+SELECT MAX(T2.weight), T1.pettype FROM has_pet AS T1 JOIN pets AS T2 ON T1.PetID = T2.PetID GROUP BY T2.pettype	pets_1
+SELECT MAX(pettype), pettype, weight FROM has_pet JOIN pets ON has_pet.PetID = pets.PetID GROUP BY pettype ORDER BY MAX(weight) DESC	pets_1
+SELECT COUNT(*) FROM has_pet JOIN pets ON has_pet.petid = pets.petid JOIN student ON has_pet.stuid = student.stuid WHERE student.age > 20	pets_1
+SELECT COUNT(*) FROM Has_Pet H JOIN Student S ON H.StuID = S.StuID WHERE S.Age > 20	pets_1
+SELECT COUNT(*) FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID, Student WHERE Student.Sex = 'F' AND Pets.PetType = 'dog'	pets_1
+SELECT COUNT(*) FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID JOIN Student ON Has_Pet.StuID = Student.StuID WHERE Pets.PetType = 'dog' AND Student.Sex = 'female'	pets_1
+SELECT COUNT(DISTINCT PetType) FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID	pets_1
+SELECT COUNT(DISTINCT PetType) FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID	pets_1
+SELECT T1.fname FROM has_pet AS T1 JOIN pets AS T2 ON T1.petid = T2.petid WHERE T2.pettype IN ('cat', 'dog')	pets_1
+SELECT T1.fname FROM has_pet AS T1 JOIN pets AS T2 ON T1.petid = T2.petid WHERE T2.pettype IN ('cat', 'dog')	pets_1
+SELECT T1.fname FROM has_pet AS T1 JOIN pets AS T2 ON T1.petid = T2.petid WHERE T2.pettype = 'cat' INTERSECT SELECT T1.fname FROM has_pet AS T1 JOIN pets AS T2 ON T1.petid = T2.petid WHERE T2.pettype = 'dog'	pets_1
+SELECT T1.fname FROM has_pet AS T1 JOIN pets AS T2 ON T1.petid = T2.petid WHERE T2.pettype = 'cat' INTERSECT SELECT T1.fname FROM has_pet AS T1 JOIN pets AS T2 ON T1.petid = T2.petid WHERE T2.pettype = 'dog'	pets_1
+SELECT Student.LName, Student.Age FROM Student LEFT JOIN Has_Pet ON Student.StuID = Has_Pet.StuID WHERE Has_Pet.PetType ! = 'Cat'	pets_1
+SELECT S.Major, P.weight FROM Student S JOIN Has_Pet HP ON S.StuID = HP.StuID JOIN Pets P ON HP.PetID = P.PetID WHERE P.PetType ! = 'cat' GROUP BY S.StuID	pets_1
+SELECT StuID FROM Has_Pet WHERE PetType ! = 'cat'	pets_1
+SELECT StuID FROM Has_Pet WHERE PetType ! = 'cat' GROUP BY StuID	pets_1
+SELECT T1.fname, T1.age FROM student AS T1 LEFT JOIN has_pet AS T2 ON T1.stuid = T2.stuID WHERE T2.pettype = 'dog' AND T2.petid IS NOT NULL AND T2.pettype ! = 'cat'	pets_1
+SELECT T1.fname FROM students AS T1 JOIN pets AS T2 ON T1.stuid = T2.petid WHERE T2.pettype = 'dog' AND T2.petid NOT IN (SELECT petid FROM pets WHERE pettype = 'cat')	pets_1
+SELECT PetType, weight FROM has_pet JOIN pets ON has_pet.PetID = pets.PetID WHERE has_pet.StuID = (SELECT StuID FROM student WHERE Age = (SELECT MIN(Age) FROM student))	pets_1
+SELECT PetType, weight FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID WHERE Pets.pet_age = (SELECT MIN(pet_age) FROM Pets)	pets_1
+SELECT T2.PetID, T2.weight FROM has_pet AS T1 JOIN pets AS T2 ON T1.PetID = T2.PetID WHERE T2.pet_age > 1	pets_1
+SELECT T2.PetID, T2.weight FROM has_pet AS T1 JOIN pets AS T2 ON T1.PetID = T2.PetID WHERE T2.pet_age > 1	pets_1
+SELECT PetType, AVG(StuID.Age) AS AverageAge, MAX(StuID.Age) AS MaxAge FROM Has_Pet JOIN Student ON Has_Pet.StuID = Student.StuID GROUP BY PetType	pets_1
+SELECT PetType, AVG(Age), MAX(Age) FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID GROUP BY PetType	pets_1
+SELECT p.pettype, AVG(p.weight) FROM has_pet AS h JOIN pets AS p ON h.petid = p.petid GROUP BY p.pettype	pets_1
+SELECT T1.PetType, AVG(T2.weight) FROM has_pet AS T1 JOIN pets AS T2 ON T1.PetID = T2.PetID GROUP BY T1.PetType	pets_1
+SELECT T1.fname, T1.age FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T2.PetID IS NOT NULL	pets_1
+SELECT DISTINCT T1.fname, T1.age FROM has_pet AS T1 JOIN students AS T2 ON T1.stuid = T2.stuid WHERE T2.petid IS NOT NULL	pets_1
+SELECT PetID FROM Has_Pet WHERE StuID IN (SELECT StuID FROM Student WHERE LName = 'Smith')	pets_1
+SELECT PetID FROM Has_Pet WHERE StuID = (SELECT StuID FROM Student WHERE LName = 'Smith')	pets_1
+SELECT T1.StuID, COUNT(T2.PetID) FROM Has_Pet AS T1 JOIN Pets AS T2 ON T1.PetID = T2.PetID WHERE T1.StuID IS NOT NULL GROUP BY T1.StuID	pets_1
+SELECT StuID, COUNT(PetID) FROM Has_Pet JOIN Pets ON Has_Pet.PetID = Pets.PetID GROUP BY StuID	pets_1
+SELECT T1.fname, T1.sex FROM Student AS T1 JOIN Has_Pet AS T2 ON T1.StuID = T2.StuID GROUP BY T1.StuID HAVING COUNT(T2.PetID) > 1	pets_1
+SELECT T1.fname, T1.sex FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuID GROUP BY T1.stuid HAVING COUNT(T2.petid) > 1	pets_1
+SELECT T1.LName FROM Student AS T1 JOIN Pets AS T2 ON T1.StuID = T2.PetID WHERE T2.PetType = 'cat' AND T2.pet_age = 3	pets_1
+SELECT T1.LName FROM Student AS T1 JOIN Pets AS T2 ON T1.StuID = T2.PetID WHERE T2.PetType = 'cat' AND T2.pet_age = 3	pets_1
+SELECT AVG(T1.pet_age) FROM Has_Pet AS T1 JOIN Student AS T2 ON T1.StuID = T2.StuID WHERE T2.StuID NOT IN (SELECT StuID FROM Pets)	pets_1
+SELECT AVG(p.pet_age) FROM Pets p INNER JOIN Has_Pet h ON p.PetID = h.PetID WHERE h.StuID NOT IN (SELECT StuID FROM Student)	pets_1
+SELECT COUNT(*) FROM employee	employee_hire_evaluation
+SELECT COUNT(Employee_ID) FROM employee	employee_hire_evaluation
+SELECT Name FROM employee ORDER BY Age ASC	employee_hire_evaluation
+SELECT employee.Name, employee.Age FROM employee JOIN hiring ON employee.Employee_ID = hiring.Employee_ID ORDER BY employee.Age ASC	employee_hire_evaluation
+SELECT T1.City, COUNT(T2.Employee_ID) FROM employee AS T1 JOIN hiring AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.City	employee_hire_evaluation
+SELECT City, COUNT(Employee_ID) FROM employee GROUP BY City	employee_hire_evaluation
+SELECT DISTINCT T1.City FROM employee AS T1 INNER JOIN hiring AS T2 ON T1.Employee_ID = T2.Employee_ID WHERE T1.Age < 30 GROUP BY T1.City HAVING COUNT(DISTINCT T2.Shop_ID) > 1	employee_hire_evaluation
+SELECT T1.City FROM employee AS T1 JOIN hiring AS T2 ON T1.Employee_ID = T2.Employee_ID WHERE T1.Age < 30 GROUP BY T1.City HAVING COUNT(DISTINCT T2.Shop_ID) > 1	employee_hire_evaluation
+SELECT T1.Location, COUNT(DISTINCT T2.Shop_ID) FROM shop AS T1 JOIN hiring AS T2 ON T1.Shop_ID = T2.Shop_ID GROUP BY T1.Location	employee_hire_evaluation
+SELECT T2.Location, COUNT(DISTINCT T1.Shop_ID) FROM shop AS T1 JOIN hiring AS T2 ON T1.Shop_ID = T2.Shop_ID GROUP BY T2.Location	employee_hire_evaluation
+SELECT T2.manager_name, T3.district FROM shop AS T1 JOIN hiring AS T2 ON T1.Shop_ID = T2.Shop_ID JOIN employee AS T3 ON T2.Employee_ID = T3.Employee_ID WHERE T1.Number_products = (SELECT MAX(Number_products) FROM shop)	employee_hire_evaluation
+SELECT T1.manager_name, T3.district FROM shop AS T1 JOIN hiring AS T2 ON T1.Employee_ID = T2.Employee_ID JOIN employee AS T3 ON T2.Employee_ID = T3.Employee_ID GROUP BY T1.Shop_ID ORDER BY COUNT(T1.Number_products) DESC LIMIT 1	employee_hire_evaluation
+SELECT MIN(T1.Number_products), MAX(T1.Number_products) FROM shop AS T1	employee_hire_evaluation
+SELECT MIN(T3.Number_products), MAX(T3.Number_products) FROM shop AS T1 JOIN hiring AS T2 ON T1.Shop_ID = T2.Shop_ID JOIN employee AS T3 ON T2.Employee_ID = T3.Employee_ID	employee_hire_evaluation
+SELECT T1.name, T1.location, T1.district FROM shop AS T1 ORDER BY T1.number_products DESC	employee_hire_evaluation
+SELECT T1.name, T1.location, T1.district FROM shop AS T1 JOIN employee AS T2 ON T1.Employee_ID = T2.employee_id ORDER BY T1.Number_products DESC	employee_hire_evaluation
+SELECT T1.Name FROM shop AS T1 WHERE T1.Number_products > (SELECT AVG(T2.Number_products) FROM shop AS T2)	employee_hire_evaluation
+SELECT T1.Name FROM shop AS T1 WHERE T1.Number_products > (SELECT AVG(T2.Number_products) FROM shop AS T2)	employee_hire_evaluation
+SELECT T1.Name FROM employee AS T1 JOIN evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.Name ORDER BY COUNT(T2.Employee_ID) DESC LIMIT 1	employee_hire_evaluation
+SELECT T1.Name FROM employee AS T1 JOIN evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.Name ORDER BY COUNT(T2.Employee_ID) DESC LIMIT 1	employee_hire_evaluation
+SELECT T1.Name FROM employee AS T1 JOIN evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID ORDER BY T2.Bonus DESC LIMIT 1	employee_hire_evaluation
+SELECT T1.Name FROM employee AS T1 JOIN evaluation AS T2 ON T1.Employee_ID = T2.Employee_ID ORDER BY T2.Bonus DESC LIMIT 1	employee_hire_evaluation
+SELECT e.Name FROM employee e LEFT JOIN evaluation v ON e.Employee_ID = v.Employee_ID WHERE v.Employee_ID IS NULL	employee_hire_evaluation
+SELECT e.Name FROM employee e LEFT JOIN evaluation v ON e.Employee_ID = v.Employee_ID WHERE v.Employee_ID IS NULL	employee_hire_evaluation
+SELECT T1.Name FROM shop AS T1, hiring AS T2 GROUP BY T1.Shop_ID ORDER BY COUNT(*) DESC LIMIT 1	employee_hire_evaluation
+SELECT T1.Name FROM shop AS T1 JOIN employee AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.Name ORDER BY COUNT(*) DESC LIMIT 1	employee_hire_evaluation
+SELECT shop.Name FROM shop LEFT JOIN hiring ON shop.Shop_ID = hiring.Shop_ID WHERE hiring.Employee_ID IS NULL	employee_hire_evaluation
+SELECT T1.Name FROM shop AS T1 LEFT JOIN employee AS T2 ON T1.Employee_ID = T2.Employee_ID WHERE T2.Employee_ID IS NULL	employee_hire_evaluation
+SELECT T1.Shop_ID, T1.Name, COUNT(T2.Employee_ID) FROM hiring AS T1 JOIN employee AS T2 ON T1.Employee_ID = T2.Employee_ID GROUP BY T1.Shop_ID, T1.Name	employee_hire_evaluation
+SELECT T1.Name, COUNT(T2.Employee_ID) FROM shop AS T1 JOIN employee AS T2 ON T1.Shop_ID = T2.Employee_ID GROUP BY T1.Name	employee_hire_evaluation
+SELECT SUM(Bonus) FROM employee E JOIN evaluation V ON E.Employee_ID = V.Employee_ID	employee_hire_evaluation
+SELECT SUM(Bonus) FROM evaluation	employee_hire_evaluation
+SELECT * FROM hiring AS T1 JOIN employee AS T2 ON T1.Employee_ID = T2.Employee_ID JOIN shop AS T3 ON T1.Shop_ID = T3.Shop_ID	employee_hire_evaluation
+SELECT * FROM hiring	employee_hire_evaluation
+SELECT DISTINCT s.district FROM shop AS s JOIN hiring AS h ON s.shop_id = h.shop_id WHERE (h.Number_products < 3000 AND h.Is_full_time = TRUE) INTERSECT SELECT DISTINCT s.district FROM shop AS s JOIN hiring AS h ON s.shop_id = h.shop_id WHERE (h.Number_products > 10000 AND h.Is_full_time = TRUE)	employee_hire_evaluation
+SELECT DISTINCT s.District FROM shop AS s LEFT JOIN hiring AS h ON s.Shop_ID = h.Shop_ID WHERE h.Is_full_time IS TRUE AND s.Number_products < 3000 INTERSECT SELECT DISTINCT s.District FROM shop AS s LEFT JOIN hiring AS h ON s.Shop_ID = h.Shop_ID WHERE h.Is_full_time IS TRUE AND s.Number_products > 10000	employee_hire_evaluation
+SELECT COUNT(DISTINCT shop.Location) FROM shop INNER JOIN hiring ON shop.Shop_ID = hiring.Shop_ID	employee_hire_evaluation
+SELECT COUNT(DISTINCT s.Location) FROM employee e JOIN hiring h ON e.Employee_ID = h.Employee_ID JOIN shop s ON h.Shop_ID = s.Shop_ID	employee_hire_evaluation
+SELECT COUNT(*) FROM condactor	orchestra
+SELECT COUNT(*) FROM conductor	orchestra
+SELECT Name FROM conductor ORDER BY Age ASC	orchestra
+SELECT Name, Age FROM Conductor JOIN Orchestra ON Conductor.Conductor_ID = Orchestra.Conductor_ID ORDER BY Age DESC	orchestra
+SELECT Name FROM Conductor WHERE Nationality ! = 'USA'	orchestra
+SELECT Name FROM Conductor WHERE Nationality ! = 'USA'	orchestra
+SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC	orchestra
+SELECT orchestra.Record_Company FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID JOIN performance ON orchestra.Orchestra_ID = performance.Orchestra_ID WHERE performance.Year_of_Founded IS NOT NULL ORDER BY orchestra.Year_of_Founded DESC	orchestra
+SELECT AVG(Attendance) FROM show	orchestra
+SELECT AVG(show.Attendance) FROM show JOIN performance ON show.Performance_ID = performance.Performance_ID JOIN orchestra ON performance.Orchestra_ID = orchestra.Orchestra_ID GROUP BY show.Show_ID	orchestra
+SELECT MAX(performance.Share), MIN(performance.Share) FROM performance WHERE performance.Type ! = 'Live final'	orchestra
+SELECT MAX(performance.Share), MIN(performance.Share) FROM performance WHERE performance.Type ! = 'Live final'	orchestra
+SELECT COUNT(DISTINCT Nationality) FROM conductor	orchestra
+SELECT COUNT(DISTINCT Nationality) FROM conductor	orchestra
+SELECT Name FROM conductor ORDER BY Year_of_Work DESC	orchestra
+SELECT Name, COUNT(*) FROM conductor GROUP BY Name ORDER BY COUNT(*) DESC	orchestra
+SELECT Name FROM conductor ORDER BY Year_of_Work DESC LIMIT 1	orchestra
+SELECT Name FROM conductor WHERE Age = (SELECT MAX(Age) FROM conductor)	orchestra
+SELECT T1.Name, T2.Orchestra FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID	orchestra
+SELECT conductor.Name, orchestra.Orchestra FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID WHERE orchestra IS NOT NULL	orchestra
+SELECT T1.Name FROM Conductor AS T1 JOIN Orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T1.Name HAVING COUNT(DISTINCT T2.Orchestra) > 1	orchestra
+SELECT T1.Name FROM Conductor AS T1 JOIN Orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T1.Name HAVING COUNT(DISTINCT T2.Orchestra_ID) > 1	orchestra
+SELECT c.Name FROM conductor c JOIN orchestra o ON c.Conductor_ID = o.Conductor_ID GROUP BY c.Name ORDER BY COUNT(DISTINCT o.Orchestra_ID) DESC LIMIT 1	orchestra
+SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T1.Name ORDER BY COUNT(DISTINCT T2.Orchestra_ID) DESC LIMIT 1	orchestra
+SELECT Name FROM Conductor WHERE Year_of_Work > 2008	orchestra
+SELECT conductor_id, name FROM conductor WHERE year_of_founded > 2008	orchestra
+SELECT DISTINCT Record_Company FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID WHERE orchestra.Orchestra IS NOT NULL	orchestra
+SELECT Record_Company, COUNT(DISTINCT Orchestra_ID) FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID GROUP BY Record_Company	orchestra
+SELECT Major_Record_Format FROM orchestra GROUP BY Major_Record_Format ORDER BY COUNT(*) ASC	orchestra
+SELECT Major_Record_Format FROM orchestra WHERE Conductor_ID IN (SELECT Conductor_ID FROM performance GROUP BY Conductor_ID ORDER BY COUNT(*) DESC LIMIT 1)	orchestra
+SELECT Record_Company FROM orchestra GROUP BY Record_Company ORDER BY COUNT(*) DESC LIMIT 1	orchestra
+SELECT T1.Record_Company FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID WHERE (SELECT COUNT(*) FROM performance) = (SELECT MAX(Count_of_orchestras))	orchestra
+SELECT Orchestra FROM orchestra WHERE Orchestra_ID NOT IN (SELECT Orchestra_ID FROM performance)	orchestra
+SELECT Orchestra FROM orchestra WHERE Orchestra_ID NOT IN (SELECT Orchestra_ID FROM performance)	orchestra
+SELECT Record_Company FROM orchestra WHERE Year_of_Founded < 2003 INTERSECT SELECT Record_Company FROM orchestra WHERE Year_of_Founded > 2003	orchestra
+SELECT DISTINCT Record_Company FROM orchestra WHERE Year_of_Founded < 2003 INTERSECT SELECT Record_Company FROM orchestra WHERE Year_of_Founded > 2003	orchestra
+SELECT COUNT(*) FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID WHERE Major_Record_Format IN ('CD', 'DVD')	orchestra
+SELECT COUNT(*) FROM conductor JOIN orchestra ON conductor.Conductor_ID = orchestra.Conductor_ID WHERE Major_Record_Format = 'CD' OR Major_Record_Format = 'DVD'	orchestra
+SELECT DISTINCT Year_of_Founded FROM orchestra WHERE Conductor_ID IN (SELECT Conductor_ID FROM conductor GROUP BY Conductor_ID HAVING COUNT(Orchestra_ID) > 1)	orchestra
+SELECT DISTINCT orchestra.Year_of_Founded FROM orchestra JOIN performance ON orchestra.Orchestra_ID = performance.Orchestra_ID GROUP BY orchestra.Year_of_Founded HAVING COUNT(performance.Performance_ID) > 1	orchestra
+SELECT COUNT(*) FROM singer	singer
+SELECT COUNT(*) FROM singer	singer
+SELECT Title FROM song WHERE Singer_ID IN (SELECT singer_id FROM singer ORDER BY Net_Worth_Millions ASC)	singer
+SELECT Title FROM song ORDER BY singer_id IN (SELECT singer_id FROM singer ORDER BY Net_Worth_Millions ASC)	singer
+SELECT Birth_Year, Citizenship FROM singer	singer
+SELECT Birth_Year, Citizenship FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID	singer
+SELECT Title FROM song WHERE singer_id NOT IN (SELECT singer_id FROM singer WHERE citizenship = 'France')	singer
+SELECT Title FROM song WHERE singer.Citizenship ! = 'France'	singer
+select singer.name from singer where singer.birth_year = 1948 or singer.birth_year = 1949	singer
+SELECT Title FROM song WHERE Singer_ID IN (SELECT singer_id FROM singer WHERE Birth_Year = 1948 UNION SELECT singer_id FROM singer WHERE Birth_Year = 1949)	singer
+SELECT T1.Title FROM song AS T1 JOIN singer AS T2 ON T1.Singer_ID = T2.Singer_ID ORDER BY T2.Net_Worth_Millions DESC LIMIT 1	singer
+SELECT Title FROM song WHERE Singer_ID IN (SELECT Singer_ID FROM singer ORDER BY Net_Worth_Millions DESC LIMIT 1)	singer
+SELECT Citizenship, COUNT(*) FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID GROUP BY Citizenship	singer
+SELECT Citizenship, COUNT(Singer_ID) FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID GROUP BY Citizenship	singer
+SELECT Citizenship, COUNT(*) FROM singer GROUP BY Citizenship ORDER BY COUNT(*) DESC LIMIT 1	singer
+SELECT Citizenship, COUNT(DISTINCT Singer_ID) as singer_count FROM singer GROUP BY Citizenship ORDER BY singer_count DESC LIMIT 1	singer
+SELECT singer.Citizenship, MAX(singer.Net_Worth_Millions) FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID GROUP BY singer.Citizenship	singer
+SELECT citizenship, MAX(net_worth_millions) FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID GROUP BY citizenship	singer
+SELECT song_title, name FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID	singer
+SELECT Title, Name FROM song JOIN singer ON song.Singer_ID = singer.Singer_ID	singer
+SELECT DISTINCT singer.Name FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID WHERE song.Sales > 300000	singer
+SELECT DISTINCT s.Name FROM singer AS s JOIN song AS t ON s.Singer_ID = t.Singer_ID WHERE t.Sales > 300000	singer
+SELECT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name HAVING COUNT(T2.Song_ID) > 1	singer
+SELECT T1.Title FROM song AS T1 JOIN singer AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Singer_ID HAVING COUNT(T1.Song_ID) > 1	singer
+SELECT T1.Name, SUM(T2.Sales) FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name	singer
+SELECT T1.Name, SUM(T2.Sales) FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID GROUP BY T1.Name	singer
+SELECT Title FROM song WHERE Singer_ID NOT IN (SELECT Singer_ID FROM singer)	singer
+SELECT singer.Name FROM singer LEFT JOIN song ON singer.Singer_ID = song.Singer_ID WHERE song.Title IS NULL	singer
+SELECT Citizenship FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Citizenship FROM singer WHERE Birth_Year > 1955	singer
+SELECT DISTINCT T2.Citizenship FROM singer AS T1 JOIN (SELECT Birth_Year FROM singer WHERE Birth_Year < 1945 INTERSECT SELECT Birth_Year FROM singer WHERE Birth_Year > 1955) AS T2 ON T1.Birth_Year = T2.Birth_Year	singer
