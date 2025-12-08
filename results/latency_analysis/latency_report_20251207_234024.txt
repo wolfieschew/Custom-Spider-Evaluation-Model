@@ -1,0 +1,286 @@
+================================================================================
+LATENCY ANALYSIS REPORT
+================================================================================
+
+Generated: 2025-12-07 23:40:24
+Total Models: 20
+Total Queries: 3900
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+
+Overall Average Latency: 13.2181 seconds
+Overall Median Latency:  0.9539 seconds
+Overall Std Dev:         29.1345 seconds
+Overall Min Latency:     0.1462 seconds
+Overall Max Latency:     427.1990 seconds
+
+================================================================================
+PER-MODEL STATISTICS
+================================================================================
+
+Model: phi3.5_3.8b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         0.6670 seconds
+  Median:       0.4046 seconds
+  Std Dev:      1.5655 seconds
+  Min:          0.1462 seconds
+  Max:          15.0880 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: qwen2.5_7b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      195
+  Mean:         0.9712 seconds
+  Median:       0.8352 seconds
+  Std Dev:      0.6758 seconds
+  Min:          0.3385 seconds
+  Max:          6.8771 seconds
+  25th %ile:    0.6142 seconds
+  75th %ile:    1.1038 seconds
+  95th %ile:    1.7965 seconds
+
+Model: falcon3_1b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         1.1015 seconds
+  Median:       0.5152 seconds
+  Std Dev:      3.0158 seconds
+  Min:          0.2132 seconds
+  Max:          29.9950 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: granite3.3_2b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         1.1061 seconds
+  Median:       0.5820 seconds
+  Std Dev:      4.7548 seconds
+  Min:          0.1805 seconds
+  Max:          63.3720 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: falcon3_1b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         1.2591 seconds
+  Median:       0.5753 seconds
+  Std Dev:      4.2287 seconds
+  Min:          0.2692 seconds
+  Max:          51.7950 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: smollm2_1.7b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      193
+  Mean:         2.7371 seconds
+  Median:       0.5775 seconds
+  Std Dev:      6.9845 seconds
+  Min:          0.2517 seconds
+  Max:          75.3320 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: phi3.5_3.8b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         3.1344 seconds
+  Median:       0.6407 seconds
+  Std Dev:      6.6216 seconds
+  Min:          0.1941 seconds
+  Max:          64.7070 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: smollm2_1.7b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         3.7311 seconds
+  Median:       0.7266 seconds
+  Std Dev:      6.6608 seconds
+  Min:          0.2345 seconds
+  Max:          53.6150 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: qwen2.5_7b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         4.9881 seconds
+  Median:       0.8576 seconds
+  Std Dev:      6.9440 seconds
+  Min:          0.3718 seconds
+  Max:          38.4030 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: granite3.3_2b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         5.4349 seconds
+  Median:       0.9360 seconds
+  Std Dev:      7.7913 seconds
+  Min:          0.2954 seconds
+  Max:          59.6720 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: mistral_7b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      193
+  Mean:         7.9231 seconds
+  Median:       0.9911 seconds
+  Std Dev:      10.5702 seconds
+  Min:          0.2536 seconds
+  Max:          74.7120 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: mistral_7b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         10.7480 seconds
+  Median:       10.8985 seconds
+  Std Dev:      10.4156 seconds
+  Min:          0.3299 seconds
+  Max:          56.0730 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: llama3.1_8b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         12.1678 seconds
+  Median:       13.9595 seconds
+  Std Dev:      11.0494 seconds
+  Min:          0.4479 seconds
+  Max:          88.4990 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: codellama_7b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         13.5438 seconds
+  Median:       13.4125 seconds
+  Std Dev:      11.8127 seconds
+  Min:          0.3432 seconds
+  Max:          51.0650 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: codellama_7b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         14.5218 seconds
+  Median:       12.6555 seconds
+  Std Dev:      13.2622 seconds
+  Min:          0.4625 seconds
+  Max:          72.1190 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: llama3.1_8b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         17.4763 seconds
+  Median:       18.0740 seconds
+  Std Dev:      13.0400 seconds
+  Min:          0.5980 seconds
+  Max:          106.4280 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: gemma3_4b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         22.7566 seconds
+  Median:       20.6200 seconds
+  Std Dev:      30.1873 seconds
+  Min:          1.6970 seconds
+  Max:          427.1990 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: gemma3_4b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         30.3976 seconds
+  Median:       28.1630 seconds
+  Std Dev:      11.5014 seconds
+  Min:          2.1400 seconds
+  Max:          62.6340 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: deepseek-r1_1.5b (Manual)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      194
+  Mean:         96.4605 seconds
+  Median:       66.6930 seconds
+  Std Dev:      73.7874 seconds
+  Min:          3.6570 seconds
+  Max:          237.7550 seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+Model: deepseek-r1_1.5b (LlamaIndex)
+────────────────────────────────────────────────────────────────────────────────
+  Queries:      0
+  Mean:         nan seconds
+  Median:       nan seconds
+  Std Dev:      nan seconds
+  Min:          nan seconds
+  Max:          nan seconds
+  25th %ile:    nan seconds
+  75th %ile:    nan seconds
+  95th %ile:    nan seconds
+
+================================================================================
+RANKINGS
+================================================================================
+
+🏆 FASTEST MODELS (by mean latency):
+  1. phi3.5_3.8b                    -   0.6670s (LlamaIndex)
+  2. qwen2.5_7b                     -   0.9712s (Manual)
+  3. falcon3_1b                     -   1.1015s (Manual)
+  4. granite3.3_2b                  -   1.1061s (LlamaIndex)
+  5. falcon3_1b                     -   1.2591s (LlamaIndex)
+
+⏱️  SLOWEST MODELS (by mean latency):
+  1. deepseek-r1_1.5b               -      nans (LlamaIndex)
+  2. deepseek-r1_1.5b               -  96.4605s (Manual)
+  3. gemma3_4b                      -  30.3976s (LlamaIndex)
+  4. gemma3_4b                      -  22.7566s (Manual)
+  5. llama3.1_8b                    -  17.4763s (Manual)
+
+📊 MOST CONSISTENT (lowest std dev):
+  1. qwen2.5_7b                     - σ=  0.6758s (Manual)
+  2. phi3.5_3.8b                    - σ=  1.5655s (LlamaIndex)
+  3. falcon3_1b                     - σ=  3.0158s (Manual)
+  4. falcon3_1b                     - σ=  4.2287s (LlamaIndex)
+  5. granite3.3_2b                  - σ=  4.7548s (LlamaIndex)

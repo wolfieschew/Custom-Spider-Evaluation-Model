@@ -1,0 +1,11 @@
+model,approach,exact_match,execution_accuracy,pred_file
+gemma3:4b,Few-Shot Approach,,,output/Few Shot Output/prediksi_gemma3_4b_20251207_162757.txt
+smollm2:1.7b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_smollm2_1.7b_20251207_175347.txt
+gemma3:4b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_gemma3_4b_20251207_171501.txt
+falcon3:1b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_falcon3_1b_20251207_182329.txt
+codellama:7b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_codellama_7b_20251207_185802.txt
+phi3.5:3.8b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_phi3.5_3.8b_20251207_190447.txt
+granite3.3:2b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_granite3.3_2b_20251207_190932.txt
+mistral:7b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_mistral_7b_20251207_191256.txt
+llama3.1:8b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_llama3.1_8b_20251207_191756.txt
+qwen2.5:7b,LlamaIndex Approach,,,output/Few Shot + Llamaindex Output/prediksi_fewshot_qwen2.5_7b_20251207_192454.txt

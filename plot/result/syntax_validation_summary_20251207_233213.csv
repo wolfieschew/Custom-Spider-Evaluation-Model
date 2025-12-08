@@ -1,0 +1,21 @@
+﻿approach;model_name;total_queries;valid_queries;validity_rate;error_categories
+Few-Shot LlamaIndex;codellama_7b;195;153;7.846.153.846.153.840;{'column_error': 28, 'operational_error': 12, 'syntax_error': 1, 'ambiguous_column': 1}
+Few-Shot LlamaIndex;deepseek-r1_1.5b;195;58;29.743.589.743.589.700;{'column_error': 48, 'invalid_start': 24, 'syntax_error': 10, 'fallback': 36, 'table_error': 8, 'operational_error': 7, 'ambiguous_column': 3, 'dangerous': 1}
+Few-Shot LlamaIndex;falcon3_1b;195;56;28.717.948.717.948.700;{'column_error': 89, 'ambiguous_column': 16, 'syntax_error': 18, 'operational_error': 12, 'table_error': 4}
+Few-Shot LlamaIndex;gemma3_4b;195;169;8.666.666.666.666.660;{'column_error': 13, 'syntax_error': 2, 'operational_error': 8, 'ambiguous_column': 1, 'table_error': 2}
+Few-Shot LlamaIndex;granite3.3_2b;195;125;641.025.641.025.641;{'ambiguous_column': 3, 'table_error': 13, 'column_error': 40, 'syntax_error': 2, 'operational_error': 12}
+Few-Shot LlamaIndex;llama3.1_8b;195;148;758.974.358.974.359;{'column_error': 36, 'syntax_error': 1, 'operational_error': 9, 'table_error': 1}
+Few-Shot LlamaIndex;mistral_7b;195;159;8.153.846.153.846.150;{'ambiguous_column': 7, 'column_error': 20, 'syntax_error': 1, 'operational_error': 7, 'database_error': 1}
+Few-Shot LlamaIndex;phi3.5_3.8b;195;166;8.512.820.512.820.510;{'column_error': 15, 'ambiguous_column': 2, 'operational_error': 9, 'syntax_error': 3}
+Few-Shot LlamaIndex;qwen2.5_7b;195;171;876.923.076.923.077;{'syntax_error': 2, 'operational_error': 7, 'column_error': 15}
+Few-Shot LlamaIndex;smollm2_1.7b;195;113;57.948.717.948.717.900;{'column_error': 67, 'operational_error': 9, 'database_error': 1, 'ambiguous_column': 1, 'table_error': 1, 'syntax_error': 3}
+Few-Shot Manual;codellama_7b;195;150;7.692.307.692.307.690;{'syntax_error': 5, 'column_error': 33, 'ambiguous_column': 3, 'operational_error': 4}
+Few-Shot Manual;deepseek-r1_1.5b;195;57;29.230.769.230.769.200;{'invalid_start': 39, 'column_error': 39, 'fallback': 39, 'syntax_error': 9, 'table_error': 7, 'operational_error': 4, 'ambiguous_column': 1}
+Few-Shot Manual;falcon3_1b;195;65;3.333.333.333.333.330;{'table_error': 6, 'syntax_error': 19, 'column_error': 83, 'operational_error': 15, 'fallback': 4, 'ambiguous_column': 3}
+Few-Shot Manual;gemma3_4b;195;168;8.615.384.615.384.610;{'column_error': 16, 'operational_error': 1, 'table_error': 5, 'syntax_error': 5}
+Few-Shot Manual;granite3.3_2b;195;129;6.615.384.615.384.610;{'column_error': 52, 'table_error': 6, 'operational_error': 5, 'syntax_error': 2, 'ambiguous_column': 1}
+Few-Shot Manual;llama3.1_8b;195;160;8.205.128.205.128.200;{'column_error': 34, 'syntax_error': 1}
+Few-Shot Manual;mistral_7b;195;147;7.538.461.538.461.530;{'ambiguous_column': 8, 'syntax_error': 10, 'table_error': 1, 'column_error': 28, 'operational_error': 1}
+Few-Shot Manual;phi3.5_3.8b;195;170;8.717.948.717.948.710;{'syntax_error': 6, 'column_error': 16, 'ambiguous_column': 2, 'operational_error': 1}
+Few-Shot Manual;qwen2.5_7b;195;183;9.384.615.384.615.380;{'syntax_error': 1, 'column_error': 11}
+Few-Shot Manual;smollm2_1.7b;195;92;47.179.487.179.487.100;{'column_error': 89, 'operational_error': 8, 'syntax_error': 3, 'table_error': 2, 'ambiguous_column': 1}

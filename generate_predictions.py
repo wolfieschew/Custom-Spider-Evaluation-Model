@@ -6,7 +6,7 @@ import csv
 import sqlite3
 from datetime import datetime
 
-MODEL_NAME = "gemma3:4b" 
+MODEL_NAME = "qwen2.5:7b" 
 DATA_DIR = "data"
 DATABASE_DIR = "data"
 GOLD_FILE = "database/gold_195.sql"

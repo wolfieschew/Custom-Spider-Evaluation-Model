@@ -1,0 +1,21 @@
+﻿approach;model_name;evaluation_status;exact_match_all;exec_match_all;exact_match_easy;exact_match_medium;exact_match_hard;exact_match_extra;count_all;count_easy;count_medium;count_hard;count_extra;prediction_file;evaluation_timestamp
+Few-Shot LlamaIndex;gemma3_4b;success;63.1;66.7;89.5;56.2;61.0;50.0;195;38;96;41;20;prediksi_fewshot_gemma3_4b_20251207_171501.txt;07/12/2025 23:24
+Few-Shot LlamaIndex;phi3.5_3.8b;success;62.1;63.1;89.5;61.5;5.610.000.000.000.000;25.0;195;38;96;41;20;prediksi_fewshot_phi3.5_3.8b_20251207_190447.txt;07/12/2025 23:25
+Few-Shot LlamaIndex;qwen2.5_7b;success;52.800.000.000.000.000;6.560.000.000.000.000;68.4;47.9;5.610.000.000.000.000;40.0;195;38;96;41;20;prediksi_fewshot_qwen2.5_7b_20251207_192454.txt;07/12/2025 23:25
+Few-Shot LlamaIndex;llama3.1_8b;success;48.199.999.999.999.900;52.300.000.000.000.000;81.6;44.800.000.000.000.000;39.0;20.0;195;38;96;41;20;prediksi_fewshot_llama3.1_8b_20251207_191756.txt;07/12/2025 23:24
+Few-Shot LlamaIndex;mistral_7b;success;39.0;48.199.999.999.999.900;68.4;33.300.000.000.000.000;36.6;15.0;195;38;96;41;20;prediksi_fewshot_mistral_7b_20251207_191256.txt;07/12/2025 23:24
+Few-Shot LlamaIndex;codellama_7b;success;33.300.000.000.000.000;41.5;63.2;29.2;22.0;20.0;195;38;96;41;20;prediksi_fewshot_codellama_7b_20251207_185802.txt;07/12/2025 23:24
+Few-Shot LlamaIndex;granite3.3_2b;success;25.1;34.4;42.1;17.7;36.6;5.0;195;38;96;41;20;prediksi_fewshot_granite3.3_2b_20251207_190932.txt;07/12/2025 23:24
+Few-Shot LlamaIndex;smollm2_1.7b;success;23.1;26.700.000.000.000.000;42.1;17.7;26.8;5.0;195;38;96;41;20;prediksi_fewshot_smollm2_1.7b_20251207_175347.txt;07/12/2025 23:25
+Few-Shot LlamaIndex;deepseek-r1_1.5b;success;10.299.999.999.999.900;8.7;34.2;7.3;0.0;0.0;195;38;96;41;20;prediksi_fewshot_deepseek-r1_1.5b_20251207_201406.txt;07/12/2025 23:24
+Few-Shot LlamaIndex;falcon3_1b;success;8.200.000.000.000.000;9.700.000.000.000.000;31.6;2.1;4.9;0.0;195;38;96;41;20;prediksi_fewshot_falcon3_1b_20251207_182329.txt;07/12/2025 23:24
+Few-Shot Manual;gemma3_4b;success;60.0;64.1;89.5;49.0;63.4;50.0;195;38;96;41;20;prediksi_gemma3_4b_20251207_162757.txt;07/12/2025 23:24
+Few-Shot Manual;phi3.5_3.8b;success;52.300.000.000.000.000;62.1;76.3;57.3;34.1;20.0;195;38;96;41;20;prediksi_phi3.5_3.8b_20251206_151201.txt;07/12/2025 23:24
+Few-Shot Manual;qwen2.5_7b;success;50.3;67.7;63.2;40.6;61.0;50.0;195;38;96;41;20;prediksi_qwen2.5_7b_20251207_231432.txt;07/12/2025 23:24
+Few-Shot Manual;llama3.1_8b;success;48.199.999.999.999.900;61.5;60.5;50.0;39.0;35.0;195;38;96;41;20;prediksi_llama3.1_8b_20251206_153253.txt;07/12/2025 23:24
+Few-Shot Manual;mistral_7b;success;40.5;48.199.999.999.999.900;71.1;33.300.000.000.000.000;39.0;20.0;195;38;96;41;20;prediksi_mistral_7b_20251206_152714.txt;07/12/2025 23:24
+Few-Shot Manual;codellama_7b;success;33.800.000.000.000.000;43.6;57.9;25.0;43.9;10.0;195;38;96;41;20;prediksi_codellama_7b_20251206_230745.txt;07/12/2025 23:24
+Few-Shot Manual;granite3.3_2b;success;22.6;32.300.000.000.000.000;42.1;19.8;17.1;10.0;195;38;96;41;20;prediksi_granite3.3_2b_20251206_151826.txt;07/12/2025 23:24
+Few-Shot Manual;smollm2_1.7b;success;14.899.999.999.999.900;18.5;28.9;10.4;17.1;5.0;195;38;96;41;20;prediksi_smollm2_1.7b_20251206_151459.txt;07/12/2025 23:24
+Few-Shot Manual;falcon3_1b;success;10.8;11.3;39.5;4.2;2.4;5.0;195;38;96;41;20;prediksi_falcon3_1b_20251206_230022.txt;07/12/2025 23:24
+Few-Shot Manual;deepseek-r1_1.5b;success;7.7;8.200.000.000.000.000;23.7;6.2;0.0;0.0;195;38;96;41;20;prediksi_deepseek-r1_1.5b_20251206_192030.txt;07/12/2025 23:24

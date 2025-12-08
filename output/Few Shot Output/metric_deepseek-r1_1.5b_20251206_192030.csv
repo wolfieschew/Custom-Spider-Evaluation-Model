@@ -1,196 +1,196 @@
-question_id,db_id,question,predicted_sql,latency_seconds,model,timestamp
-1,concert_singer,How many singers do we have ?,"This query selects the count of distinct 'Singer_ID' from the 'singer' table, which gives us the total number of singers.",5.6515,deepseek-r1:1.5b,2025-12-06T19:20:35.940137
-2,concert_singer,What is the total number of singers ?,SELECT COUNT(DISTINCT singer_ID) FROM singer_in_concert,8.1757,deepseek-r1:1.5b,2025-12-06T19:20:44.115882
-3,concert_singer,"Show name , country , age for all singers ordered by age from the oldest to the youngest .","SELECT Name, Country, Age FROM singer",7.0944,deepseek-r1:1.5b,2025-12-06T19:20:51.211816
-4,concert_singer,"What are the names , countries , and ages for every singer in descending order of age ?","SELECT Name, Country, Age",4.6928,deepseek-r1:1.5b,2025-12-06T19:20:55.904617
-5,concert_singer,"What is the average , minimum , and maximum age of all singers from France ?","This query selects the minimum, maximum, and average age of singers from France by using a common table expression (cte). It filters the data where the country is 'France', then applies the required aggregations.",6.3877,deepseek-r1:1.5b,2025-12-06T19:21:02.292354
-6,concert_singer,"What is the average , minimum , and maximum age for all French singers ?","FROM (SELECT singer.Singer_ID, singer.Name, singer.Country, singer.Age",15.5099,deepseek-r1:1.5b,2025-12-06T19:21:17.802245
-7,concert_singer,Show the name and the release year of the song by the youngest singer .,SELECT 1,22.6963,deepseek-r1:1.5b,2025-12-06T19:21:40.499543
-8,concert_singer,What are the names and release years for all the songs of the youngest singer ?,WHERE singer_id = (SELECT MAX(Age) FROM singer WHERE Age = ''),5.945,deepseek-r1:1.5b,2025-12-06T19:21:46.445578
-9,concert_singer,What are all distinct countries where singers above age 20 are from ?,SELECT DISTINCT Location FROM singer WHERE Age > 20,5.8819,deepseek-r1:1.5b,2025-12-06T19:21:52.329184
-10,concert_singer,What are the different countries with singers above age 20 ?,WHERE singer.IncomingID IN (SELECT singer_id FROM singer WHERE singer.Age > 20),5.0026,deepseek-r1:1.5b,2025-12-06T19:21:57.333779
-11,concert_singer,Show all countries and the number of singers in each country .,"SELECT Country, COUNT(Singer_ID) AS Number_of_Singers",9.0623,deepseek-r1:1.5b,2025-12-06T19:22:06.397077
-12,concert_singer,How many singers are from each country ?,"SELECT Country, COUNT(Singer_ID) AS NumberOfSingersFromCountry FROM Singer GROUP BY Country",8.1425,deepseek-r1:1.5b,2025-12-06T19:22:14.541332
-13,concert_singer,List all song names by singers above the average age .,"This query selects all song names by singers who are older than the average age, using a LEFT JOIN to include additional information about concerts and includes only those singers whose age exceeds the calculated average.",16.2906,deepseek-r1:1.5b,2025-12-06T19:22:30.831960
-14,concert_singer,What are all the song names by singers who are older than average ?,SELECT 1,23.0685,deepseek-r1:1.5b,2025-12-06T19:22:53.900457
-15,concert_singer,Show location and name for all stadiums with a capacity between 5000 and 10000 .,"SELECT Location, Name FROM stadium WHERE Capacity > = 5000 AND Capacity < = 10000",5.8625,deepseek-r1:1.5b,2025-12-06T19:22:59.762939
-16,concert_singer,What are the locations and names of all stations with capacity between 5000 and 10000 ?,"SELECT Location, Name FROM stadium WHERE Capacity > = 5000 AND Capacity < = 10000",7.4947,deepseek-r1:1.5b,2025-12-06T19:23:07.259690
-17,concert_singer,What is the maximum capacity and the average of all stadiums ?,SELECT AVG(Song_release_year) AS Avg_Song_Year FROM singer,3.657,deepseek-r1:1.5b,2025-12-06T19:23:10.918685
-18,concert_singer,What is the average and maximum capacities for all stadiums ?,"SELECT AVG(Capacity), MAX(Capacity) FROM Stadiums",5.6483,deepseek-r1:1.5b,2025-12-06T19:23:16.567962
-19,concert_singer,What is the name and capacity for the stadium with highest average attendance ?,"SELECT Name, Capacity FROM stadium WHERE Average = (SELECT MAX(Average) FROM stadium)",8.0276,deepseek-r1:1.5b,2025-12-06T19:23:24.597589
-20,concert_singer,What is the name and capacity for the stadium with the highest average attendance ?,SELECT 1,22.9771,deepseek-r1:1.5b,2025-12-06T19:23:47.576744
-21,concert_singer,How many concerts are there in year 2014 or 2015 ?,SELECT COUNT(concert_ID) FROM concert WHERE Year BETWEEN 2014 AND 2015,3.8245,deepseek-r1:1.5b,2025-12-06T19:23:51.401262
-22,concert_singer,How many concerts occurred in 2014 or 2015 ?,SELECT COUNT(c concert_ID) FROM concert WHERE year = 2014 OR year = 2015,3.8045,deepseek-r1:1.5b,2025-12-06T19:23:55.206465
-23,concert_singer,Show the stadium name and the number of concerts in each stadium .,"SELECT STAY_STADIUM_NAME AS STAY_NAME, COUNT(CONCERT_ID) AS CONCERT_COUNT FROM singer_in_concert",8.0523,deepseek-r1:1.5b,2025-12-06T19:24:03.259766
-24,concert_singer,"For each stadium , how many concerts play there ?","SELECT STADIUM_ID AS Stadium, COUNT(CONCERT_ID) AS Concerts",8.0058,deepseek-r1:1.5b,2025-12-06T19:24:11.265527
-25,concert_singer,Show the stadium name and capacity with most number of concerts in year 2014 or after .,SELECT 1,22.8175,deepseek-r1:1.5b,2025-12-06T19:24:34.084297
-26,concert_singer,What is the name and capacity of the stadium with the most concerts after 2013 ?,SELECT 1,22.8552,deepseek-r1:1.5b,2025-12-06T19:24:56.941491
-27,concert_singer,Which year has most number of concerts ?,SELECT Year AS MostConcertYear,7.4849,deepseek-r1:1.5b,2025-12-06T19:25:04.426355
-28,concert_singer,What is the year that had the most concerts ?,"SELECT YEAR, COUNT(concert_ID) AS ConcertCount FROM concert GROUP BY YEAR ORDER BY COUNT(concert_ID) DESC LIMIT 1",5.8974,deepseek-r1:1.5b,2025-12-06T19:25:10.324933
-29,concert_singer,Show the stadium names without any concert .,This query selects all distinct stadium names that are not associated with any concerts by checking if their stadium_id appears in the concert_ids from the Concerts table.,13.2496,deepseek-r1:1.5b,2025-12-06T19:25:23.577415
-30,concert_singer,What are the names of the stadiums without any concerts ?,WHERE concert_ID IN (SELECT concert_ID FROM singer_in_concert),6.0916,deepseek-r1:1.5b,2025-12-06T19:25:29.671051
-31,concert_singer,Show countries where a singer above age 40 and a singer below 30 are from .,This query selects all distinct locations where there are singers both above 40 and below 30. It uses a subquery to find the necessary singers for each country.,22.8367,deepseek-r1:1.5b,2025-12-06T19:25:52.509727
-32,concert_singer,Show names for all stadiums except for stadiums having a concert in year 2014 .,This query selects all stadium names except those that have a concert in the year 2014. It uses COALESCE to handle potential NULL values and includes only those stadiums where no concert was held in 2014.,22.0065,deepseek-r1:1.5b,2025-12-06T19:26:14.516262
-33,concert_singer,What are the names of all stadiums that did not have a concert in 2014 ?,SELECT 1,23.0302,deepseek-r1:1.5b,2025-12-06T19:26:37.546478
-34,concert_singer,Show the name and theme for all concerts and the number of singers in each concert .,LEFT JOIN (SELECT singer_ID FROM singer_in_concert) singer_id ON concert.concert_ID = singer_id.concert_ID,20.0472,deepseek-r1:1.5b,2025-12-06T19:26:57.594716
-35,concert_singer,"What are the names , themes , and number of singers for every concert ?",SELECT Name FROM singer s WHERE concert_ID IN (SELECT concert_ID FROM concerts c),9.3329,deepseek-r1:1.5b,2025-12-06T19:27:06.929103
-36,concert_singer,List singer names and number of concerts for each singer .,SELECT 1,22.8881,deepseek-r1:1.5b,2025-12-06T19:27:29.818234
-37,concert_singer,What are the names of the singers and number of concerts for each person ?,"SELECT singer.Name,",14.4782,deepseek-r1:1.5b,2025-12-06T19:27:44.298399
-38,concert_singer,List all singer names in concerts in year 2014 .,SELECT Name FROM singer_in_concert WHERE concert.Year = 2014,4.8811,deepseek-r1:1.5b,2025-12-06T19:27:49.181489
-39,concert_singer,What are the names of the singers who performed in a concert in 2014 ?,SELECT 1,23.0127,deepseek-r1:1.5b,2025-12-06T19:28:12.196235
-40,concert_singer,what is the name and nation of the singer who have a song having 'Hey ' in its name ?,"SELECT Name, Country FROM singer WHERE Name LIKE '%Hey%'",6.6681,deepseek-r1:1.5b,2025-12-06T19:28:18.865424
-41,concert_singer,What is the name and country of origin of every singer who has a song with the word 'Hey ' in its title ?,SELECT 1,23.1365,deepseek-r1:1.5b,2025-12-06T19:28:42.004519
-42,concert_singer,Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015 .,SELECT 1,10.9594,deepseek-r1:1.5b,2025-12-06T19:28:52.963884
-43,concert_singer,What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015 ?,SELECT 1,23.0729,deepseek-r1:1.5b,2025-12-06T19:29:16.037830
-44,concert_singer,Find the number of concerts happened in the stadium with the highest capacity .,WHERE Stadium_ID = (SELECT MAX(Capacity) FROM stadium),4.2255,deepseek-r1:1.5b,2025-12-06T19:29:20.264707
-45,concert_singer,What are the number of concerts that occurred in the stadium with the largest capacity ?,SELECT concert_ID,23.1661,deepseek-r1:1.5b,2025-12-06T19:29:43.432267
-46,pets_1,Find the number of pets whose weight is heavier than 10 .,SELECT 1,23.2098,deepseek-r1:1.5b,2025-12-06T19:30:06.642060
-47,pets_1,How many pets have a greater weight than 10 ?,SELECT 1,23.1313,deepseek-r1:1.5b,2025-12-06T19:30:29.774403
-48,pets_1,Find the weight of the youngest dog .,SELECT w-weight FROM pets,7.2013,deepseek-r1:1.5b,2025-12-06T19:30:36.977741
-49,pets_1,How much does the youngest dog weigh ?,"SELECT P PetID, P PetType, P pet_age, P weight FROM Pets",9.0941,deepseek-r1:1.5b,2025-12-06T19:30:46.072826
-50,pets_1,Find the maximum weight for each type of pet . List the maximum weight and pet type .,"SELECT PetType, MAX(pet_age) AS MaxWeight FROM Pets",4.7604,deepseek-r1:1.5b,2025-12-06T19:30:50.835229
-51,pets_1,List the maximum weight and type for each type of pet .,"WHERE p.StuID IN (SELECT StuID FROM Has_Pet WHERE Has_Pet.StuID IN (SELECT StuID FROM Students ORDER BY LName, Fname, city_code) AND p.StuID NOT NULL)",7.154,deepseek-r1:1.5b,2025-12-06T19:30:57.989191
-52,pets_1,Find number of pets owned by students who are older than 20 .,SELECT 1,7.9266,deepseek-r1:1.5b,2025-12-06T19:31:05.917920
-53,pets_1,How many pets are owned by students that have an age greater than 20 ?,"This query selects the count of pets from the Pets table, joining only those students who are older than 20. The LEFT JOIN ensures that all pets in the Has_Pet table are included, even if they aren't owned by a student.",8.3221,deepseek-r1:1.5b,2025-12-06T19:31:14.242532
-54,pets_1,Find the number of dog pets that are raised by female students ( with sex F ) .,SELECT S.StuID AS sStuID,8.0583,deepseek-r1:1.5b,2025-12-06T19:31:22.301951
-55,pets_1,How many dog pets are raised by female students ?,This query selects the count of distinct student IDs where students are female and have pets of type 'Dog'.,4.4419,deepseek-r1:1.5b,2025-12-06T19:31:26.745845
-56,pets_1,Find the number of distinct type of pets .,SELECT COUNT(*) AS NumberOfPetTypes FROM Petts GROUP BY PetType,6.1051,deepseek-r1:1.5b,2025-12-06T19:31:32.851985
-57,pets_1,How many different types of pet are there ?,SELECT COUNT(DISTINCT PetType) AS NumberOfPetTypes FROM Pets,4.3818,deepseek-r1:1.5b,2025-12-06T19:31:37.235813
-58,pets_1,Find the first name of students who have cat or dog pet .,AND (SELECT PetType FROM Pets WHERE PetID = (SELECT PetID FROM Has_Pet)),6.7137,deepseek-r1:1.5b,2025-12-06T19:31:43.951523
-59,pets_1,What are the first names of every student who has a cat or dog as a pet ?,SELECT 1,23.048,deepseek-r1:1.5b,2025-12-06T19:32:07.001211
-60,pets_1,Find the first name of students who have both cat and dog pets .,SELECT LName FROM Student,4.3756,deepseek-r1:1.5b,2025-12-06T19:32:11.378856
-61,pets_1,What are the students ' first names who have both cats and dogs as pets ?,SELECT 1,23.0554,deepseek-r1:1.5b,2025-12-06T19:32:34.435848
-62,pets_1,Find the major and age of students who do not have a cat pet .,WHERE PetID IN (SELECT PetID FROM Student WHERE LName = 'Student'),4.1555,deepseek-r1:1.5b,2025-12-06T19:32:38.591331
-63,pets_1,"What major is every student who does not own a cat as a pet , and also how old are they ?",WHERE H.PetID IN (SELECT PetID FROM Has_Pet H),9.8728,deepseek-r1:1.5b,2025-12-06T19:32:48.465141
-64,pets_1,Find the id of students who do not have a cat pet .,This SQL query selects the StuID from the Student table where the student does not have a cat pet. It uses a subquery to check if the student has a 'Cat' type pet and excludes those students who do.,8.6124,deepseek-r1:1.5b,2025-12-06T19:32:57.077536
-65,pets_1,What are the ids of the students who do not own cats as pets ?,"This query selects the StuID from the Student table where the corresponding student has a PetType that is not 'cat'. It uses a JOIN between Student and Has_Pet tables based on StuID, and filters out any pets with type 'cat'.",4.9363,deepseek-r1:1.5b,2025-12-06T19:33:02.015368
-66,pets_1,Find the first name and age of students who have a dog but do not have a cat as a pet .,"This query selects the first name and last name from the Student table where the student has pets. The inner subquery checks if the pet type is a dog or not a cat, ensuring only students with dogs are included.",6.788,deepseek-r1:1.5b,2025-12-06T19:33:08.805589
-67,pets_1,What is the first name of every student who has a dog but does not have a cat ?,WHERE (SELECT PetID FROM Has_Pet WHERE StuID IN (SELECT StuID FROM (SELECT StuID FROM Student WHERE Has_Pet PetID IN ('Dog')))) AND NOT (SELECT PetID FROM Has_Pet WHERE StuID IN (SELECT StuID FROM (SELECT StuID FROM Student WHERE Has_Pet PetID = 'Cat')))),15.4369,deepseek-r1:1.5b,2025-12-06T19:33:24.242447
-68,pets_1,Find the type and weight of the youngest pet .,AND P.StuID = (SELECT StuID FROM Student WHERE LName = 'Jane'),4.9132,deepseek-r1:1.5b,2025-12-06T19:33:29.156682
-69,pets_1,"What type of pet is the youngest animal , and how much does it weigh ?","SELECT PetType, weight",22.8363,deepseek-r1:1.5b,2025-12-06T19:33:51.994018
-70,pets_1,Find the id and weight of all pets whose age is older than 1 .,"SELECT p.PetID, p.Weight FROM pets WHERE p.pet_age > 1",4.3225,deepseek-r1:1.5b,2025-12-06T19:33:56.318519
-71,pets_1,What is the id and weight of every pet who is older than 1 ?,"SELECT StuID, PetType FROM Pets WHERE pet_age > 1",5.94,deepseek-r1:1.5b,2025-12-06T19:34:02.260833
-72,pets_1,Find the average and maximum age for each type of pet .,"FROM (SELECT pet_type,",6.6705,deepseek-r1:1.5b,2025-12-06T19:34:08.932525
-73,pets_1,What is the average and maximum age for each pet type ?,"SELECT PetType, AVG(age) AS Avg_Age, MAX(age) AS Max_Age FROM (SELECT StuID, PetID, PetType, age as PetAge FROM Pets LEFT JOIN Has_Pet ON Pets.StuID = Has_Pet.StuID) GROUP BY PetType",10.7425,deepseek-r1:1.5b,2025-12-06T19:34:19.676029
-74,pets_1,Find the average weight for each pet type .,"SELECT `PetType`, AVG(`weight`) AS Avg_Weight",4.1917,deepseek-r1:1.5b,2025-12-06T19:34:23.867693
-75,pets_1,What is the average weight for each type of pet ?,"SELECT p.PetType AS avg_pet_type,",9.099,deepseek-r1:1.5b,2025-12-06T19:34:32.966683
-76,pets_1,Find the first name and age of students who have a pet .,SELECT 1,23.2711,deepseek-r1:1.5b,2025-12-06T19:34:56.238774
-77,pets_1,What are the different first names and ages of the students who do have pets ?,"SELECT StuID, LName, Fname, age, sex, major, advisor, city_code",12.1224,deepseek-r1:1.5b,2025-12-06T19:35:08.364881
-78,pets_1,Find the id of the pet owned by student whose last name is ‘Smith’ .,SELECT 1,23.2274,deepseek-r1:1.5b,2025-12-06T19:35:31.592250
-79,pets_1,What is the id of the pet owned by the student whose last name is 'Smith ' ?,SELECT PetID FROM Has_Pet WHERE LName = 'Smith',4.0463,deepseek-r1:1.5b,2025-12-06T19:35:35.638591
-80,pets_1,Find the number of pets for each student who has any pet and student id .,"SELECT LName, Fname, StuID, COUNT(PetID) AS PetCount FROM Student",5.3036,deepseek-r1:1.5b,2025-12-06T19:35:40.944196
-81,pets_1,"For students who have pets , how many pets does each student have ? list their ids instead of names .",WHERE StuID = (SELECT StuID FROM Student),7.3937,deepseek-r1:1.5b,2025-12-06T19:35:48.339895
-82,pets_1,Find the first name and gender of student who have more than one pet .,SELECT 1,10.6292,deepseek-r1:1.5b,2025-12-06T19:35:58.971432
-83,pets_1,What is the first name and gender of the all the students who have more than one pet ?,"SELECT LName, Fname",10.2426,deepseek-r1:1.5b,2025-12-06T19:36:09.216599
-84,pets_1,Find the last name of the student who has a cat that is age 3 .,SELECT LName,4.0796,deepseek-r1:1.5b,2025-12-06T19:36:13.298172
-85,pets_1,What is the last name of the student who has a cat that is 3 years old ?,SELECT StuID FROM Has_Pet WHERE PetType = 'cat' AND pet_age = 3,6.7698,deepseek-r1:1.5b,2025-12-06T19:36:20.069641
-86,pets_1,Find the average age of students who do not have any pet .,"SELECT P.StuID, P.PetType, P pet_age",11.24,deepseek-r1:1.5b,2025-12-06T19:36:31.310788
-87,pets_1,What is the average age for all students who do not own any pets ?,SELECT 1,23.4679,deepseek-r1:1.5b,2025-12-06T19:36:54.780663
-88,employee_hire_evaluation,How many employees are there ?,SELECT COUNT(Employee_ID) AS Total_Employee_Count FROM Employee,7.4477,deepseek-r1:1.5b,2025-12-06T19:37:02.231377
-89,employee_hire_evaluation,Count the number of employees,SELECT COUNT(Employee_ID) AS EmployeeCount FROM employee,5.2732,deepseek-r1:1.5b,2025-12-06T19:37:07.505602
-90,employee_hire_evaluation,Sort employee names by their age in ascending order .,SELECT * FROM employee ORDER BY Age ASC,3.7601,deepseek-r1:1.5b,2025-12-06T19:37:11.266763
-91,employee_hire_evaluation,List the names of employees and sort in ascending order of age .,SELECT Name FROM employee WHERE Age ASC,4.0533,deepseek-r1:1.5b,2025-12-06T19:37:15.321632
-92,employee_hire_evaluation,What is the number of employees from each city ?,"SELECT City, COUNT(Employee_ID) AS EmployeeCount FROM employee",6.0631,deepseek-r1:1.5b,2025-12-06T19:37:21.386726
-93,employee_hire_evaluation,Count the number of employees for each city .,"SELECT City, COUNT(Employee_ID) AS EmployeeCount",5.0163,deepseek-r1:1.5b,2025-12-06T19:37:26.405595
-94,employee_hire_evaluation,Which cities do more than one employee under age 30 come from ?,"SELECT e1.name, COUNT(DISTINCT e1.City) as unique_cities",5.8604,deepseek-r1:1.5b,2025-12-06T19:37:32.266946
-95,employee_hire_evaluation,Find the cities that have more than one employee under age 30 .,SELECT 1,23.715,deepseek-r1:1.5b,2025-12-06T19:37:55.985603
-96,employee_hire_evaluation,Find the number of shops in each location .,SELECT COUNT(*) FROM Shop,7.2035,deepseek-r1:1.5b,2025-12-06T19:38:03.190280
-97,employee_hire_evaluation,How many shops are there in each location ?,"SELECT Location, COUNT(Shop_ID) AS NumberOfShops",10.8081,deepseek-r1:1.5b,2025-12-06T19:38:14.000433
-98,employee_hire_evaluation,Find the manager name and district of the shop whose number of products is the largest .,"SELECT Manager_name, District FROM shop WHERE Number_products = (SELECT MAX(Number_products) FROM shop)",5.9719,deepseek-r1:1.5b,2025-12-06T19:38:19.975368
-99,employee_hire_evaluation,What are the manager name and district of the shop that sells the largest number of products ?,SELECT 1,6.4084,deepseek-r1:1.5b,2025-12-06T19:38:26.384800
-100,employee_hire_evaluation,find the minimum and maximum number of products of all stores .,"SELECT MIN(Number_products), MAX(Number_products) FROM shop",4.1997,deepseek-r1:1.5b,2025-12-06T19:38:30.586547
-101,employee_hire_evaluation,What are the minimum and maximum number of products across all the shops ?,SELECT COUNT(Number_products) FROM shop,6.1943,deepseek-r1:1.5b,2025-12-06T19:38:36.782322
-102,employee_hire_evaluation,"Return the name , location and district of all shops in descending order of number of products .",ORDER BY (SELECT COUNT(Number_products) AS ProductCount FROM shop) DESC,2.8499,deepseek-r1:1.5b,2025-12-06T19:38:39.634260
-103,employee_hire_evaluation,"Sort all the shops by number products in descending order , and return the name , location and district of each shop .","SELECT Name, Location, District FROM Shop WHERE Number_products = (SELECT MAX(Number_products) FROM Shop ORDER BY Number_products DESC)",3.9762,deepseek-r1:1.5b,2025-12-06T19:38:43.611462
-104,employee_hire_evaluation,Find the names of stores whose number products is more than the average number of products .,SELECT Name FROM shop WHERE Number_products > (SELECT SUM(Number_products) / COUNT(Shop_ID)),17.4132,deepseek-r1:1.5b,2025-12-06T19:39:01.026669
-105,employee_hire_evaluation,Which shops ' number products is above the average ? Give me the shop names .,WHERE s.Number_products > (SELECT AVG(Number_products) FROM shop),7.3667,deepseek-r1:1.5b,2025-12-06T19:39:08.396043
-106,employee_hire_evaluation,find the name of employee who was awarded the most times in the evaluation .,SELECT MAX(COUNT(Evaluation_Emp_ID)),10.3768,deepseek-r1:1.5b,2025-12-06T19:39:18.773813
-107,employee_hire_evaluation,Which employee received the most awards in evaluations ? Give me the employee name .,"The SQL query selects the employee name from the ""employees"" table, joins it with the ""evaluation"" table on the Employee_ID field. It then groups by each employee's name and counts how many times they appear in the evaluation table. The HAVING clause filters for employees who have more than zero evaluations.",6.887,deepseek-r1:1.5b,2025-12-06T19:39:25.661840
-108,employee_hire_evaluation,Find the name of the employee who got the highest one time bonus .,WHERE Bonus = (SELECT MAX(Bonus) FROM Evaluation),4.9764,deepseek-r1:1.5b,2025-12-06T19:39:30.641266
-109,employee_hire_evaluation,Which employee received the biggest bonus ? Give me the employee name .,"This query selects the employee with the highest bonus by first finding the maximum bonus from the evaluation table, then joining it back with the employee table where the bonus matches.",15.3548,deepseek-r1:1.5b,2025-12-06T19:39:45.996056
-110,employee_hire_evaluation,Find the names of employees who never won any award in the evaluation .,SELECT DISTINCT e.Name AS Employee_Name,4.059,deepseek-r1:1.5b,2025-12-06T19:39:50.056282
-111,employee_hire_evaluation,What are the names of the employees who never received any evaluation ?,SELECT e.Name FROM Employee e WHERE NOT EXISTS (SELECT 1 FROM Evaluation ev WHERE ev.Employee_ID = e.Employee_ID AND ev.Bonus IS NULL),16.6615,deepseek-r1:1.5b,2025-12-06T19:40:06.718752
-112,employee_hire_evaluation,What is the name of the shop that is hiring the largest number of employees ?,SELECT 1,23.5377,deepseek-r1:1.5b,2025-12-06T19:40:30.258565
-113,employee_hire_evaluation,Which shop has the most employees ? Give me the shop name .,WHERE COUNT(Num_products) IN (SELECT MAX(NumberPRODUCTS) FROM employee),3.0793,deepseek-r1:1.5b,2025-12-06T19:40:33.339858
-114,employee_hire_evaluation,Find the name of the shops that do not hire any employee .,SELECT NULL AS emp_id,7.6171,deepseek-r1:1.5b,2025-12-06T19:40:40.959028
-115,employee_hire_evaluation,Which shops run with no employees ? Find the shop names,SELECT 1,23.6752,deepseek-r1:1.5b,2025-12-06T19:41:04.635715
-116,employee_hire_evaluation,Find the number of employees hired in each shop ; show the shop name as well .,"SELECT DISTINCT s.Name AS Shop_Name, COUNT(e.Employee_ID) AS Number_of_Employees_Hired FROM employee e JOIN shop s ON e.Employee_ID = s.Employee_ID WHERE e.employee_ID IS NOT NULL ORDER BY s.Name",4.8326,deepseek-r1:1.5b,2025-12-06T19:41:09.469320
-117,employee_hire_evaluation,"For each shop , return the number of employees working there and the name of the shop .","SELECT Shop_ID, Emp_ID",12.9033,deepseek-r1:1.5b,2025-12-06T19:41:22.374682
-118,employee_hire_evaluation,What is total bonus given in all evaluations ?,SELECT SUM(Bonus) AS TotalBonus FROM Evaluation,6.4181,deepseek-r1:1.5b,2025-12-06T19:41:28.793827
-119,employee_hire_evaluation,Find the total amount of bonus given in all the evaluations .,SELECT SUM(Bonus) AS Total_Bonus FROM evaluation,4.5639,deepseek-r1:1.5b,2025-12-06T19:41:33.358834
-120,employee_hire_evaluation,Give me all the information about hiring .,"This query selects all employees from both the ""employee"" and ""hiring"" tables, ensuring that each employee is associated with a shop via their ID.",15.2291,deepseek-r1:1.5b,2025-12-06T19:41:48.587922
-121,employee_hire_evaluation,What is all the information about hiring ?,"SELECT Shop_ID, Employee_ID, Start_from, Is_full_time FROM hiring",3.2363,deepseek-r1:1.5b,2025-12-06T19:41:51.824176
-122,employee_hire_evaluation,Which district has both stores with less than 3000 products and stores with more than 10000 products ?,SELECT 1,23.5063,deepseek-r1:1.5b,2025-12-06T19:42:15.331499
-123,employee_hire_evaluation,Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products .,This query selects all distinct districts where there exists at least one shop with fewer than 3000 products and another with more than 10000 products.,19.0035,deepseek-r1:1.5b,2025-12-06T19:42:34.337023
-124,employee_hire_evaluation,How many different store locations are there ?,SELECT COUNT(DISTINCT Location) FROM shop,3.4798,deepseek-r1:1.5b,2025-12-06T19:42:37.818889
-125,employee_hire_evaluation,Count the number of distinct store locations .,SELECT COUNT(DISTINCT Location) AS NumberOfDistinctLocations FROM shop,6.108,deepseek-r1:1.5b,2025-12-06T19:42:43.928909
-126,orchestra,How many conductors are there ?,SELECT COUNT(Conductor_ID) AS NumberOfConductors FROM conductor,2.9101,deepseek-r1:1.5b,2025-12-06T19:42:46.842111
-127,orchestra,Count the number of conductors .,SELECT COUNT(*) FROM conductor,6.5738,deepseek-r1:1.5b,2025-12-06T19:42:53.415917
-128,orchestra,List the names of conductors in ascending order of age .,SELECT Name FROM conductor ORDER BY Age,5.9018,deepseek-r1:1.5b,2025-12-06T19:42:59.318618
-129,orchestra,"What are the names of conductors , ordered by age ?",SELECT Name FROM conductor_ID ORDER BY Age,4.0831,deepseek-r1:1.5b,2025-12-06T19:43:03.403205
-130,orchestra,What are the names of conductors whose nationalities are not `` USA '' ?,SELECT Name FROM Conductor_ID WHERE NOT (CONDUCTOR.Nationality = 'USA'),5.0597,deepseek-r1:1.5b,2025-12-06T19:43:08.464899
-131,orchestra,Return the names of conductors that do not have the nationality `` USA '' .,SELECT Name FROM conductor WHERE Nationality != 'USA',4.8211,deepseek-r1:1.5b,2025-12-06T19:43:13.288002
-132,orchestra,What are the record companies of orchestras in descending order of years in which they were founded ?,SELECT * FROM orchestra,3.3248,deepseek-r1:1.5b,2025-12-06T19:43:16.615030
-133,orchestra,"Return the record companies of orchestras , sorted descending by the years in which they were founded .",WHERE conductor_ID IN (SELECT Year_of_Founded FROM conductor),10.3382,deepseek-r1:1.5b,2025-12-06T19:43:26.954350
-134,orchestra,What is the average attendance of shows ?,SELECT AVG(Attendance) FROM show,4.7722,deepseek-r1:1.5b,2025-12-06T19:43:31.726584
-135,orchestra,Return the average attendance across all shows .,SELECT AVG(Attendance) FROM show,5.3498,deepseek-r1:1.5b,2025-12-06T19:43:37.076376
-136,orchestra,What are the maximum and minimum share of performances whose type is not `` Live final '' .,"SELECT MAX(Official_ratings_(millions)), MIN(Official_ratings_(millions)) FROM performance WHERE Type != 'Live final'",4.8387,deepseek-r1:1.5b,2025-12-06T19:43:41.917626
-137,orchestra,Return the maximum and minimum shares for performances that do not have the type `` Live final '' .,"SELECT MAX(Share), MIN(Share) FROM performance WHERE Type != 'Live final'",3.4477,deepseek-r1:1.5b,2025-12-06T19:43:45.365368
-138,orchestra,How many different nationalities do conductors have ?,SELECT COUNT(Nationality) FROM conductor WHERE Conductor_ID IS NOT NULL,3.6801,deepseek-r1:1.5b,2025-12-06T19:43:49.046446
-139,orchestra,Count the number of different nationalities of conductors .,SELECT COUNT(*) FROM conductor WHERE NOT NULL ON Nationality,17.5658,deepseek-r1:1.5b,2025-12-06T19:44:06.613786
-140,orchestra,List names of conductors in descending order of years of work .,SELECT 1,23.5579,deepseek-r1:1.5b,2025-12-06T19:44:30.173212
-141,orchestra,"What are the names of conductors , sorted descending by the number of years they have worked ?",SELECT 1,23.7755,deepseek-r1:1.5b,2025-12-06T19:44:53.950755
-142,orchestra,List the name of the conductor with the most years of work .,SELECT Name FROM conductor WHERE COUNT(DISTINCT Performance_ID) = (SELECT MAX(COUNT(DISTINCT Performance_ID)) FROM conductor),22.8638,deepseek-r1:1.5b,2025-12-06T19:45:16.816722
-143,orchestra,What is the name of the conductor who has worked the greatest number of years ?,"SELECT Name, COUNT(*) AS Years Worked From Conductor_ID FROM conductor",10.2151,deepseek-r1:1.5b,2025-12-06T19:45:27.034354
-144,orchestra,Show the names of conductors and the orchestras they have conducted .,SELECT Name FROM conductor WHERE CONductor_ID IN (SELECT Orchestra_ID FROM orchestra),6.5784,deepseek-r1:1.5b,2025-12-06T19:45:33.614730
-145,orchestra,What are the names of conductors as well as the corresonding orchestras that they have conducted ?,SELECT Name FROM conductor,11.6941,deepseek-r1:1.5b,2025-12-06T19:45:45.309834
-146,orchestra,Show the names of conductors that have conducted more than one orchestras .,SELECT 1,23.498,deepseek-r1:1.5b,2025-12-06T19:46:08.808814
-147,orchestra,What are the names of conductors who have conducted at more than one orchestra ?,SELECT Name FROM conductor WHERE COUNT(DISTINCT Orchestra_ID) > 1,5.4994,deepseek-r1:1.5b,2025-12-06T19:46:14.309558
-148,orchestra,Show the name of the conductor that has conducted the most number of orchestras .,"SELECT CID AS Conductor_ID, COUNT( Orchestra_ID) AS Number_of_Orchestras",10.4595,deepseek-r1:1.5b,2025-12-06T19:46:24.769099
-149,orchestra,What is the name of the conductor who has conducted the most orchestras ?,SELECT Name FROM Conductor_ID,7.7492,deepseek-r1:1.5b,2025-12-06T19:46:32.523727
-150,orchestra,Please show the name of the conductor that has conducted orchestras founded after 2008 .,SELECT Name FROM conductor c JOIN orchestra o ON o.Orchestra_ID = c.Conductor_ID WHERE o.Year_of_Founded > 2008,8.8748,deepseek-r1:1.5b,2025-12-06T19:46:41.400615
-151,orchestra,What are the names of conductors who have conducted orchestras founded after the year 2008 ?,SELECT C.Name FROM Conductor_ID C,5.2048,deepseek-r1:1.5b,2025-12-06T19:46:46.607778
-152,orchestra,Please show the different record companies and the corresponding number of orchestras .,"SELECT Record_Compy, COUNT(Orchestra_ID) AS Number_of_Orchestries",6.5105,deepseek-r1:1.5b,2025-12-06T19:46:53.120331
-153,orchestra,How many orchestras does each record company manage ?,(SELECT COUNT(*) FROM orchestra,8.1287,deepseek-r1:1.5b,2025-12-06T19:47:01.251104
-154,orchestra,Please show the record formats of orchestras in ascending order of count .,"SELECT Orchestra_ID, Major_Record_Format, COUNT(Major_Record_Format) AS record_count",6.9355,deepseek-r1:1.5b,2025-12-06T19:47:08.189022
-155,orchestra,"What are the major record formats of orchestras , sorted by their frequency ?",SELECT 1,19.0665,deepseek-r1:1.5b,2025-12-06T19:47:27.257736
-156,orchestra,List the record company shared by the most number of orchestras .,"SELECT name, SUM(total_record_companies) AS count",7.0221,deepseek-r1:1.5b,2025-12-06T19:47:34.281929
-157,orchestra,What is the record company used by the greatest number of orchestras ?,SELECT 1,23.6231,deepseek-r1:1.5b,2025-12-06T19:47:57.905342
-158,orchestra,List the names of orchestras that have no performance .,"This query selects the names of orchestras from the orchestra table where there are no corresponding records in the performance table, indicating they haven't performed yet.",7.0621,deepseek-r1:1.5b,2025-12-06T19:48:04.969421
-159,orchestra,What are the orchestras that do not have any performances ?,SELECT 1,23.6382,deepseek-r1:1.5b,2025-12-06T19:48:28.610644
-160,orchestra,Show the record companies shared by orchestras founded before 2003 and after 2003 .,SELECT 1,23.4977,deepseek-r1:1.5b,2025-12-06T19:48:52.110367
-161,orchestra,What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003 ?,SELECT 1,23.5985,deepseek-r1:1.5b,2025-12-06T19:49:15.710856
-162,orchestra,Find the number of orchestras whose record format is `` CD '' or `` DVD '' .,SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format = 'CD' OR Major_Record_Format = 'DVD',4.7149,deepseek-r1:1.5b,2025-12-06T19:49:20.430872
-163,orchestra,Count the number of orchestras that have CD or DVD as their record format .,SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format = 'CD' OR Major_Record Format = 'DVD',5.5454,deepseek-r1:1.5b,2025-12-06T19:49:25.978288
-164,orchestra,Show the years in which orchestras that have given more than one performance are founded .,SELECT 1,23.563,deepseek-r1:1.5b,2025-12-06T19:49:49.543539
-165,orchestra,What are years of founding for orchestras that have had more than a single performance ?,SELECT 1,23.6805,deepseek-r1:1.5b,2025-12-06T19:50:13.226047
-166,singer,How many singers are there ?,SELECT COUNT(Singer_ID) FROM singer,5.658,deepseek-r1:1.5b,2025-12-06T19:50:18.885549
-167,singer,What is the count of singers ?,SELECT COUNT(DISTINCT Singer_ID) AS CountOfSingers FROM singer,3.7201,deepseek-r1:1.5b,2025-12-06T19:50:22.607217
-168,singer,List the name of singers in ascending order of net worth .,SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC,3.7369,deepseek-r1:1.5b,2025-12-06T19:50:26.345146
-169,singer,What are the names of singers ordered by ascending net worth ?,SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC,6.145,deepseek-r1:1.5b,2025-12-06T19:50:32.491146
-170,singer,What are the birth year and citizenship of singers ?,"SELECT Birth_Year, Citizenship FROM singer",5.5513,deepseek-r1:1.5b,2025-12-06T19:50:38.044396
-171,singer,What are the birth years and citizenships of the singers ?,"SELECT Birth_Year, Citizenship FROM singer",4.9115,deepseek-r1:1.5b,2025-12-06T19:50:42.956990
-172,singer,List the name of singers whose citizenship is not `` France '' .,SELECT Name FROM singer WHERE NOT (Citizenship = 'France'),3.4436,deepseek-r1:1.5b,2025-12-06T19:50:46.403346
-173,singer,What are the names of the singers who are not French citizens ?,SELECT Name FROM singer WHERE citizenship != 'French',5.0548,deepseek-r1:1.5b,2025-12-06T19:50:51.459951
-174,singer,Show the name of singers whose birth year is either 1948 or 1949 ?,SELECT Name FROM singer WHERE Birth_Year = 1948 OR Birth_Year = 1949,9.0601,deepseek-r1:1.5b,2025-12-06T19:51:00.522053
-175,singer,What are the names of the singers whose birth years are either 1948 or 1949 ?,SELECT Name FROM singer WHERE (Birth_Year - 1948) = 0 OR (Birth_Year - 1948 > = 1 AND Birth_Year - 1948 < = 12),8.7951,deepseek-r1:1.5b,2025-12-06T19:51:09.318168
-176,singer,What is the name of the singer with the largest net worth ?,SELECT 1,23.5142,deepseek-r1:1.5b,2025-12-06T19:51:32.833641
-177,singer,What is the name of the singer who is worth the most ?,SELECT Name FROM singer WHERE Net_Worth_Millions = (SELECT MAX(Net_Worth_Millions) FROM singer),4.7887,deepseek-r1:1.5b,2025-12-06T19:51:37.623342
-178,singer,Show different citizenship of singers and the number of singers of each citizenship .,SELECT DISTINCTCitizenship FROM singer,3.3383,deepseek-r1:1.5b,2025-12-06T19:51:40.962668
-179,singer,"For each citizenship , how many singers are from that country ?","SELECT citizenship, COUNT(*) FROM singer",6.2741,deepseek-r1:1.5b,2025-12-06T19:51:47.238790
-180,singer,Please show the most common citizenship of singers .,"SELECT citizenship, COUNT(*) AS CommonCount FROM singer GROUP BY citizenship ORDER BY CommonCount DESC LIMIT 10",10.6713,deepseek-r1:1.5b,2025-12-06T19:51:57.911338
-181,singer,What is the most common singer citizenship ?,"SELECT *, FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID",5.6831,deepseek-r1:1.5b,2025-12-06T19:52:03.596876
-182,singer,Show different citizenships and the maximum net worth of singers of each citizenship .,SELECT 1,23.4811,deepseek-r1:1.5b,2025-12-06T19:52:27.080041
-183,singer,"For each citizenship , what is the maximum net worth ?","SELECT citizenship, MAX(Net_Worth_Millions) AS Max_Net_Worth FROM singer GROUP BY citizenship",5.9404,deepseek-r1:1.5b,2025-12-06T19:52:33.021471
-184,singer,Show titles of songs and names of singers .,"SELECT Title, Name FROM singer JOIN song ON song.Singer_ID = singer.Singer_ID WHERE song.Song_ID IN (SELECT Song_ID FROM singer)",4.4001,deepseek-r1:1.5b,2025-12-06T19:52:37.422526
-185,singer,What are the song titles and singer names ?,"SELECT Song.Title, Singer.Name",8.9918,deepseek-r1:1.5b,2025-12-06T19:52:46.415358
-186,singer,Show distinct names of singers that have songs with sales more than 300000 .,WHERE (SELECT max(Sales) FROM song where Song_ID = s.Singer_ID) > 300000,7.282,deepseek-r1:1.5b,2025-12-06T19:52:53.699913
-187,singer,what are the different names of the singers that have sales more than 300000 ?,SELECT 1,23.4986,deepseek-r1:1.5b,2025-12-06T19:53:17.199500
-188,singer,Show the names of singers that have more than one song .,SELECT singer.Name FROM singer LEFT JOIN song ON singer.Singer_ID = song.Singer_ID HAVING COUNT(*) > 1,13.8665,deepseek-r1:1.5b,2025-12-06T19:53:31.068022
-189,singer,What are the names of the singers that have more than one songs ?,SELECT Name FROM singer,6.4794,deepseek-r1:1.5b,2025-12-06T19:53:37.548649
-190,singer,Show the names of singers and the total sales of their songs .,"This query selects the name and birth year from the singer table. It then joins with the song table on the common key of Singer_ID, using a subquery to sum the Sales field into a new column called Total_Sales.",6.4721,deepseek-r1:1.5b,2025-12-06T19:53:44.022720
-191,singer,"For each singer name , what is the total sales for their songs ?",SELECT 1,23.451,deepseek-r1:1.5b,2025-12-06T19:54:07.474706
-192,singer,List the name of singers that do not have any song .,WHERE (SELECT COUNT(*) FROM song WHERE Singer_ID = (SELECT DISTINCT Singer_ID FROM singer)) = 0,12.6006,deepseek-r1:1.5b,2025-12-06T19:54:20.076744
-193,singer,What is the sname of every sing that does not have any song ?,SELECT Name FROM singer WHERE (SELECT COUNT(*) AS song_count FROM (SELECT Song_ID FROM song) CROSS JOIN singer) = 0,15.664,deepseek-r1:1.5b,2025-12-06T19:54:35.740760
-194,singer,Show the citizenship shared by singers with birth year before 1945 and after 1955 .,SELECT c.citizenship AS singling_citizenship,23.3188,deepseek-r1:1.5b,2025-12-06T19:54:59.059516
-195,singer,What are the citizenships that are shared by singers with a birth year before 1945 and after 1955 ?,SELECT Citizenship FROM singer WHERE Birth_Year < 1945 OR Birth_Year > 1955,4.6897,deepseek-r1:1.5b,2025-12-06T19:55:03.751187
+question_id;db_id;question;predicted_sql;latency_seconds;model;timestamp
+1;concert_singer;How many singers do we have ?;This query selects the count of distinct 'Singer_ID' from the 'singer' table, which gives us the total number of singers.;56.515;deepseek-r1:1.5b;2025-12-06T19:20:35.940137
+2;concert_singer;What is the total number of singers ?;SELECT COUNT(DISTINCT singer_ID) FROM singer_in_concert;81.757;deepseek-r1:1.5b;2025-12-06T19:20:44.115882
+3;concert_singer;Show name , country , age for all singers ordered by age from the oldest to the youngest .;SELECT Name, Country, Age FROM singer;70.944;deepseek-r1:1.5b;2025-12-06T19:20:51.211816
+4;concert_singer;What are the names , countries , and ages for every singer in descending order of age ?;SELECT Name, Country, Age;46.928;deepseek-r1:1.5b;2025-12-06T19:20:55.904617
+5;concert_singer;What is the average , minimum , and maximum age of all singers from France ?;This query selects the minimum, maximum, and average age of singers from France by using a common table expression (cte). It filters the data where the country is 'France', then applies the required aggregations.;63.877;deepseek-r1:1.5b;2025-12-06T19:21:02.292354
+6;concert_singer;What is the average , minimum , and maximum age for all French singers ?;FROM (SELECT singer.Singer_ID, singer.Name, singer.Country, singer.Age;155.099;deepseek-r1:1.5b;2025-12-06T19:21:17.802245
+7;concert_singer;Show the name and the release year of the song by the youngest singer .;SELECT 1;226.963;deepseek-r1:1.5b;2025-12-06T19:21:40.499543
+8;concert_singer;What are the names and release years for all the songs of the youngest singer ?;WHERE singer_id = (SELECT MAX(Age) FROM singer WHERE Age = '');5.945;deepseek-r1:1.5b;2025-12-06T19:21:46.445578
+9;concert_singer;What are all distinct countries where singers above age 20 are from ?;SELECT DISTINCT Location FROM singer WHERE Age > 20;58.819;deepseek-r1:1.5b;2025-12-06T19:21:52.329184
+10;concert_singer;What are the different countries with singers above age 20 ?;WHERE singer.IncomingID IN (SELECT singer_id FROM singer WHERE singer.Age > 20);50.026;deepseek-r1:1.5b;2025-12-06T19:21:57.333779
+11;concert_singer;Show all countries and the number of singers in each country .;SELECT Country, COUNT(Singer_ID) AS Number_of_Singers;90.623;deepseek-r1:1.5b;2025-12-06T19:22:06.397077
+12;concert_singer;How many singers are from each country ?;SELECT Country, COUNT(Singer_ID) AS NumberOfSingersFromCountry FROM Singer GROUP BY Country;81.425;deepseek-r1:1.5b;2025-12-06T19:22:14.541332
+13;concert_singer;List all song names by singers above the average age .;This query selects all song names by singers who are older than the average age, using a LEFT JOIN to include additional information about concerts and includes only those singers whose age exceeds the calculated average.;162.906;deepseek-r1:1.5b;2025-12-06T19:22:30.831960
+14;concert_singer;What are all the song names by singers who are older than average ?;SELECT 1;230.685;deepseek-r1:1.5b;2025-12-06T19:22:53.900457
+15;concert_singer;Show location and name for all stadiums with a capacity between 5000 and 10000 .;SELECT Location, Name FROM stadium WHERE Capacity > = 5000 AND Capacity < = 10000;58.625;deepseek-r1:1.5b;2025-12-06T19:22:59.762939
+16;concert_singer;What are the locations and names of all stations with capacity between 5000 and 10000 ?;SELECT Location, Name FROM stadium WHERE Capacity > = 5000 AND Capacity < = 10000;74.947;deepseek-r1:1.5b;2025-12-06T19:23:07.259690
+17;concert_singer;What is the maximum capacity and the average of all stadiums ?;SELECT AVG(Song_release_year) AS Avg_Song_Year FROM singer;3.657;deepseek-r1:1.5b;2025-12-06T19:23:10.918685
+18;concert_singer;What is the average and maximum capacities for all stadiums ?;SELECT AVG(Capacity), MAX(Capacity) FROM Stadiums;56.483;deepseek-r1:1.5b;2025-12-06T19:23:16.567962
+19;concert_singer;What is the name and capacity for the stadium with highest average attendance ?;SELECT Name, Capacity FROM stadium WHERE Average = (SELECT MAX(Average) FROM stadium);80.276;deepseek-r1:1.5b;2025-12-06T19:23:24.597589
+20;concert_singer;What is the name and capacity for the stadium with the highest average attendance ?;SELECT 1;229.771;deepseek-r1:1.5b;2025-12-06T19:23:47.576744
+21;concert_singer;How many concerts are there in year 2014 or 2015 ?;SELECT COUNT(concert_ID) FROM concert WHERE Year BETWEEN 2014 AND 2015;38.245;deepseek-r1:1.5b;2025-12-06T19:23:51.401262
+22;concert_singer;How many concerts occurred in 2014 or 2015 ?;SELECT COUNT(c concert_ID) FROM concert WHERE year = 2014 OR year = 2015;38.045;deepseek-r1:1.5b;2025-12-06T19:23:55.206465
+23;concert_singer;Show the stadium name and the number of concerts in each stadium .;SELECT STAY_STADIUM_NAME AS STAY_NAME, COUNT(CONCERT_ID) AS CONCERT_COUNT FROM singer_in_concert;80.523;deepseek-r1:1.5b;2025-12-06T19:24:03.259766
+24;concert_singer;For each stadium , how many concerts play there ?;SELECT STADIUM_ID AS Stadium, COUNT(CONCERT_ID) AS Concerts;80.058;deepseek-r1:1.5b;2025-12-06T19:24:11.265527
+25;concert_singer;Show the stadium name and capacity with most number of concerts in year 2014 or after .;SELECT 1;228.175;deepseek-r1:1.5b;2025-12-06T19:24:34.084297
+26;concert_singer;What is the name and capacity of the stadium with the most concerts after 2013 ?;SELECT 1;228.552;deepseek-r1:1.5b;2025-12-06T19:24:56.941491
+27;concert_singer;Which year has most number of concerts ?;SELECT Year AS MostConcertYear;74.849;deepseek-r1:1.5b;2025-12-06T19:25:04.426355
+28;concert_singer;What is the year that had the most concerts ?;SELECT YEAR, COUNT(concert_ID) AS ConcertCount FROM concert GROUP BY YEAR ORDER BY COUNT(concert_ID) DESC LIMIT 1;58.974;deepseek-r1:1.5b;2025-12-06T19:25:10.324933
+29;concert_singer;Show the stadium names without any concert .;This query selects all distinct stadium names that are not associated with any concerts by checking if their stadium_id appears in the concert_ids from the Concerts table.;132.496;deepseek-r1:1.5b;2025-12-06T19:25:23.577415
+30;concert_singer;What are the names of the stadiums without any concerts ?;WHERE concert_ID IN (SELECT concert_ID FROM singer_in_concert);60.916;deepseek-r1:1.5b;2025-12-06T19:25:29.671051
+31;concert_singer;Show countries where a singer above age 40 and a singer below 30 are from .;This query selects all distinct locations where there are singers both above 40 and below 30. It uses a subquery to find the necessary singers for each country.;228.367;deepseek-r1:1.5b;2025-12-06T19:25:52.509727
+32;concert_singer;Show names for all stadiums except for stadiums having a concert in year 2014 .;This query selects all stadium names except those that have a concert in the year 2014. It uses COALESCE to handle potential NULL values and includes only those stadiums where no concert was held in 2014.;220.065;deepseek-r1:1.5b;2025-12-06T19:26:14.516262
+33;concert_singer;What are the names of all stadiums that did not have a concert in 2014 ?;SELECT 1;230.302;deepseek-r1:1.5b;2025-12-06T19:26:37.546478
+34;concert_singer;Show the name and theme for all concerts and the number of singers in each concert .;LEFT JOIN (SELECT singer_ID FROM singer_in_concert) singer_id ON concert.concert_ID = singer_id.concert_ID;200.472;deepseek-r1:1.5b;2025-12-06T19:26:57.594716
+35;concert_singer;What are the names , themes , and number of singers for every concert ?;SELECT Name FROM singer s WHERE concert_ID IN (SELECT concert_ID FROM concerts c);93.329;deepseek-r1:1.5b;2025-12-06T19:27:06.929103
+36;concert_singer;List singer names and number of concerts for each singer .;SELECT 1;228.881;deepseek-r1:1.5b;2025-12-06T19:27:29.818234
+37;concert_singer;What are the names of the singers and number of concerts for each person ?;SELECT singer.Name,;144.782;deepseek-r1:1.5b;2025-12-06T19:27:44.298399
+38;concert_singer;List all singer names in concerts in year 2014 .;SELECT Name FROM singer_in_concert WHERE concert.Year = 2014;48.811;deepseek-r1:1.5b;2025-12-06T19:27:49.181489
+39;concert_singer;What are the names of the singers who performed in a concert in 2014 ?;SELECT 1;230.127;deepseek-r1:1.5b;2025-12-06T19:28:12.196235
+40;concert_singer;what is the name and nation of the singer who have a song having 'Hey ' in its name ?;SELECT Name, Country FROM singer WHERE Name LIKE '%Hey%';66.681;deepseek-r1:1.5b;2025-12-06T19:28:18.865424
+41;concert_singer;What is the name and country of origin of every singer who has a song with the word 'Hey ' in its title ?;SELECT 1;231.365;deepseek-r1:1.5b;2025-12-06T19:28:42.004519
+42;concert_singer;Find the name and location of the stadiums which some concerts happened in the years of both 2014 and 2015 .;SELECT 1;109.594;deepseek-r1:1.5b;2025-12-06T19:28:52.963884
+43;concert_singer;What are the names and locations of the stadiums that had concerts that occurred in both 2014 and 2015 ?;SELECT 1;230.729;deepseek-r1:1.5b;2025-12-06T19:29:16.037830
+44;concert_singer;Find the number of concerts happened in the stadium with the highest capacity .;WHERE Stadium_ID = (SELECT MAX(Capacity) FROM stadium);42.255;deepseek-r1:1.5b;2025-12-06T19:29:20.264707
+45;concert_singer;What are the number of concerts that occurred in the stadium with the largest capacity ?;SELECT concert_ID;231.661;deepseek-r1:1.5b;2025-12-06T19:29:43.432267
+46;pets_1;Find the number of pets whose weight is heavier than 10 .;SELECT 1;232.098;deepseek-r1:1.5b;2025-12-06T19:30:06.642060
+47;pets_1;How many pets have a greater weight than 10 ?;SELECT 1;231.313;deepseek-r1:1.5b;2025-12-06T19:30:29.774403
+48;pets_1;Find the weight of the youngest dog .;SELECT w-weight FROM pets;72.013;deepseek-r1:1.5b;2025-12-06T19:30:36.977741
+49;pets_1;How much does the youngest dog weigh ?;SELECT P PetID, P PetType, P pet_age, P weight FROM Pets;90.941;deepseek-r1:1.5b;2025-12-06T19:30:46.072826
+50;pets_1;Find the maximum weight for each type of pet . List the maximum weight and pet type .;SELECT PetType, MAX(pet_age) AS MaxWeight FROM Pets;47.604;deepseek-r1:1.5b;2025-12-06T19:30:50.835229
+51;pets_1;List the maximum weight and type for each type of pet .;WHERE p.StuID IN (SELECT StuID FROM Has_Pet WHERE Has_Pet.StuID IN (SELECT StuID FROM Students ORDER BY LName, Fname, city_code) AND p.StuID NOT NULL);7.154;deepseek-r1:1.5b;2025-12-06T19:30:57.989191
+52;pets_1;Find number of pets owned by students who are older than 20 .;SELECT 1;79.266;deepseek-r1:1.5b;2025-12-06T19:31:05.917920
+53;pets_1;How many pets are owned by students that have an age greater than 20 ?;This query selects the count of pets from the Pets table, joining only those students who are older than 20. The LEFT JOIN ensures that all pets in the Has_Pet table are included, even if they aren't owned by a student.;83.221;deepseek-r1:1.5b;2025-12-06T19:31:14.242532
+54;pets_1;Find the number of dog pets that are raised by female students ( with sex F ) .;SELECT S.StuID AS sStuID;80.583;deepseek-r1:1.5b;2025-12-06T19:31:22.301951
+55;pets_1;How many dog pets are raised by female students ?;This query selects the count of distinct student IDs where students are female and have pets of type 'Dog'.;44.419;deepseek-r1:1.5b;2025-12-06T19:31:26.745845
+56;pets_1;Find the number of distinct type of pets .;SELECT COUNT(*) AS NumberOfPetTypes FROM Petts GROUP BY PetType;61.051;deepseek-r1:1.5b;2025-12-06T19:31:32.851985
+57;pets_1;How many different types of pet are there ?;SELECT COUNT(DISTINCT PetType) AS NumberOfPetTypes FROM Pets;43.818;deepseek-r1:1.5b;2025-12-06T19:31:37.235813
+58;pets_1;Find the first name of students who have cat or dog pet .;AND (SELECT PetType FROM Pets WHERE PetID = (SELECT PetID FROM Has_Pet));67.137;deepseek-r1:1.5b;2025-12-06T19:31:43.951523
+59;pets_1;What are the first names of every student who has a cat or dog as a pet ?;SELECT 1;23.048;deepseek-r1:1.5b;2025-12-06T19:32:07.001211
+60;pets_1;Find the first name of students who have both cat and dog pets .;SELECT LName FROM Student;43.756;deepseek-r1:1.5b;2025-12-06T19:32:11.378856
+61;pets_1;What are the students ' first names who have both cats and dogs as pets ?;SELECT 1;230.554;deepseek-r1:1.5b;2025-12-06T19:32:34.435848
+62;pets_1;Find the major and age of students who do not have a cat pet .;WHERE PetID IN (SELECT PetID FROM Student WHERE LName = 'Student');41.555;deepseek-r1:1.5b;2025-12-06T19:32:38.591331
+63;pets_1;What major is every student who does not own a cat as a pet , and also how old are they ?;WHERE H.PetID IN (SELECT PetID FROM Has_Pet H);98.728;deepseek-r1:1.5b;2025-12-06T19:32:48.465141
+64;pets_1;Find the id of students who do not have a cat pet .;This SQL query selects the StuID from the Student table where the student does not have a cat pet. It uses a subquery to check if the student has a 'Cat' type pet and excludes those students who do.;86.124;deepseek-r1:1.5b;2025-12-06T19:32:57.077536
+65;pets_1;What are the ids of the students who do not own cats as pets ?;This query selects the StuID from the Student table where the corresponding student has a PetType that is not 'cat'. It uses a JOIN between Student and Has_Pet tables based on StuID, and filters out any pets with type 'cat'.;49.363;deepseek-r1:1.5b;2025-12-06T19:33:02.015368
+66;pets_1;Find the first name and age of students who have a dog but do not have a cat as a pet .;This query selects the first name and last name from the Student table where the student has pets. The inner subquery checks if the pet type is a dog or not a cat, ensuring only students with dogs are included.;6.788;deepseek-r1:1.5b;2025-12-06T19:33:08.805589
+67;pets_1;What is the first name of every student who has a dog but does not have a cat ?;WHERE (SELECT PetID FROM Has_Pet WHERE StuID IN (SELECT StuID FROM (SELECT StuID FROM Student WHERE Has_Pet PetID IN ('Dog')))) AND NOT (SELECT PetID FROM Has_Pet WHERE StuID IN (SELECT StuID FROM (SELECT StuID FROM Student WHERE Has_Pet PetID = 'Cat'))));154.369;deepseek-r1:1.5b;2025-12-06T19:33:24.242447
+68;pets_1;Find the type and weight of the youngest pet .;AND P.StuID = (SELECT StuID FROM Student WHERE LName = 'Jane');49.132;deepseek-r1:1.5b;2025-12-06T19:33:29.156682
+69;pets_1;What type of pet is the youngest animal , and how much does it weigh ?;SELECT PetType, weight;228.363;deepseek-r1:1.5b;2025-12-06T19:33:51.994018
+70;pets_1;Find the id and weight of all pets whose age is older than 1 .;SELECT p.PetID, p.Weight FROM pets WHERE p.pet_age > 1;43.225;deepseek-r1:1.5b;2025-12-06T19:33:56.318519
+71;pets_1;What is the id and weight of every pet who is older than 1 ?;SELECT StuID, PetType FROM Pets WHERE pet_age > 1;5.94;deepseek-r1:1.5b;2025-12-06T19:34:02.260833
+72;pets_1;Find the average and maximum age for each type of pet .;FROM (SELECT pet_type,;66.705;deepseek-r1:1.5b;2025-12-06T19:34:08.932525
+73;pets_1;What is the average and maximum age for each pet type ?;SELECT PetType, AVG(age) AS Avg_Age, MAX(age) AS Max_Age FROM (SELECT StuID, PetID, PetType, age as PetAge FROM Pets LEFT JOIN Has_Pet ON Pets.StuID = Has_Pet.StuID) GROUP BY PetType;107.425;deepseek-r1:1.5b;2025-12-06T19:34:19.676029
+74;pets_1;Find the average weight for each pet type .;SELECT `PetType`, AVG(`weight`) AS Avg_Weight;41.917;deepseek-r1:1.5b;2025-12-06T19:34:23.867693
+75;pets_1;What is the average weight for each type of pet ?;SELECT p.PetType AS avg_pet_type,;9.099;deepseek-r1:1.5b;2025-12-06T19:34:32.966683
+76;pets_1;Find the first name and age of students who have a pet .;SELECT 1;232.711;deepseek-r1:1.5b;2025-12-06T19:34:56.238774
+77;pets_1;What are the different first names and ages of the students who do have pets ?;SELECT StuID, LName, Fname, age, sex, major, advisor, city_code;121.224;deepseek-r1:1.5b;2025-12-06T19:35:08.364881
+78;pets_1;Find the id of the pet owned by student whose last name is ‘Smith’ .;SELECT 1;232.274;deepseek-r1:1.5b;2025-12-06T19:35:31.592250
+79;pets_1;What is the id of the pet owned by the student whose last name is 'Smith ' ?;SELECT PetID FROM Has_Pet WHERE LName = 'Smith';40.463;deepseek-r1:1.5b;2025-12-06T19:35:35.638591
+80;pets_1;Find the number of pets for each student who has any pet and student id .;SELECT LName, Fname, StuID, COUNT(PetID) AS PetCount FROM Student;53.036;deepseek-r1:1.5b;2025-12-06T19:35:40.944196
+81;pets_1;For students who have pets , how many pets does each student have ? list their ids instead of names .;WHERE StuID = (SELECT StuID FROM Student);73.937;deepseek-r1:1.5b;2025-12-06T19:35:48.339895
+82;pets_1;Find the first name and gender of student who have more than one pet .;SELECT 1;106.292;deepseek-r1:1.5b;2025-12-06T19:35:58.971432
+83;pets_1;What is the first name and gender of the all the students who have more than one pet ?;SELECT LName, Fname;102.426;deepseek-r1:1.5b;2025-12-06T19:36:09.216599
+84;pets_1;Find the last name of the student who has a cat that is age 3 .;SELECT LName;40.796;deepseek-r1:1.5b;2025-12-06T19:36:13.298172
+85;pets_1;What is the last name of the student who has a cat that is 3 years old ?;SELECT StuID FROM Has_Pet WHERE PetType = 'cat' AND pet_age = 3;67.698;deepseek-r1:1.5b;2025-12-06T19:36:20.069641
+86;pets_1;Find the average age of students who do not have any pet .;SELECT P.StuID, P.PetType, P pet_age;11.24;deepseek-r1:1.5b;2025-12-06T19:36:31.310788
+87;pets_1;What is the average age for all students who do not own any pets ?;SELECT 1;234.679;deepseek-r1:1.5b;2025-12-06T19:36:54.780663
+88;employee_hire_evaluation;How many employees are there ?;SELECT COUNT(Employee_ID) AS Total_Employee_Count FROM Employee;74.477;deepseek-r1:1.5b;2025-12-06T19:37:02.231377
+89;employee_hire_evaluation;Count the number of employees;SELECT COUNT(Employee_ID) AS EmployeeCount FROM employee;52.732;deepseek-r1:1.5b;2025-12-06T19:37:07.505602
+90;employee_hire_evaluation;Sort employee names by their age in ascending order .;SELECT * FROM employee ORDER BY Age ASC;37.601;deepseek-r1:1.5b;2025-12-06T19:37:11.266763
+91;employee_hire_evaluation;List the names of employees and sort in ascending order of age .;SELECT Name FROM employee WHERE Age ASC;40.533;deepseek-r1:1.5b;2025-12-06T19:37:15.321632
+92;employee_hire_evaluation;What is the number of employees from each city ?;SELECT City, COUNT(Employee_ID) AS EmployeeCount FROM employee;60.631;deepseek-r1:1.5b;2025-12-06T19:37:21.386726
+93;employee_hire_evaluation;Count the number of employees for each city .;SELECT City, COUNT(Employee_ID) AS EmployeeCount;50.163;deepseek-r1:1.5b;2025-12-06T19:37:26.405595
+94;employee_hire_evaluation;Which cities do more than one employee under age 30 come from ?;SELECT e1.name, COUNT(DISTINCT e1.City) as unique_cities;58.604;deepseek-r1:1.5b;2025-12-06T19:37:32.266946
+95;employee_hire_evaluation;Find the cities that have more than one employee under age 30 .;SELECT 1;23.715;deepseek-r1:1.5b;2025-12-06T19:37:55.985603
+96;employee_hire_evaluation;Find the number of shops in each location .;SELECT COUNT(*) FROM Shop;72.035;deepseek-r1:1.5b;2025-12-06T19:38:03.190280
+97;employee_hire_evaluation;How many shops are there in each location ?;SELECT Location, COUNT(Shop_ID) AS NumberOfShops;108.081;deepseek-r1:1.5b;2025-12-06T19:38:14.000433
+98;employee_hire_evaluation;Find the manager name and district of the shop whose number of products is the largest .;SELECT Manager_name, District FROM shop WHERE Number_products = (SELECT MAX(Number_products) FROM shop);59.719;deepseek-r1:1.5b;2025-12-06T19:38:19.975368
+99;employee_hire_evaluation;What are the manager name and district of the shop that sells the largest number of products ?;SELECT 1;64.084;deepseek-r1:1.5b;2025-12-06T19:38:26.384800
+100;employee_hire_evaluation;find the minimum and maximum number of products of all stores .;SELECT MIN(Number_products), MAX(Number_products) FROM shop;41.997;deepseek-r1:1.5b;2025-12-06T19:38:30.586547
+101;employee_hire_evaluation;What are the minimum and maximum number of products across all the shops ?;SELECT COUNT(Number_products) FROM shop;61.943;deepseek-r1:1.5b;2025-12-06T19:38:36.782322
+102;employee_hire_evaluation;Return the name , location and district of all shops in descending order of number of products .;ORDER BY (SELECT COUNT(Number_products) AS ProductCount FROM shop) DESC;28.499;deepseek-r1:1.5b;2025-12-06T19:38:39.634260
+103;employee_hire_evaluation;Sort all the shops by number products in descending order , and return the name , location and district of each shop .;SELECT Name, Location, District FROM Shop WHERE Number_products = (SELECT MAX(Number_products) FROM Shop ORDER BY Number_products DESC);39.762;deepseek-r1:1.5b;2025-12-06T19:38:43.611462
+104;employee_hire_evaluation;Find the names of stores whose number products is more than the average number of products .;SELECT Name FROM shop WHERE Number_products > (SELECT SUM(Number_products) / COUNT(Shop_ID));174.132;deepseek-r1:1.5b;2025-12-06T19:39:01.026669
+105;employee_hire_evaluation;Which shops ' number products is above the average ? Give me the shop names .;WHERE s.Number_products > (SELECT AVG(Number_products) FROM shop);73.667;deepseek-r1:1.5b;2025-12-06T19:39:08.396043
+106;employee_hire_evaluation;find the name of employee who was awarded the most times in the evaluation .;SELECT MAX(COUNT(Evaluation_Emp_ID));103.768;deepseek-r1:1.5b;2025-12-06T19:39:18.773813
+107;employee_hire_evaluation;Which employee received the most awards in evaluations ? Give me the employee name .;"The SQL query selects the employee name from the ""employees"" table, joins it with the ""evaluation"" table on the Employee_ID field. It then groups by each employee's name and counts how many times they appear in the evaluation table. The HAVING clause filters for employees who have more than zero evaluations.";6.887;deepseek-r1:1.5b;2025-12-06T19:39:25.661840
+108;employee_hire_evaluation;Find the name of the employee who got the highest one time bonus .;WHERE Bonus = (SELECT MAX(Bonus) FROM Evaluation);49.764;deepseek-r1:1.5b;2025-12-06T19:39:30.641266
+109;employee_hire_evaluation;Which employee received the biggest bonus ? Give me the employee name .;This query selects the employee with the highest bonus by first finding the maximum bonus from the evaluation table, then joining it back with the employee table where the bonus matches.;153.548;deepseek-r1:1.5b;2025-12-06T19:39:45.996056
+110;employee_hire_evaluation;Find the names of employees who never won any award in the evaluation .;SELECT DISTINCT e.Name AS Employee_Name;4.059;deepseek-r1:1.5b;2025-12-06T19:39:50.056282
+111;employee_hire_evaluation;What are the names of the employees who never received any evaluation ?;SELECT e.Name FROM Employee e WHERE NOT EXISTS (SELECT 1 FROM Evaluation ev WHERE ev.Employee_ID = e.Employee_ID AND ev.Bonus IS NULL);166.615;deepseek-r1:1.5b;2025-12-06T19:40:06.718752
+112;employee_hire_evaluation;What is the name of the shop that is hiring the largest number of employees ?;SELECT 1;235.377;deepseek-r1:1.5b;2025-12-06T19:40:30.258565
+113;employee_hire_evaluation;Which shop has the most employees ? Give me the shop name .;WHERE COUNT(Num_products) IN (SELECT MAX(NumberPRODUCTS) FROM employee);30.793;deepseek-r1:1.5b;2025-12-06T19:40:33.339858
+114;employee_hire_evaluation;Find the name of the shops that do not hire any employee .;SELECT NULL AS emp_id;76.171;deepseek-r1:1.5b;2025-12-06T19:40:40.959028
+115;employee_hire_evaluation;Which shops run with no employees ? Find the shop names;SELECT 1;236.752;deepseek-r1:1.5b;2025-12-06T19:41:04.635715
+116;employee_hire_evaluation;Find the number of employees hired in each shop ;;;;
+117;employee_hire_evaluation;For each shop , return the number of employees working there and the name of the shop .;SELECT Shop_ID, Emp_ID;129.033;deepseek-r1:1.5b;2025-12-06T19:41:22.374682
+118;employee_hire_evaluation;What is total bonus given in all evaluations ?;SELECT SUM(Bonus) AS TotalBonus FROM Evaluation;64.181;deepseek-r1:1.5b;2025-12-06T19:41:28.793827
+119;employee_hire_evaluation;Find the total amount of bonus given in all the evaluations .;SELECT SUM(Bonus) AS Total_Bonus FROM evaluation;45.639;deepseek-r1:1.5b;2025-12-06T19:41:33.358834
+120;employee_hire_evaluation;Give me all the information about hiring .;"This query selects all employees from both the ""employee"" and ""hiring"" tables, ensuring that each employee is associated with a shop via their ID.";152.291;deepseek-r1:1.5b;2025-12-06T19:41:48.587922
+121;employee_hire_evaluation;What is all the information about hiring ?;SELECT Shop_ID, Employee_ID, Start_from, Is_full_time FROM hiring;32.363;deepseek-r1:1.5b;2025-12-06T19:41:51.824176
+122;employee_hire_evaluation;Which district has both stores with less than 3000 products and stores with more than 10000 products ?;SELECT 1;235.063;deepseek-r1:1.5b;2025-12-06T19:42:15.331499
+123;employee_hire_evaluation;Find the districts in which there are both shops selling less than 3000 products and shops selling more than 10000 products .;This query selects all distinct districts where there exists at least one shop with fewer than 3000 products and another with more than 10000 products.;190.035;deepseek-r1:1.5b;2025-12-06T19:42:34.337023
+124;employee_hire_evaluation;How many different store locations are there ?;SELECT COUNT(DISTINCT Location) FROM shop;34.798;deepseek-r1:1.5b;2025-12-06T19:42:37.818889
+125;employee_hire_evaluation;Count the number of distinct store locations .;SELECT COUNT(DISTINCT Location) AS NumberOfDistinctLocations FROM shop;6.108;deepseek-r1:1.5b;2025-12-06T19:42:43.928909
+126;orchestra;How many conductors are there ?;SELECT COUNT(Conductor_ID) AS NumberOfConductors FROM conductor;29.101;deepseek-r1:1.5b;2025-12-06T19:42:46.842111
+127;orchestra;Count the number of conductors .;SELECT COUNT(*) FROM conductor;65.738;deepseek-r1:1.5b;2025-12-06T19:42:53.415917
+128;orchestra;List the names of conductors in ascending order of age .;SELECT Name FROM conductor ORDER BY Age;59.018;deepseek-r1:1.5b;2025-12-06T19:42:59.318618
+129;orchestra;What are the names of conductors , ordered by age ?;SELECT Name FROM conductor_ID ORDER BY Age;40.831;deepseek-r1:1.5b;2025-12-06T19:43:03.403205
+130;orchestra;What are the names of conductors whose nationalities are not `` USA '' ?;SELECT Name FROM Conductor_ID WHERE NOT (CONDUCTOR.Nationality = 'USA');50.597;deepseek-r1:1.5b;2025-12-06T19:43:08.464899
+131;orchestra;Return the names of conductors that do not have the nationality `` USA '' .;SELECT Name FROM conductor WHERE Nationality != 'USA';48.211;deepseek-r1:1.5b;2025-12-06T19:43:13.288002
+132;orchestra;What are the record companies of orchestras in descending order of years in which they were founded ?;SELECT * FROM orchestra;33.248;deepseek-r1:1.5b;2025-12-06T19:43:16.615030
+133;orchestra;Return the record companies of orchestras , sorted descending by the years in which they were founded .;WHERE conductor_ID IN (SELECT Year_of_Founded FROM conductor);103.382;deepseek-r1:1.5b;2025-12-06T19:43:26.954350
+134;orchestra;What is the average attendance of shows ?;SELECT AVG(Attendance) FROM show;47.722;deepseek-r1:1.5b;2025-12-06T19:43:31.726584
+135;orchestra;Return the average attendance across all shows .;SELECT AVG(Attendance) FROM show;53.498;deepseek-r1:1.5b;2025-12-06T19:43:37.076376
+136;orchestra;What are the maximum and minimum share of performances whose type is not `` Live final '' .;SELECT MAX(Official_ratings_(millions)), MIN(Official_ratings_(millions)) FROM performance WHERE Type != 'Live final';48.387;deepseek-r1:1.5b;2025-12-06T19:43:41.917626
+137;orchestra;Return the maximum and minimum shares for performances that do not have the type `` Live final '' .;SELECT MAX(Share), MIN(Share) FROM performance WHERE Type != 'Live final';34.477;deepseek-r1:1.5b;2025-12-06T19:43:45.365368
+138;orchestra;How many different nationalities do conductors have ?;SELECT COUNT(Nationality) FROM conductor WHERE Conductor_ID IS NOT NULL;36.801;deepseek-r1:1.5b;2025-12-06T19:43:49.046446
+139;orchestra;Count the number of different nationalities of conductors .;SELECT COUNT(*) FROM conductor WHERE NOT NULL ON Nationality;175.658;deepseek-r1:1.5b;2025-12-06T19:44:06.613786
+140;orchestra;List names of conductors in descending order of years of work .;SELECT 1;235.579;deepseek-r1:1.5b;2025-12-06T19:44:30.173212
+141;orchestra;What are the names of conductors , sorted descending by the number of years they have worked ?;SELECT 1;237.755;deepseek-r1:1.5b;2025-12-06T19:44:53.950755
+142;orchestra;List the name of the conductor with the most years of work .;SELECT Name FROM conductor WHERE COUNT(DISTINCT Performance_ID) = (SELECT MAX(COUNT(DISTINCT Performance_ID)) FROM conductor);228.638;deepseek-r1:1.5b;2025-12-06T19:45:16.816722
+143;orchestra;What is the name of the conductor who has worked the greatest number of years ?;SELECT Name, COUNT(*) AS Years Worked From Conductor_ID FROM conductor;102.151;deepseek-r1:1.5b;2025-12-06T19:45:27.034354
+144;orchestra;Show the names of conductors and the orchestras they have conducted .;SELECT Name FROM conductor WHERE CONductor_ID IN (SELECT Orchestra_ID FROM orchestra);65.784;deepseek-r1:1.5b;2025-12-06T19:45:33.614730
+145;orchestra;What are the names of conductors as well as the corresonding orchestras that they have conducted ?;SELECT Name FROM conductor;116.941;deepseek-r1:1.5b;2025-12-06T19:45:45.309834
+146;orchestra;Show the names of conductors that have conducted more than one orchestras .;SELECT 1;23.498;deepseek-r1:1.5b;2025-12-06T19:46:08.808814
+147;orchestra;What are the names of conductors who have conducted at more than one orchestra ?;SELECT Name FROM conductor WHERE COUNT(DISTINCT Orchestra_ID) > 1;54.994;deepseek-r1:1.5b;2025-12-06T19:46:14.309558
+148;orchestra;Show the name of the conductor that has conducted the most number of orchestras .;SELECT CID AS Conductor_ID, COUNT( Orchestra_ID) AS Number_of_Orchestras;104.595;deepseek-r1:1.5b;2025-12-06T19:46:24.769099
+149;orchestra;What is the name of the conductor who has conducted the most orchestras ?;SELECT Name FROM Conductor_ID;77.492;deepseek-r1:1.5b;2025-12-06T19:46:32.523727
+150;orchestra;Please show the name of the conductor that has conducted orchestras founded after 2008 .;SELECT Name FROM conductor c JOIN orchestra o ON o.Orchestra_ID = c.Conductor_ID WHERE o.Year_of_Founded > 2008;88.748;deepseek-r1:1.5b;2025-12-06T19:46:41.400615
+151;orchestra;What are the names of conductors who have conducted orchestras founded after the year 2008 ?;SELECT C.Name FROM Conductor_ID C;52.048;deepseek-r1:1.5b;2025-12-06T19:46:46.607778
+152;orchestra;Please show the different record companies and the corresponding number of orchestras .;SELECT Record_Compy, COUNT(Orchestra_ID) AS Number_of_Orchestries;65.105;deepseek-r1:1.5b;2025-12-06T19:46:53.120331
+153;orchestra;How many orchestras does each record company manage ?;(SELECT COUNT(*) FROM orchestra;81.287;deepseek-r1:1.5b;2025-12-06T19:47:01.251104
+154;orchestra;Please show the record formats of orchestras in ascending order of count .;SELECT Orchestra_ID, Major_Record_Format, COUNT(Major_Record_Format) AS record_count;69.355;deepseek-r1:1.5b;2025-12-06T19:47:08.189022
+155;orchestra;What are the major record formats of orchestras , sorted by their frequency ?;SELECT 1;190.665;deepseek-r1:1.5b;2025-12-06T19:47:27.257736
+156;orchestra;List the record company shared by the most number of orchestras .;SELECT name, SUM(total_record_companies) AS count;70.221;deepseek-r1:1.5b;2025-12-06T19:47:34.281929
+157;orchestra;What is the record company used by the greatest number of orchestras ?;SELECT 1;236.231;deepseek-r1:1.5b;2025-12-06T19:47:57.905342
+158;orchestra;List the names of orchestras that have no performance .;This query selects the names of orchestras from the orchestra table where there are no corresponding records in the performance table, indicating they haven't performed yet.;70.621;deepseek-r1:1.5b;2025-12-06T19:48:04.969421
+159;orchestra;What are the orchestras that do not have any performances ?;SELECT 1;236.382;deepseek-r1:1.5b;2025-12-06T19:48:28.610644
+160;orchestra;Show the record companies shared by orchestras founded before 2003 and after 2003 .;SELECT 1;234.977;deepseek-r1:1.5b;2025-12-06T19:48:52.110367
+161;orchestra;What are the record companies that are used by both orchestras founded before 2003 and those founded after 2003 ?;SELECT 1;235.985;deepseek-r1:1.5b;2025-12-06T19:49:15.710856
+162;orchestra;Find the number of orchestras whose record format is `` CD '' or `` DVD '' .;SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format = 'CD' OR Major_Record_Format = 'DVD';47.149;deepseek-r1:1.5b;2025-12-06T19:49:20.430872
+163;orchestra;Count the number of orchestras that have CD or DVD as their record format .;SELECT COUNT(*) FROM orchestra WHERE Major_Record_Format = 'CD' OR Major_Record Format = 'DVD';55.454;deepseek-r1:1.5b;2025-12-06T19:49:25.978288
+164;orchestra;Show the years in which orchestras that have given more than one performance are founded .;SELECT 1;23.563;deepseek-r1:1.5b;2025-12-06T19:49:49.543539
+165;orchestra;What are years of founding for orchestras that have had more than a single performance ?;SELECT 1;236.805;deepseek-r1:1.5b;2025-12-06T19:50:13.226047
+166;singer;How many singers are there ?;SELECT COUNT(Singer_ID) FROM singer;5.658;deepseek-r1:1.5b;2025-12-06T19:50:18.885549
+167;singer;What is the count of singers ?;SELECT COUNT(DISTINCT Singer_ID) AS CountOfSingers FROM singer;37.201;deepseek-r1:1.5b;2025-12-06T19:50:22.607217
+168;singer;List the name of singers in ascending order of net worth .;SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC;37.369;deepseek-r1:1.5b;2025-12-06T19:50:26.345146
+169;singer;What are the names of singers ordered by ascending net worth ?;SELECT Name FROM singer ORDER BY Net_Worth_Millions ASC;6.145;deepseek-r1:1.5b;2025-12-06T19:50:32.491146
+170;singer;What are the birth year and citizenship of singers ?;SELECT Birth_Year, Citizenship FROM singer;55.513;deepseek-r1:1.5b;2025-12-06T19:50:38.044396
+171;singer;What are the birth years and citizenships of the singers ?;SELECT Birth_Year, Citizenship FROM singer;49.115;deepseek-r1:1.5b;2025-12-06T19:50:42.956990
+172;singer;List the name of singers whose citizenship is not `` France '' .;SELECT Name FROM singer WHERE NOT (Citizenship = 'France');34.436;deepseek-r1:1.5b;2025-12-06T19:50:46.403346
+173;singer;What are the names of the singers who are not French citizens ?;SELECT Name FROM singer WHERE citizenship != 'French';50.548;deepseek-r1:1.5b;2025-12-06T19:50:51.459951
+174;singer;Show the name of singers whose birth year is either 1948 or 1949 ?;SELECT Name FROM singer WHERE Birth_Year = 1948 OR Birth_Year = 1949;90.601;deepseek-r1:1.5b;2025-12-06T19:51:00.522053
+175;singer;What are the names of the singers whose birth years are either 1948 or 1949 ?;SELECT Name FROM singer WHERE (Birth_Year - 1948) = 0 OR (Birth_Year - 1948 > = 1 AND Birth_Year - 1948 < = 12);87.951;deepseek-r1:1.5b;2025-12-06T19:51:09.318168
+176;singer;What is the name of the singer with the largest net worth ?;SELECT 1;235.142;deepseek-r1:1.5b;2025-12-06T19:51:32.833641
+177;singer;What is the name of the singer who is worth the most ?;SELECT Name FROM singer WHERE Net_Worth_Millions = (SELECT MAX(Net_Worth_Millions) FROM singer);47.887;deepseek-r1:1.5b;2025-12-06T19:51:37.623342
+178;singer;Show different citizenship of singers and the number of singers of each citizenship .;SELECT DISTINCTCitizenship FROM singer;33.383;deepseek-r1:1.5b;2025-12-06T19:51:40.962668
+179;singer;For each citizenship , how many singers are from that country ?;SELECT citizenship, COUNT(*) FROM singer;62.741;deepseek-r1:1.5b;2025-12-06T19:51:47.238790
+180;singer;Please show the most common citizenship of singers .;SELECT citizenship, COUNT(*) AS CommonCount FROM singer GROUP BY citizenship ORDER BY CommonCount DESC LIMIT 10;106.713;deepseek-r1:1.5b;2025-12-06T19:51:57.911338
+181;singer;What is the most common singer citizenship ?;SELECT *, FROM singer JOIN song ON singer.Singer_ID = song.Singer_ID;56.831;deepseek-r1:1.5b;2025-12-06T19:52:03.596876
+182;singer;Show different citizenships and the maximum net worth of singers of each citizenship .;SELECT 1;234.811;deepseek-r1:1.5b;2025-12-06T19:52:27.080041
+183;singer;For each citizenship , what is the maximum net worth ?;SELECT citizenship, MAX(Net_Worth_Millions) AS Max_Net_Worth FROM singer GROUP BY citizenship;59.404;deepseek-r1:1.5b;2025-12-06T19:52:33.021471
+184;singer;Show titles of songs and names of singers .;SELECT Title, Name FROM singer JOIN song ON song.Singer_ID = singer.Singer_ID WHERE song.Song_ID IN (SELECT Song_ID FROM singer);44.001;deepseek-r1:1.5b;2025-12-06T19:52:37.422526
+185;singer;What are the song titles and singer names ?;SELECT Song.Title, Singer.Name;89.918;deepseek-r1:1.5b;2025-12-06T19:52:46.415358
+186;singer;Show distinct names of singers that have songs with sales more than 300000 .;WHERE (SELECT max(Sales) FROM song where Song_ID = s.Singer_ID) > 300000;7.282;deepseek-r1:1.5b;2025-12-06T19:52:53.699913
+187;singer;what are the different names of the singers that have sales more than 300000 ?;SELECT 1;234.986;deepseek-r1:1.5b;2025-12-06T19:53:17.199500
+188;singer;Show the names of singers that have more than one song .;SELECT singer.Name FROM singer LEFT JOIN song ON singer.Singer_ID = song.Singer_ID HAVING COUNT(*) > 1;138.665;deepseek-r1:1.5b;2025-12-06T19:53:31.068022
+189;singer;What are the names of the singers that have more than one songs ?;SELECT Name FROM singer;64.794;deepseek-r1:1.5b;2025-12-06T19:53:37.548649
+190;singer;Show the names of singers and the total sales of their songs .;This query selects the name and birth year from the singer table. It then joins with the song table on the common key of Singer_ID, using a subquery to sum the Sales field into a new column called Total_Sales.;64.721;deepseek-r1:1.5b;2025-12-06T19:53:44.022720
+191;singer;For each singer name , what is the total sales for their songs ?;SELECT 1;23.451;deepseek-r1:1.5b;2025-12-06T19:54:07.474706
+192;singer;List the name of singers that do not have any song .;WHERE (SELECT COUNT(*) FROM song WHERE Singer_ID = (SELECT DISTINCT Singer_ID FROM singer)) = 0;126.006;deepseek-r1:1.5b;2025-12-06T19:54:20.076744
+193;singer;What is the sname of every sing that does not have any song ?;SELECT Name FROM singer WHERE (SELECT COUNT(*) AS song_count FROM (SELECT Song_ID FROM song) CROSS JOIN singer) = 0;15.664;deepseek-r1:1.5b;2025-12-06T19:54:35.740760
+194;singer;Show the citizenship shared by singers with birth year before 1945 and after 1955 .;SELECT c.citizenship AS singling_citizenship;233.188;deepseek-r1:1.5b;2025-12-06T19:54:59.059516
+195;singer;What are the citizenships that are shared by singers with a birth year before 1945 and after 1955 ?;SELECT Citizenship FROM singer WHERE Birth_Year < 1945 OR Birth_Year > 1955;46.897;deepseek-r1:1.5b;2025-12-06T19:55:03.751187
